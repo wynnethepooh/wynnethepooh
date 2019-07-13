@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "wynne-the-pooh",
+    "wynne-the-pooh-deploy": "wynne-the-pooh"
+  }
+}
