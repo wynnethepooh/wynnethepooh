@@ -20,13 +20,35 @@
   color: white;
 }
 
+.app-title-header {
+  background-color: #E8C1B7; /* #E1B94E (mustard)*/
+  min-height: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  font-size: calc(10px + 2vmin);
+  font-family: Helvetica, sans-serif;
+  color: white;
+}
+
 .no-wrap {
   overflow: hidden;
   white-space: nowrap;
 }
 
 h1 {
-  font-size: calc(70px + 2vmin);
+  font-size: calc(20px + 2vmin);
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+#app-title {
+  font-size: calc(47px + 2vmin);
   font-family: PalmCanyonDrive;
   font-weight: normal;
   margin: 0;
@@ -35,15 +57,34 @@ h1 {
 
 h2 {
   letter-spacing: 3px;
-  font-size: calc(7px + 2vmin);
+  font-size: calc(1px + 2vmin);
   font-family: 'Oswald', sans-serif;
   /* font-family: 'Fjalla One', sans-serif; */
   padding: 0;
-  margin: 0 0 0 -117px;
+  margin: 0 0 0 -80px;
+}
+
+.page {
+  padding: 2.5vh 5vh;
+  background-color: #E8C1B7; /* #E1B94E (mustard)*/
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  font-family: Helvetica, sans-serif;
+  color: white;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.home {
+  min-height: 85vh;
+  background-image: url("images/pottery.JPG");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
 }
 
 @keyframes App-logo-spin {
@@ -66,8 +107,8 @@ h2 {
   position: fixed;
   width: 36px;
   height: 30px;
-  left: 36px;
-  top: 36px;
+  left: 5vh;
+  top: 5vh;
 }
  
 /* Color/shape of burger icon bars */
