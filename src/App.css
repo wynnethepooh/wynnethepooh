@@ -143,7 +143,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
  
 /* General sidebar styles */
 .bm-menu {
-  background: #CE7E7D;
+  background: #fefefe;/* #CE7E7D; */
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
@@ -164,10 +164,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
   display: inline-block;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: #eeeeee;
+  color: #CE7E7D;
   font-weight: bold;
   text-decoration: none;
   padding: 10px;
+
+  font-family: 'Oswald', sans-serif;
 }
  
 /* Styling of overlay */
