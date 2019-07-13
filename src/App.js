@@ -6,14 +6,19 @@ import { slide as Menu } from 'react-burger-menu'
 function App() {
   return (
     <div className="App">
-      <Menu/>
+      <Menu>
+        <a id="home" className="menu-item" href="/">Home</a>
+        <a id="about" className="menu-item" href="/about">About</a>
+        <a id="contact" className="menu-item" href="/contact">Contact</a>
+        {/* <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a> */}
+      </Menu>
       <header className="App-header">
         <div className="no-wrap">
           <h1>
             wynne the pooh
           </h1>
           <h2>
-            NOT WAYNE
+            NOT WAYNE!
           </h2>
         </div>
         {/* <a
@@ -31,21 +36,21 @@ function App() {
   );
 }
 
-class Example extends React.Component {
-  showSettings (event) {
-    event.preventDefault();
-  }
+// class Example extends React.Component {
+//   showSettings (event) {
+//     event.preventDefault();
+//   }
  
-  render () {
-    return (
-      <Menu>
-        <a id="home" className="menu-item" href="/">Home</a>
-        <a id="about" className="menu-item" href="/about">About</a>
-        <a id="contact" className="menu-item" href="/contact">Contact</a>
-        <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
-      </Menu>
-    );
-  }
-}
+//   render () {
+//     return (
+//       <Menu>
+//         <a id="home" className="menu-item" href="/">Home</a>
+//         <a id="about" className="menu-item" href="/about">About</a>
+//         <a id="contact" className="menu-item" href="/contact">Contact</a>
+//         <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
+//       </Menu>
+//     );
+//   }
+// }
 
 export default App;
