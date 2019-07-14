@@ -30,6 +30,7 @@
   font-size: calc(10px + 2vmin);
   font-family: Helvetica, sans-serif;
   color: white;
+  padding: 0 0 0 5vh;
 }
 
 .no-wrap {
@@ -43,7 +44,7 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 3px;
   margin: 0;
-  padding: 0;
+  padding: 0 0 10px 0;
   text-align: left;
 }
 
@@ -104,10 +105,10 @@ h2 {
 /* Burger bar */
 /* Position and sizing of burger button */
 .bm-burger-button {
-  position: fixed;
+  position: absolute;
   width: 36px;
   height: 30px;
-  left: 5vh;
+  left: 3vh;
   top: 5vh;
 }
  
@@ -143,7 +144,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
  
 /* General sidebar styles */
 .bm-menu {
-  background: #fefefe;/* #CE7E7D; */
+  background: rgb(231, 203, 196);/* #CE7E7D; */
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
@@ -167,6 +168,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   color: #CE7E7D;
   font-weight: bold;
   text-decoration: none;
+  font-size: 3vh;
   padding: 10px;
 
   font-family: 'Oswald', sans-serif;
@@ -175,4 +177,50 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.0);
+}
+
+.contact-form {
+  text-align: left;
+  font-size: 14px;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 1px;
+  padding: 7px 0;
+}
+
+.contact-field {
+  position: absolute;
+  left: 120px;
+  width: 50%;
+  border: none;
+  border-radius: 2px;
+  padding: 3px;
+  color: #555555;
+  resize: none;
+}
+
+input {
+  position: absolute;
+  margin-top: 3px;
+  border-radius: 3px;
+  padding: 3px;
+  border: none;
+  color: #555555;
+}
+
+.submit-button {
+  position: absolute;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 2px;
+  color: white;
+  margin-top: 75px;
+  left: 120px;
+  padding: 7px;
+  background: none #4469B0; /* rgb(218, 179, 74) */
+  font-weight: bold;
+  -webkit-appearance: none;
+  border-radius: 3px;
 }
