@@ -1,13 +1,17 @@
 import React from 'react';
+import { Link } from "gatsby";
 import logo from '../logo.svg';
-import '../App.css';
+
+import Layout from "../components/layout"
 
 class Home extends React.Component {
   render() {
     return (
-    <div className="home">
-        
-    </div>
+    <Layout>
+      <main className="home">
+      </main>
+    </Layout>
+
     );
   }
 }

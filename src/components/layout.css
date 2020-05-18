@@ -1,13 +1,30 @@
 /*
 Colors:
 #FAF6EB - beige
+#52504B - dark text
 #E1B94E - mustard
 #E8C1B7 - pink
 #D1A297 - dark pink
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Jost&family=Oswald&display=swap');
+
+body {
+  background-color: #FAF6EB;
+  color: #52504B;
+  font-family: 'Jost', san-serif;
+  margin: 0;
+}
+
+footer {
+  margin: 20px;
+  color: #52504B;
+}
+
 .App {
   text-align: center;
+  background-color: #FAF6EB;
+  font-family: 'Jost', sans-serif;
 }
 
 .App-logo {
@@ -24,7 +41,7 @@ Colors:
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  font-family: Helvetica, sans-serif;
+  font-family: 'Oswald', sans-serif;
   color: #E8C1B7;
 }
 
@@ -78,8 +95,6 @@ h2 {
 p {
   font-size: 16px;
   text-align: left;
-  color: #D1A297;
-  font-family: 'Jost', sans-serif;
 }
 
 a {
@@ -99,8 +114,6 @@ a:hover {
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
-  font-family: 'Jost', sans-serif;
-  color: #E8C1B7;
 }
 
 .App-link {
@@ -108,11 +121,37 @@ a:hover {
 }
 
 .home {
-  min-height: 85vh;
-  background-image: url("images/pottery.JPG");
+  min-height: 77vh;
+  background-image: url("../images/pottery.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+}
+
+.coming-soon {
+  background-image: url("../images/pottery.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  min-height: 77vh;
+  opacity: 0.6;
+}
+
+.coming-soon-text {
+  font-size: calc(5em);
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 77vh;
+  opacity: 1;
+  position: absolute;
+  top: 13vh;
+  left: 0;
+  width: 100%;
 }
 
 @keyframes App-logo-spin {
@@ -126,7 +165,7 @@ a:hover {
 
 @font-face{
   font-family: "PalmCanyonDrive";
-  src: url('PalmCanyonDrive-Trial.otf');
+  src: url('../PalmCanyonDrive-Trial.otf');
 }
 
 /* Burger bar */
@@ -138,28 +177,28 @@ a:hover {
   left: 3vh;
   top: 5vh;
 }
- 
+
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
   background: #E8C1B7;
 }
- 
+
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
   background: #D1A297;
 }
- 
+
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
   height: 24px;
   width: 24px;
 }
- 
+
 /* Color/shape of close button cross */
 .bm-cross {
   background: #E8C1B7;
 }
- 
+
 /*
 Sidebar wrapper styles
 Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
@@ -168,25 +207,25 @@ Note: Beware of modifying this element as it can break the animations - you shou
   position: fixed;
   height: 100%;
 }
- 
+
 /* General sidebar styles */
 .bm-menu {
   background: #FAF6EB;/* #CE7E7D; */
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
- 
+
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
   fill: #373a47;
 }
- 
+
 /* Wrapper for item list */
 .bm-item-list {
   /* color: #b8b7ad; */
   padding: 0.8em;
 }
- 
+
 /* Individual item */
 .bm-item {
   display: inline-block;
@@ -200,7 +239,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
   font-family: 'Oswald', sans-serif;
 }
- 
+
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.0);
