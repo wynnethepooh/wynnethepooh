@@ -1,3 +1,11 @@
+/*
+Colors:
+#FAF6EB - beige
+#E1B94E - mustard
+#E8C1B7 - pink
+#D1A297 - dark pink
+*/
+
 .App {
   text-align: center;
 }
@@ -9,7 +17,7 @@
 }
 
 .App-header {
-  background-color: #E8C1B7; /* #E1B94E (mustard)*/
+  background-color: #FAF6EB; /* #E1B94E (mustard)*/
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -17,11 +25,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   font-family: Helvetica, sans-serif;
-  color: white;
+  color: #E8C1B7;
 }
 
 .app-title-header {
-  background-color: #E8C1B7; /* #E1B94E (mustard)*/
+  background-color: #FAF6EB; /* #E1B94E (mustard)*/
   min-height: 15vh;
   display: flex;
   flex-direction: column;
@@ -29,7 +37,7 @@
   /* justify-content: center; */
   font-size: calc(10px + 2vmin);
   font-family: Helvetica, sans-serif;
-  color: white;
+  color: #E8C1B7;
   padding: 0 0 0 5vh;
 }
 
@@ -46,6 +54,7 @@ h1 {
   margin: 0;
   padding: 0 0 10px 0;
   text-align: left;
+  color: #E8C1B7;
 }
 
 #app-title {
@@ -63,17 +72,35 @@ h2 {
   /* font-family: 'Fjalla One', sans-serif; */
   padding: 0;
   margin: 0 0 0 -80px;
+  color: #E8C1B7;
+}
+
+p {
+  font-size: 16px;
+  text-align: left;
+  color: #D1A297;
+  font-family: 'Jost', sans-serif;
+}
+
+a {
+  color: #D1A297;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #E1B94E;
 }
 
 .page {
   padding: 2.5vh 5vh;
-  background-color: #E8C1B7; /* #E1B94E (mustard)*/
+  background-color: #FAF6EB; /* #E1B94E (mustard)*/
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
-  font-family: Helvetica, sans-serif;
-  color: white;
+  font-family: 'Jost', sans-serif;
+  color: #E8C1B7;
 }
 
 .App-link {
@@ -114,12 +141,12 @@ h2 {
  
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #C05052;
+  background: #E8C1B7;
 }
  
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-  background: #373a47;
+  background: #D1A297;
 }
  
 /* Position and sizing of clickable cross button */
@@ -130,7 +157,7 @@ h2 {
  
 /* Color/shape of close button cross */
 .bm-cross {
-  background: #bdc3c7;
+  background: #E8C1B7;
 }
  
 /*
@@ -144,7 +171,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
  
 /* General sidebar styles */
 .bm-menu {
-  background: rgb(231, 203, 196);/* #CE7E7D; */
+  background: #FAF6EB;/* #CE7E7D; */
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
@@ -165,7 +192,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   display: inline-block;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: #CE7E7D;
+  color: #E8C1B7;
   font-weight: bold;
   text-decoration: none;
   font-size: 3vh;
