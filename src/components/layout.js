@@ -14,6 +14,10 @@ import { slide as Menu } from 'react-burger-menu';
 import Header from "./header";
 import "./layout.css";
 
+import Facebook from "../images/facebook.png";
+import Instagram from "../images/instagram.png";
+import LinkedIn from "../images/linkedin.png";
+
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -37,9 +41,18 @@ const Layout = ({ children }) => {
         </Menu>
         <main>{children}</main>
         <footer>
-          © {new Date().getFullYear()} | Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+          © {new Date().getFullYear()} | wynne the pooh
+          <div className="social-media">
+            <a class="facebook" href="https://www.facebook.com/it.me.wynne/" target="_blank">
+              <img src={Facebook} height="30px"/>
+            </a>
+            <a class="instagram" href="https://www.instagram.com/wynnethepooh" target="_blank">
+              <img src={Instagram} height="30px"/>
+            </a>
+            <a class="linkedin" href="https://www.linkedin.com/in/wynnetran" target="_blank">
+              <img src={LinkedIn} width="30px"/>
+            </a>
+          </div>
         </footer>
       </div>
     </>

@@ -17,8 +17,29 @@ body {
 }
 
 footer {
-  margin: 20px;
-  color: #52504B;
+  color: #D1A297;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 5vh;
+}
+
+.facebook {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+}
+
+.instagram {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px
+}
+
+.linkedin {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px
 }
 
 .App {
@@ -110,7 +131,7 @@ a:hover {
 .page {
   padding: 2.5vh 5vh;
   background-color: #FAF6EB; /* #E1B94E (mustard)*/
-  min-height: 100vh;
+  min-height: 66vh;
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
@@ -165,7 +186,7 @@ a:hover {
 
 @font-face{
   font-family: "PalmCanyonDrive";
-  src: url('../PalmCanyonDrive-Trial.otf');
+  src: url('../resources/PalmCanyonDrive-Trial.otf');
 }
 
 /* Burger bar */

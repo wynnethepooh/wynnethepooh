@@ -7,7 +7,7 @@ class Contact extends React.Component {
       <Layout>
         <div className="page">
           <p>
-          If you're interested in my pottery or just want to say hi, send me an email at <a href="mailto:wynnetran@gmail.com">wynnetran@gmail.com</a>.
+          If you're interested in my pottery or just want to say hi, send me an email at <a href="mailto:wynne@wynnethepooh.com">wynne@wynnethepooh.com</a>.
           </p>
         </div>
       </Layout>
