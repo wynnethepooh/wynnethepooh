@@ -1,0 +1,46 @@
+.shop {
+  padding: 2.5vh 5vh
+}
+
+.product-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.product {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.product-overview {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 200px
+}
+
+.product-title {
+  overflow-wrap: break-word;
+  text-align: left;
+  padding-right: 10px;
+}
+
+.product-price {
+  font-weight: normal;
+  white-space: nowrap;
+  text-align: right
+}
+
+.sold-out {
+  text-transform: lowercase;
+  position: absolute;
+  top: 40px;
+  right: 23px;
+  background-color: #E8C1B7;
+  color: white;
+  padding: 3px 7px;
+}

@@ -18,49 +18,43 @@ import Facebook from "../images/facebook.png";
 import Instagram from "../images/instagram.png";
 import LinkedIn from "../images/linkedin.png";
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+class Layout extends React.Component {
 
-  return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div className="App">
-        <Menu>
-          <Link to="/">Home</Link>
-          <Link to="/shop">Shop</Link>
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
-        </Menu>
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()} | wynne the pooh
-          <div className="social-media">
-            <a class="facebook" href="https://www.facebook.com/it.me.wynne/" target="_blank">
-              <img src={Facebook} height="30px"/>
-            </a>
-            <a class="instagram" href="https://www.instagram.com/wynnethepooh" target="_blank">
-              <img src={Instagram} height="30px"/>
-            </a>
-            <a class="linkedin" href="https://www.linkedin.com/in/wynnetran" target="_blank">
-              <img src={LinkedIn} width="30px"/>
-            </a>
-          </div>
-        </footer>
-      </div>
-    </>
-  )
-}
+  render() {
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+    const { location, title, children } = this.props
+    const rootPath = `${__PATH_PREFIX__}/`
+    let header
+
+    return (
+      <>
+        <Header siteTitle={title} />
+        <div className="App">
+          <Menu>
+            <Link to="/">Home</Link>
+            <Link to="/shop">Shop</Link>
+            <Link to="/about">About</Link>
+            <Link to="/contact">Contact</Link>
+          </Menu>
+          {children}
+          <footer>
+            © {new Date().getFullYear()} | wynne the pooh
+            <div className="social-media">
+              <a className="facebook" href="https://www.facebook.com/it.me.wynne/" target="_blank">
+                <img src={Facebook} height="30px"/>
+              </a>
+              <a className="instagram" href="https://www.instagram.com/wynnethepooh" target="_blank">
+                <img src={Instagram} height="30px"/>
+              </a>
+              <a className="linkedin" href="https://www.linkedin.com/in/wynnetran" target="_blank">
+                <img src={LinkedIn} width="30px"/>
+              </a>
+            </div>
+          </footer>
+        </div>
+      </>
+    )
+  }
 }
 
 export default Layout

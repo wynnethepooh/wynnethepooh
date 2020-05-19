@@ -1,0 +1,48 @@
+.product-page {
+  padding: 2.5vh 5vh
+}
+
+.back-button {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+h4 {
+  margin: 7px 0;
+}
+
+.product-information {
+ display: flex;
+ flex-direction: row;
+ align-content: space-evenly;
+}
+
+.product-details {
+  text-align: left;
+  margin-left: 50px;
+}
+
+.dimensions {
+  margin-top: 20px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.product-image {
+  width: 400px;
+}
+
+.position-relative {
+  position: relative;
+  display: inline-block;
+}
+
+.sold-out-banner {
+  text-transform: lowercase;
+  position: absolute;
+  top: 40px;
+  right: -7px;
+  background-color: #E8C1B7;
+  color: white;
+  padding: 3px 7px;
+}

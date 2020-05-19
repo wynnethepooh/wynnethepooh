@@ -6,12 +6,20 @@
     "axios": "^0.19.0",
     "gatsby": "^2.21.35",
     "gatsby-image": "^2.4.4",
+    "gatsby-plugin-feed": "^2.0.8",
     "gatsby-plugin-manifest": "^2.4.4",
     "gatsby-plugin-offline": "^3.2.2",
     "gatsby-plugin-react-helmet": "^3.3.1",
     "gatsby-plugin-sharp": "^2.6.3",
+    "gatsby-remark-copy-linked-files": "^2.0.5",
+    "gatsby-remark-images": "^2.0.4",
+    "gatsby-remark-prismjs": "^3.5.1",
+    "gatsby-remark-responsive-iframe": "^2.0.5",
+    "gatsby-remark-smartypants": "^2.0.5",
     "gatsby-source-filesystem": "^2.3.3",
+    "gatsby-transformer-remark": "^2.8.9",
     "gatsby-transformer-sharp": "^2.5.2",
+    "prismjs": "^1.20.0",
     "react": "^16.8.6",
     "react-burger-menu": "^2.6.10",
     "react-dom": "^16.8.6",
@@ -47,6 +55,8 @@
   "devDependencies": {
     "file-loader": "^6.0.0",
     "image-webpack-loader": "^6.0.0",
+    "kill-port": "^1.6.0",
+    "nodemon": "^2.0.4",
     "prettier": "2.0.5"
   }
 }
