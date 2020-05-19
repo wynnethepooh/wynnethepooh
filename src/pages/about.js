@@ -31,7 +31,7 @@ class About extends React.Component {
 
           <p>
             Until then you can message me
-            at <a href="mailto:wynne@wynnethepooh.com">wynne@wynnethepooh.com</a>.
+            at <a href="mailto:&#119;&#121;&#110;&#110;&#101;&#064;&#119;&#121;&#110;&#110;&#101;&#116;&#104;&#101;&#112;&#111;&#111;&#104;&#046;&#099;&#111;&#109;">&#119;&#121;&#110;&#110;&#101;&#064;&#119;&#121;&#110;&#110;&#101;&#116;&#104;&#101;&#112;&#111;&#111;&#104;&#046;&#099;&#111;&#109;</a>.
             Hoping to hear from you!
           </p>
         </div>
