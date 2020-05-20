@@ -471,6 +471,11 @@ table#snipcart-confirm-prices tr td span,
   color: #ABA79F;
 }
 
+#snipcart-sub-content p.snip-form__error {
+  background: none;
+  color: #D1A297;
+}
+
 #snipcart-sub-content h2 {
   font-family: 'Oswald', sans-serif;
   letter-spacing: 1px;
@@ -490,4 +495,11 @@ table#snipcart-confirm-prices tr td span,
 #snipcart-total,
 #snipcart-fees {
   padding: 20px 20px
+}
+
+#snipcart-loading-container {
+  background-color: #FAF6EB;
+  color: #52504B;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 2px;
 }
