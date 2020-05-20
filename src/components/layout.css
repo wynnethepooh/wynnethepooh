@@ -1,13 +1,15 @@
 /*
 Colors:
 #FAF6EB - beige
+#EBE7DD - dark beige
+#ABA79F - darker beige (for text)
 #52504B - dark text
 #E1B94E - mustard
 #E8C1B7 - pink
 #D1A297 - dark pink
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Jost&family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&family=Oswald&display=swap');
 
 body {
   background-color: #FAF6EB;
@@ -120,7 +122,7 @@ p {
 
 a {
   color: #D1A297;
-  font-weight: bold;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -266,48 +268,150 @@ Note: Beware of modifying this element as it can break the animations - you shou
   background: rgba(0, 0, 0, 0.0);
 }
 
-.contact-form {
-  text-align: left;
-  font-size: 14px;
+
+/** Snipcart Overwrites **/
+#snipcart-header,
+#snipcart-sub-content {
+  background-color: #FAF6EB;
+}
+
+#snipcart-sub-content p.snip-product__empty {
+  font-family: 'Jost', sans-serif;
+  text-transform: lowercase;
+  padding-bottom: 50px;
+}
+
+#snipcart-header-total {
+  position: absolute;
+  right: 30px;
+  background-color: #EBE7DD;
+  border: none;
+
+  .snip-header__total-label {
+    color: #52504B;
+  }
+}
+
+#snipcart-header-total .snip-header__total-label {
+  color: #52504B;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+#snipcart-amount {
+  color: #52504B;
+  font-weight: 700;
+}
+
+#snipcart-items-header {
   font-family: 'Oswald', sans-serif;
-  text-transform: uppercase;
-  font-weight: bold;
-  color: white;
   letter-spacing: 1px;
-  padding: 7px 0;
-}
-
-.contact-field {
-  position: absolute;
-  left: 120px;
-  width: 50%;
   border: none;
-  border-radius: 2px;
-  padding: 3px;
-  color: #555555;
-  resize: none;
+  color: #ABA79F;
 }
 
-input {
-  position: absolute;
-  margin-top: 3px;
-  border-radius: 3px;
-  padding: 3px;
+#snipcart-items-header tr,
+#snipcart-items-header th {
   border: none;
-  color: #555555;
 }
 
-.submit-button {
-  position: absolute;
-  text-transform: uppercase;
+#snipcart-main-container span.snipcart-unit-price,
+#snipcart-main-container span.snipcart-total-price,
+#snipcart-main-container table.snipcart-list span.snipcart-product-name,
+#snipcart-main-container table.snipcart-list span.snipcart-shipping-method-name,
+ #snipcart-main-container table.snipcart-list span.snipcart-shipping-method-price,
+#snipcart-main-container table.snipcart-list span.snipcart-confirm-item-quantity,
+#snipcart-main-container table.snipcart-list span.snipcart-confirm-item-price,
+#snipcart-main-container table.snipcart-list span.snipcart-confirm-item-total-price,
+#snipcart-main-container label,
+ul#snipcart-steps li span.snipcart-step-text,
+#snipcart-main-container table.snipcart-list th,
+#snipcart-main-content .snipcart-column span.snipcart-title,
+table#snipcart-confirm-prices tr td span,
+#snipcart-main-container .snipcart-full-width-text span.snipcart-title,
+#snipcart-main-container .snipcart-full-width-text,
+#snipcart-step-content-emptycart .snipcart-full-width-text p,
+#snipcart-blocked .snipcart-full-width-text p,
+#snipcart-header,
+#snipcart-header #snipcart-total span {
+    font-family: 'Jost', sans-serif;
+}
+
+#snipcart-header #snipcart-title  {
   font-family: 'Oswald', sans-serif;
-  letter-spacing: 2px;
+  left: 0;
+  margin-left: 30px;
+}
+
+#snipcart-footer {
+  display: none;
+}
+
+#snipcart-actions a {
+  background-color: #E8C1B7;
+  font-family: 'Oswald', sans-serif;
   color: white;
-  margin-top: 75px;
-  left: 120px;
-  padding: 7px;
-  background: none #4469B0; /* rgb(218, 179, 74) */
-  font-weight: bold;
-  -webkit-appearance: none;
-  border-radius: 3px;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+#snipcart-close {
+  color: #52504B;
+}
+
+#snipcart-items-list a.snip-product__remove {
+  color: #52504B;
+}
+
+#snipcart-items-list .snip-quantity-trigger a.snip-quantity-trigger__btn {
+  background-color: #EBE7DD;
+}
+
+#snipcart-items-list .snip-quantity-trigger__text {
+  font-weight: normal;
+}
+
+#snipcart-items-list h2.snip-product__name {
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 1px;
+  color: #52504B;
+  margin: 0;
+}
+
+#snipcart-items-list p.snip-product__description {
+  font-family: 'Jost', sans-serif;
+  text-transform: lowercase;
+  margin-top: 5px;
+}
+
+#snipcart-items-list,
+#snipcart-items-list .snip-table__item,
+#snipcart-items-list .snip-table__item td {
+  font-family: 'Jost', sans-serif;
+  font-weight: normal;
+  border: none;
+}
+
+#snipcart-items-list .snip-layout .snip-product__thumbnail img {
+  max-height: none;
+}
+
+#snipcart-items-list label.snip-form__label {
+  font-family: 'Jost', sans-serif;
+  text-transform: lowercase;
+}
+
+#snipcart-discounts {
+  display: none;
+}
+
+#snipcart-actions {
+  border: none;
+}
+
+#snipcart-items-list .snipcart-customfield-element input {
+  border: none;
+  background-color: #EBE7DD;
+  text-transform: lowercase;
+  font-family: 'Jost', sans-serif;
+  pointer-events:none;
 }

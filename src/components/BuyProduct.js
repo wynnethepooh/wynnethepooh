@@ -25,6 +25,8 @@ var BuyProduct = React.memo(({product, images}) => {
                   onChange={(e) => setSelected(e.target.value)}
                   value={selected}
                   style={{
+                      backgroundColor: "#EBE7DD",
+                      border: "none",
                       borderRadius: "5px",
                       paddingRight: "30px",
                       paddingBlockStart: "13px",
@@ -42,7 +44,7 @@ var BuyProduct = React.memo(({product, images}) => {
                 backgroundColor: "#D1A297",
                 borderRadius: "5px",
                 color: "#F5F5F5",
-                fontWeight: "bold",
+                fontWeight: "500",
                 paddingBottom: "15px",
                 paddingTop: "12px",
                 paddingRight: "35px",
@@ -62,7 +64,7 @@ var BuyProduct = React.memo(({product, images}) => {
             data-item-custom1-name={product.customFields.name}
             data-item-custom1-value={selected}
             data-item-url={"https://wynnethepooh.com/" + product.path}>
-            add to cart &nbsp;  <bold>${product.price}</bold>
+            add to cart &nbsp;  ${product.price}
           </a>
         </div>
 

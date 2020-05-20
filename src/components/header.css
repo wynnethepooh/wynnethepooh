@@ -1,0 +1,11 @@
+.shopping-cart {
+  position: absolute;
+  right: 30px;
+  top: 40px;
+}
+
+.snipcart-checkout {
+  -webkit-appearance: none;
+  border: none;
+  background: none;
+}

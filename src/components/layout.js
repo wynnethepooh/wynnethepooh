@@ -27,7 +27,7 @@ class Layout extends React.Component {
     let header
 
     return (
-      <>
+      <span className="snipcart-overwrite">
         <Header siteTitle={title} />
         <div className="App">
           <Menu>
@@ -52,7 +52,7 @@ class Layout extends React.Component {
             </div>
           </footer>
         </div>
-      </>
+      </span>
     )
   }
 }
