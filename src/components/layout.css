@@ -3,6 +3,7 @@ Colors:
 #FAF6EB - beige
 #EBE7DD - dark beige
 #ABA79F - darker beige (for text)
+#FFFCF5 - light beige
 #52504B - dark text
 #E1B94E - mustard
 #E8C1B7 - pink
@@ -271,7 +272,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /** Snipcart Overwrites **/
 #snipcart-header,
-#snipcart-sub-content {
+#snipcart-sub-content,
+#snipcart-fees {
   background-color: #FAF6EB;
 }
 
@@ -346,8 +348,19 @@ table#snipcart-confirm-prices tr td span,
   display: none;
 }
 
-#snipcart-actions a {
+#snipcart-actions a,
+#snipcart-next,
+#snipcart-paymentmethod-pay,
+#snipcart-sub-content .snip-actions a.js-submit {
   background-color: #E8C1B7;
+  font-family: 'Oswald', sans-serif;
+  color: white;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+#snipcart-previous,
+#snipcart-sub-content .snip-actions a.js-back {
   font-family: 'Oswald', sans-serif;
   color: white;
   font-size: 16px;
@@ -381,6 +394,7 @@ table#snipcart-confirm-prices tr td span,
   font-family: 'Jost', sans-serif;
   text-transform: lowercase;
   margin-top: 5px;
+  color: #ABA79F;
 }
 
 #snipcart-items-list,
@@ -395,11 +409,13 @@ table#snipcart-confirm-prices tr td span,
   max-height: none;
 }
 
-#snipcart-items-list label.snip-form__label {
+#snipcart-items-list label.snip-form__label,
+#snipcart-items-list-now span,
+#snipcart-total td.snip-table__cell--right,
+#snipcart-fees td.snip-table__cell--right{
   font-family: 'Jost', sans-serif;
   text-transform: lowercase;
 }
-
 #snipcart-discounts {
   display: none;
 }
@@ -414,4 +430,64 @@ table#snipcart-confirm-prices tr td span,
   text-transform: lowercase;
   font-family: 'Jost', sans-serif;
   pointer-events:none;
+}
+
+#snipcart-checkout-step.snip-step__item.js-active,
+#snipcart-billing-address-step.snip-step__item.js-active,
+#snipcart-payment-method-step.snip-step__item.js-active,
+#snipcart-confirm-step.snip-step__item.js-active {
+  background-color: #FAF6EB;
+  color: #52504B;
+  border: none;
+}
+
+#snipcart-checkout-step.snip-step__item,
+#snipcart-billing-address-step.snip-step__item,
+#snipcart-payment-method-step.snip-step__item,
+#snipcart-confirm-step.snip-step__item {
+  background-color: #EBE7DD;
+  color: #ABA79F;
+  border: none;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 1px;
+}
+
+#snipcart-sub-content label {
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 1px;
+  color: #ABA79F;
+}
+
+#snipcart-sub-content input,
+#snipcart-sub-content select {
+  font-family: 'Jost', sans-serif;
+  background-color: #FFFCF5;
+  color: #52504B;
+  border: none;
+}
+
+#snipcart-sub-content p {
+  font-family: 'Jost', sans-serif;
+  color: #ABA79F;
+}
+
+#snipcart-sub-content h2 {
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 1px;
+  color: #52504B;
+}
+
+#snipcart-sub-content div,
+#snipcart-sub-content div.snip-col,
+#snipcart-sub-content tr.snip-table__item,
+#snipcart-sub-content tr.snip-table__item td,
+#snipcart-fees,
+#snipcart-fees tr,
+#snipcart-total {
+  border: none;
+}
+
+#snipcart-total,
+#snipcart-fees {
+  padding: 20px 20px
 }
