@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { Link, graphql } from 'gatsby'
 import get from 'lodash/get'
 
-import BuyButton from '../components/BuyButton'
+import BuyProduct from '../components/BuyProduct'
 import Layout from '../components/layout'
 import './product.css'
 
@@ -24,7 +24,7 @@ class ProductTemplate extends React.Component {
         <div className="product-page">
 
           <Link to="/shop" className="back-button">
-            ← Back to Shop
+            ← back to shop
           </Link>
 
           <Helmet
@@ -51,31 +51,33 @@ class ProductTemplate extends React.Component {
 
           <div className="product-information">
             {!product.frontmatter.sold &&
-              <BuyButton product={product.frontmatter} images={images}>
-              </BuyButton>
+              <BuyProduct product={product.frontmatter} images={images}>
+              </BuyProduct>
             }
 
             {product.frontmatter.sold &&
-              <div className="position-relative">
-                <div className="sold-out-banner">
-                    Sold out
+              <div className="product-overview">
+                <div className="position-relative">
+                  <div className="sold-out-banner">
+                      Sold out
+                  </div>
+                  <img className="product-image" src={require(`./../pages${product.frontmatter.path}default.jpg`)}/>
                 </div>
-                <img className="product-image" src={require(`./../pages${product.frontmatter.path}default.jpg`)}/>
+                <div className="product-text">
+                  <div dangerouslySetInnerHTML={{ __html: product.frontmatter.description }} />
+
+                  <div className="dimensions">
+                    <h4>Dimensions</h4>
+                    {product.frontmatter.dimensions.map(dimension => {
+                      return (
+                        <div key={dimension} dangerouslySetInnerHTML={{ __html: "- " + dimension}} />
+                      )
+                    })}
+                    <div>- Each piece is handmade so sizes may vary</div>
+                  </div>
+                </div>
               </div>
             }
-
-            <div className="product-details">
-              <div dangerouslySetInnerHTML={{ __html: product.frontmatter.description }} />
-
-              <div className="dimensions">
-                <h4>Dimensions</h4>
-                {product.frontmatter.dimensions.map(dimension => {
-                  return (
-                    <div key={dimension} dangerouslySetInnerHTML={{ __html: "- " + dimension}} />
-                  )
-                })}
-              </div>
-            </div>
           </div>
 
           <ul
@@ -86,6 +88,7 @@ class ProductTemplate extends React.Component {
               justifyContent: 'space-between',
               listStyle: 'none',
               padding: 0,
+              textTransform: 'lowercase',
             }}
           >
             <li>

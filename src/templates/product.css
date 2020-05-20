@@ -5,6 +5,7 @@
 .back-button {
   display: flex;
   margin-bottom: 20px;
+  text-transform: lowercase;
 }
 
 h4 {
@@ -17,9 +18,9 @@ h4 {
  align-content: space-evenly;
 }
 
-.product-details {
+.product-text {
+  margin-left: 30px;
   text-align: left;
-  margin-left: 50px;
 }
 
 .dimensions {

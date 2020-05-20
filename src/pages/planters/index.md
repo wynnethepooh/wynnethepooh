@@ -7,16 +7,16 @@ image:
     - name: 'Speckled buff'
       src: 'speckled-buff'
     
-    - name: 'Death valley'
+    - name: 'death valley'
       src: 'death-valley'
 
 price: 43.00
 sold: false
-dimensions: ['Planter: 5in D x 6in H', 'Saucer: 5in D']
+dimensions: ['Planter: approximately 5in D x 6in H', 'Saucer: approximately 5in D']
 path: "/planters/"
 customFields:
     name: Color
-    values: ['Speckled buff', 'Death valley']
+    values: ['Speckled buff', 'death valley']
 
 description: "Zigzag planter with drainage hole and saucer"
 ---

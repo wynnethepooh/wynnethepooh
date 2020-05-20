@@ -42,7 +42,7 @@ class Shop extends React.Component {
                   <Link to={node.fields.slug}>
                     <img src={imgSrc} width="200px"></img>
                   </Link>
-                  <div className="product-overview">
+                  <div className="product-list-item">
                     <h3 className="product-title">
                       <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
                         {title}

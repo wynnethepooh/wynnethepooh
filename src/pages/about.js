@@ -26,7 +26,7 @@ class About extends React.Component {
             I had a successful sale at Slab's holiday studio sale, and since
             then I've
             been creating pieces for friends, but I'm hoping to open up an
-            online shop soon, so check back in!
+            online shop with my quarantine pieces soon, so check back in!
           </p>
 
           <p>

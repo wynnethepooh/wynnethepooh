@@ -12,13 +12,13 @@ image:
 
 price: 38.00
 sold: true
-dimensions: ['6in diameter']
+dimensions: ['Approximately 6in diameter']
 path: "/donut-vases/"
 customFields:
     name: Color
-    values: ['Redstone', 'Black']
+    values: ['redstone', 'black']
 
-description: "Donut vase can hold water and a few stems"
+description: "Each donut vase is glazed inside so it can hold water and a few fresh stems."
 ---
 
-Donut vase can hold water and a few stems
+Each donut vase can hold water and a few fresh stems
