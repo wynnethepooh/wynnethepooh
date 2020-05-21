@@ -8,6 +8,8 @@ Colors:
 #E1B94E - mustard
 #E8C1B7 - pink
 #D1A297 - dark pink
+
+#CC8E20 - honey
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&family=Oswald&display=swap');
@@ -20,7 +22,7 @@ body {
 }
 
 footer {
-  color: #D1A297;
+  color: #CC8E21;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -66,7 +68,7 @@ footer {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   font-family: 'Oswald', sans-serif;
-  color: #E8C1B7;
+  color: #CC8E20;
 }
 
 .app-title-header {
@@ -78,7 +80,7 @@ footer {
   /* justify-content: center; */
   font-size: calc(10px + 2vmin);
   font-family: Helvetica, sans-serif;
-  color: #E8C1B7;
+  color: #CC8E20;
   padding: 0 0 0 5vh;
 }
 
@@ -95,7 +97,7 @@ h1 {
   margin: 0;
   padding: 0 0 10px 0;
   text-align: left;
-  color: #E8C1B7;
+  color: #CC8E20;
 }
 
 #app-title {
@@ -113,7 +115,7 @@ h2 {
   /* font-family: 'Fjalla One', sans-serif; */
   padding: 0;
   margin: 0 0 0 -80px;
-  color: #E8C1B7;
+  color: #CC8E20;
 }
 
 p {
@@ -122,7 +124,7 @@ p {
 }
 
 a {
-  color: #D1A297;
+  color: #CC8E21;
   font-weight: 500;
   text-decoration: none;
 }
@@ -200,16 +202,17 @@ a:hover {
   height: 30px;
   left: 3vh;
   top: 5vh;
+  z-index: 1;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #E8C1B7;
+  background: #CC8E20;
 }
 
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-  background: #D1A297;
+  background: #CC8E21;
 }
 
 /* Position and sizing of clickable cross button */
@@ -220,7 +223,7 @@ a:hover {
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: #E8C1B7;
+  background: #CC8E20;
 }
 
 /*
@@ -255,7 +258,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   display: inline-block;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: #E8C1B7;
+  color: #CC8E20;
   font-weight: bold;
   text-decoration: none;
   font-size: 3vh;
@@ -352,7 +355,7 @@ table#snipcart-confirm-prices tr td span,
 #snipcart-next,
 #snipcart-paymentmethod-pay,
 #snipcart-sub-content .snip-actions a.js-submit {
-  background-color: #E8C1B7;
+  background-color: #CC8E20;
   font-family: 'Oswald', sans-serif;
   color: white;
   font-size: 16px;
@@ -473,7 +476,7 @@ table#snipcart-confirm-prices tr td span,
 
 #snipcart-sub-content p.snip-form__error {
   background: none;
-  color: #D1A297;
+  color: #CC8E21;
 }
 
 #snipcart-sub-content h2 {

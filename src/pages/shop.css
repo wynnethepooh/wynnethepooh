@@ -27,6 +27,7 @@
   overflow-wrap: break-word;
   text-align: left;
   padding-right: 10px;
+  text-transform: lowercase;
 }
 
 .product-price {
@@ -40,7 +41,7 @@
   position: absolute;
   top: 40px;
   right: 23px;
-  background-color: #E8C1B7;
+  background-color: #CC8E20;
   color: white;
   padding: 3px 7px;
 }

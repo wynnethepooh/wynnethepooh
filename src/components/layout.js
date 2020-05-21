@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import { Link } from "gatsby";
 import { slide as Menu } from 'react-burger-menu';
+import { Helmet } from 'react-helmet'
 
 import Header from "./header";
 import "./layout.css";
@@ -28,6 +29,25 @@ class Layout extends React.Component {
 
     return (
       <span className="snipcart-overwrite">
+
+        <Helmet
+          htmlAttributes={{ lang: 'en' }}
+          meta={{ charSet: 'utf-8' }}
+          link={[{
+            href:"https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css",
+            rel:"stylesheet",
+            type:"text/css"
+          }]}
+          script={[{
+            type: 'text/javascript',
+            id: "snipcart",
+            "data-api-key": "NGM1YThjMDgtZDBhNy00MzU5LWJiNGUtMjU2YTBjNTJlMWNhNjM3MjUzODE0ODI3MjM0MTEx",
+            src:"https://cdn.snipcart.com/scripts/2.0/snipcart.js"
+          },{
+            type: 'text/javascript',
+            src:"https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
+          }]}/>
+
         <Header siteTitle={title} />
         <div className="App">
           <Menu>

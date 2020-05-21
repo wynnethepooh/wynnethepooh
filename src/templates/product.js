@@ -30,21 +30,7 @@ class ProductTemplate extends React.Component {
           <Helmet
             htmlAttributes={{ lang: 'en' }}
             meta={[{ name: 'description', content: siteDescription }]}
-            title={`${product.frontmatter.title} | ${siteTitle}`}
-            link={[{
-              href:"https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css",
-              rel:"stylesheet",
-              type:"text/css"
-            }]}
-            script={[{
-              type: 'text/javascript',
-              id: "snipcart",
-              "data-api-key": "NGM1YThjMDgtZDBhNy00MzU5LWJiNGUtMjU2YTBjNTJlMWNhNjM3MjUzODE0ODI3MjM0MTEx",
-              src:"https://cdn.snipcart.com/scripts/2.0/snipcart.js"
-            },{
-              type: 'text/javascript',
-              src:"https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
-            }]}/>
+            title={`${product.frontmatter.title} | ${siteTitle}`}/>
           <h1>{product.frontmatter.title}</h1>
           <p>
           </p>

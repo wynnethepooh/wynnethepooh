@@ -41,7 +41,7 @@ var BuyProduct = React.memo(({product, images}) => {
 
           <a
             style={{
-                backgroundColor: "#D1A297",
+                backgroundColor: "#CC8E21",
                 borderRadius: "5px",
                 color: "#F5F5F5",
                 fontWeight: "500",
