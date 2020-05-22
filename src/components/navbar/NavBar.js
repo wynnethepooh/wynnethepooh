@@ -126,6 +126,6 @@ const BurgerWrapper = styled.div`
 const ShoppingCartWrapper = styled.span`
   @media (max-width: 900px) {
     position: relative;
-    right: 30px;
+    right: 35px;
   }
 `;

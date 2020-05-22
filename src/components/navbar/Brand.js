@@ -36,7 +36,7 @@ const Title = styled.div`
   font-family: PalmCanyonDrive;
   font-weight: normal;
   margin: 0;
-  padding: 0;
+  padding: 0 5px;
   z-index: 11;
 `;
 
@@ -46,6 +46,6 @@ const Subtitle = styled.h2`
   font-family: 'Oswald', sans-serif;
   /* font-family: 'Fjalla One', sans-serif; */
   padding: 0;
-  margin: 0 0 0 -57px;
+  margin: -7px 0 0 -63px;
   color: #CC8E20;
 `;

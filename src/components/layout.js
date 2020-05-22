@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import { Link } from "gatsby";
 import { Helmet } from 'react-helmet'
+import styled from "styled-components";
 
 import Navbar from "./navbar/Navbar";
 import "./layout.css";
@@ -63,20 +64,20 @@ class Layout extends React.Component {
 
         <div className="App">
           {children}
-          <footer>
+          <Footer>
             © {new Date().getFullYear()} | wynne the pooh
-            <div className="social-media">
+            <SocialMedia>
               <a className="facebook" href="https://www.facebook.com/it.me.wynne/" target="_blank">
-                <img src={Facebook} height="30px"/>
+                <SocialMediaIcon src={Facebook} />
               </a>
               <a className="instagram" href="https://www.instagram.com/wynnethepooh" target="_blank">
-                <img src={Instagram} height="30px"/>
+                <SocialMediaIcon src={Instagram} />
               </a>
               <a className="linkedin" href="https://www.linkedin.com/in/wynnetran" target="_blank">
-                <img src={LinkedIn} width="30px"/>
+                <SocialMediaIcon src={LinkedIn} />
               </a>
-            </div>
-          </footer>
+            </SocialMedia>
+          </Footer>
         </div>
       </>
     )
@@ -84,3 +85,27 @@ class Layout extends React.Component {
 }
 
 export default Layout
+
+const Footer = styled.div`
+  margin: 20px;
+  color: #CC8E20;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  @media (max-width: 420px) {
+    flex-direction: column-reverse;
+    font-size: 12px;
+  }
+`;
+
+const SocialMedia = styled.div`
+  @media (max-width: 420px) {
+    margin: 20px 0;
+  }
+`;
+
+const SocialMediaIcon = styled.img`
+  height: 20px;
+`;
