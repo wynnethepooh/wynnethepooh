@@ -51,37 +51,13 @@ footer {
   text-align: center;
   background-color: #FAF6EB;
   font-family: 'Jost', sans-serif;
+  margin-top: 6rem;
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
   pointer-events: none;
-}
-
-.App-header {
-  background-color: #FAF6EB; /* #E1B94E (mustard)*/
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  font-family: 'Oswald', sans-serif;
-  color: #CC8E20;
-}
-
-.app-title-header {
-  background-color: #FAF6EB; /* #E1B94E (mustard)*/
-  min-height: 15vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
-  font-size: calc(10px + 2vmin);
-  font-family: Helvetica, sans-serif;
-  color: #CC8E20;
-  padding: 0 0 0 5vh;
 }
 
 .no-wrap {
@@ -100,21 +76,7 @@ h1 {
   color: #CC8E20;
 }
 
-#app-title {
-  font-size: calc(47px + 2vmin);
-  font-family: PalmCanyonDrive;
-  font-weight: normal;
-  margin: 0;
-  padding: 0;
-}
-
 h2 {
-  letter-spacing: 3px;
-  font-size: calc(1px + 2vmin);
-  font-family: 'Oswald', sans-serif;
-  /* font-family: 'Fjalla One', sans-serif; */
-  padding: 0;
-  margin: 0 0 0 -80px;
   color: #CC8E20;
 }
 
@@ -140,10 +102,6 @@ a:hover {
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 .home {
@@ -197,6 +155,7 @@ a:hover {
 /* Burger bar */
 /* Position and sizing of burger button */
 .bm-burger-button {
+  background: #FAF6EB;
   position: absolute;
   width: 36px;
   height: 30px;
@@ -278,6 +237,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
 #snipcart-sub-content,
 #snipcart-fees {
   background-color: #FAF6EB;
+}
+
+#snipcart-title {
+  letter-spacing: 2px;
 }
 
 #snipcart-sub-content p.snip-product__empty {

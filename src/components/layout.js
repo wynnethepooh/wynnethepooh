@@ -9,17 +9,25 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 import { Link } from "gatsby";
-import { slide as Menu } from 'react-burger-menu';
 import { Helmet } from 'react-helmet'
 
-import Header from "./header";
+import Navbar from "./navbar/Navbar";
 import "./layout.css";
+import GlobalStyle from '../styles/Global';
 
 import Facebook from "../images/facebook.png";
 import Instagram from "../images/instagram.png";
 import LinkedIn from "../images/linkedin.png";
 
 class Layout extends React.Component {
+
+  state = {
+    navbarOpen: false
+  }
+
+  handleNavbar = () => {
+    this.setState({ navbarOpen: !this.state.navbarOpen });
+  }
 
   render() {
 
@@ -28,7 +36,12 @@ class Layout extends React.Component {
     let header
 
     return (
-      <span className="snipcart-overwrite">
+      <>
+        <Navbar
+          navbarState={this.state.navbarOpen}
+          handleNavbar={this.handleNavbar}
+        />
+        <GlobalStyle />
 
         <Helmet
           htmlAttributes={{ lang: 'en' }}
@@ -48,14 +61,7 @@ class Layout extends React.Component {
             src:"https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
           }]}/>
 
-        <Header siteTitle={title} />
         <div className="App">
-          <Menu>
-            <Link to="/">Home</Link>
-            <Link to="/shop">Shop</Link>
-            <Link to="/about">About</Link>
-            <Link to="/contact">Contact</Link>
-          </Menu>
           {children}
           <footer>
             © {new Date().getFullYear()} | wynne the pooh
@@ -72,7 +78,7 @@ class Layout extends React.Component {
             </div>
           </footer>
         </div>
-      </span>
+      </>
     )
   }
 }

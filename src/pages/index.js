@@ -9,7 +9,7 @@ class Home extends React.Component {
   render() {
     return (
     <Layout>
-      <main className="home">
+      <main class="home">
         <Helmet
           htmlAttributes={{ lang: 'en' }}
           title='wynne the pooh'
