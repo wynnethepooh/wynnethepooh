@@ -150,7 +150,7 @@ const ProductBanner = styled.div`
   text-transform: lowercase;
   position: absolute;
   top: 40px;
-  right: 53px;
+  right: -5px;
   background-color: #CC8E20;
   color: white;
   padding: 3px 7px;
