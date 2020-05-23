@@ -39,7 +39,6 @@ const Navbar = (props) => {
                   WebkitAppearance: "none",
                   border: "none",
                   background: "none",
-                  height: "1.4rem",
                   marginLeft: "1.5rem"
                 }}>
                 <img src={ShoppingBag} height="25px" />
