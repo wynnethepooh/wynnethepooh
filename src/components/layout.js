@@ -87,7 +87,7 @@ class Layout extends React.Component {
 export default Layout
 
 const Footer = styled.div`
-  margin: 20px;
+  margin: 5vh;
   color: #CC8E20;
   font-size: 14px;
   display: flex;

@@ -5,7 +5,7 @@ import get from 'lodash/get'
 
 import BuyProduct from '../components/BuyProduct'
 import Layout from '../components/layout'
-import './product.css'
+import styled from 'styled-components';
 
 class ProductTemplate extends React.Component {
   render() {
@@ -21,9 +21,15 @@ class ProductTemplate extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <div className="product-page">
+        <ProductPage>
 
-          <Link to="/shop" className="back-button">
+          <Link
+            to="/shop"
+            style={{
+              display: "flex",
+              marginBottom: "20px",
+              textTransform: "lowercase"
+            }}>
             ← back to shop
           </Link>
 
@@ -35,36 +41,36 @@ class ProductTemplate extends React.Component {
           <p>
           </p>
 
-          <div className="product-information">
+          <ProductInformation>
             {!product.frontmatter.sold &&
               <BuyProduct product={product.frontmatter} images={images}>
               </BuyProduct>
             }
 
             {product.frontmatter.sold &&
-              <div className="product-overview">
-                <div className="position-relative">
-                  <div className="sold-out-banner">
+              <ProductOverview>
+                <DisplayBlock>
+                  <ProductBanner>
                       Sold out
-                  </div>
-                  <img className="product-image" src={require(`./../pages${product.frontmatter.path}default.jpg`)}/>
-                </div>
-                <div className="product-text">
+                  </ProductBanner>
+                  <ProductImage src={require(`./../pages${product.frontmatter.path}default.jpg`)}/>
+                </DisplayBlock>
+                <ProductDescription>
                   <div dangerouslySetInnerHTML={{ __html: product.frontmatter.description }} />
 
-                  <div className="dimensions">
-                    <h4>Dimensions</h4>
+                  <Dimensions>
+                    <DimensionsHeader>Dimensions</DimensionsHeader>
                     {product.frontmatter.dimensions.map(dimension => {
                       return (
                         <div key={dimension} dangerouslySetInnerHTML={{ __html: "- " + dimension}} />
                       )
                     })}
                     <div>- Each piece is handmade so sizes may vary</div>
-                  </div>
-                </div>
-              </div>
+                  </Dimensions>
+                </ProductDescription>
+              </ProductOverview>
             }
-          </div>
+          </ProductInformation>
 
           <ul
             style={{
@@ -94,7 +100,7 @@ class ProductTemplate extends React.Component {
               }
             </li>
           </ul>
-        </div>
+        </ProductPage>
       </Layout>
     )
   }
@@ -135,3 +141,66 @@ export const pageQuery = graphql`
     }
   }
 `
+
+const ProductPage = styled.div`
+  padding: 2.5vh 5vh
+`;
+
+const ProductInformation = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-content: space-evenly;
+`;
+
+const ProductBanner = styled.div`
+  text-transform: lowercase;
+  position: absolute;
+  top: 40px;
+  right: -7px;
+  background-color: #CC8E20;
+  color: white;
+  padding: 3px 7px;
+`;
+
+const ProductOverview = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+`;
+
+const ProductImage = styled.img`
+  width: 400px;
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+`;
+
+const ProductDescription = styled.div`
+  margin-left: 30px;
+  text-align: left;
+
+  @media (max-width: 700px) {
+    margin: 20px 0;
+  }
+`;
+
+const Dimensions = styled.div`
+  margin-top: 20px;
+  text-align: left;
+  font-size: 14px;
+`;
+
+const DimensionsHeader = styled.h4`
+  margin: 7px 0;
+  font-weight: 500;
+`;
+
+const DisplayBlock = styled.div`
+  position: relative;
+  display: inline-block;
+`;

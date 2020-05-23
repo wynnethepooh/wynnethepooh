@@ -4,7 +4,7 @@ import get from 'lodash/get'
 import { Helmet } from 'react-helmet'
 
 import Layout from '../components/layout'
-import "./shop.css";
+import styled from 'styled-components';
 
 class Shop extends React.Component {
   render() {
@@ -18,9 +18,9 @@ class Shop extends React.Component {
 
     return (
       <Layout>
-        <div className="shop">
+        <ShopPage>
           <h1>shop</h1>
-          <div className="product-list">
+          <ProductList>
             <Helmet
               htmlAttributes={{ lang: 'en' }}
               meta={[{ name: 'description', content: siteDescription }]}
@@ -33,35 +33,35 @@ class Shop extends React.Component {
               const imgSrc= require(`./../pages${node.frontmatter.path}${image[0].src}.jpg`);
 
               return (
-                <div key={node.fields.slug} className="product">
+                <Product key={node.fields.slug}>
                   {node.frontmatter.sold &&
-                    <div className="sold-out">
+                    <ProductBanner>
                       Sold out
-                    </div>
+                    </ProductBanner>
                   }
                   <Link to={node.fields.slug}>
-                    <img src={imgSrc} width="200px"></img>
+                    <ProductImage src={imgSrc} />
                   </Link>
-                  <div className="product-list-item">
-                    <h3 className="product-title">
+                  <ProductInformation>
+                    <ProductTitle>
                       <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
                         {title}
                       </Link>
-                    </h3>
+                    </ProductTitle>
                     {node.frontmatter.sold &&
                       <strike>
-                        <h3 className="product-price" dangerouslySetInnerHTML={{ __html: '&dollar;' + node.frontmatter.price }} />
+                        <ProductPrice dangerouslySetInnerHTML={{ __html: '&dollar;' + node.frontmatter.price }} />
                       </strike>
                     }
                     {!node.frontmatter.sold &&
-                      <h3 className="product-price" dangerouslySetInnerHTML={{ __html: '&dollar;' + node.frontmatter.price }} />
+                      <ProductPrice dangerouslySetInnerHTML={{ __html: '&dollar;' + node.frontmatter.price }} />
                     }
-                  </div>
-                </div>
+                  </ProductInformation>
+                </Product>
               )
             })}
-          </div>
-        </div>
+          </ProductList>
+        </ShopPage>
       </Layout>
 
     );
@@ -101,3 +101,74 @@ export const pageQuery = graphql`
     }
   }
 `
+
+const ShopPage = styled.div`
+  padding: 2.5vh 5vh
+`;
+
+const ProductList = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+const Product = styled.div`
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  @media (min-width: 420px) {
+    padding: 30px;
+  }
+`;
+
+const ProductInformation = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 250px;
+
+  @media (max-width: 420px) {
+    width: 100%;
+  }
+`;
+
+const ProductBanner = styled.div`
+  text-transform: lowercase;
+  position: absolute;
+  top: 40px;
+  right: 23px;
+  background-color: #CC8E20;
+  color: white;
+  padding: 3px 7px;
+
+  @media (max-width: 420px) {
+    top: 50px;
+    right: -5px;
+  }
+`;
+
+const ProductImage = styled.img`
+  width: 250px;
+
+  @media(max-width: 420px) {
+    width: 100%;
+  }
+`;
+
+const ProductTitle = styled.h3`
+  overflow-wrap: break-word;
+  text-align: left;
+  padding-right: 10px;
+  text-transform: lowercase;
+  margin: 10px 0;
+`;
+
+const ProductPrice = styled.h3`
+  font-weight: normal;
+  white-space: nowrap;
+  text-align: right;
+  margin: 10px 0;
+`;
