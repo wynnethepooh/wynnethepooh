@@ -11,7 +11,7 @@ image:
       src: 'death-valley'
 
 price: 43.00
-sold: false
+sold: true
 dimensions: ['Planter: approximately 5in D x 6in H', 'Saucer: approximately 5in D']
 path: "/planters/"
 customFields:
