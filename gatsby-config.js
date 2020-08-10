@@ -54,7 +54,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/wynnethepooh-icon.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-feed`,
@@ -67,7 +67,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`,
+        icon: `src/images/wynnethepooh-icon.png`,
       },
     },
     `gatsby-plugin-offline`,
