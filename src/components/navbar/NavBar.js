@@ -39,7 +39,7 @@ const Navbar = (props) => {
                   WebkitAppearance: "none",
                   border: "none",
                   background: "none",
-                  marginLeft: "1.5rem"
+                  marginLeft: "0.5rem"
                 }}>
                 <img src={ShoppingBag} height="25px" />
               </button>
@@ -81,7 +81,7 @@ const FlexContainer = styled.div`
   margin: auto;
   padding: 0 2rem;;
   justify-content: space-between;
-  height: 5rem;
+  height: 6rem;
 `;
 
 const NavLinks = styled(animated.ul)`

@@ -6,18 +6,34 @@ const Brand = () => {
   return (
     <Link to="/">
       <TitleHeader className="app-title-header no-wrap">
-        <Title>
-          wynne the pooh
-        </Title>
-        <Subtitle>
-          NOT WAYNE
-        </Subtitle>
+        <svg viewBox="0 -25 450 170" height="95px">
+          <Path
+            id="curve"
+            d="M 50,75 Q 150,-30 250,75 T 450,75" />
+          <Text x="0">
+            <textPath xlinkHref="#curve">
+              wynne the pooh
+            </textPath>
+          </Text>
+        </svg>
       </TitleHeader>
     </Link>
   )
 }
 
 export default Brand
+
+const Path = styled.path`
+  fill: transparent
+`;
+
+const Text = styled.text`
+  font-family: 'Jost', sans-serif;
+  font-size: 45px;
+  letter-spacing: 11px;
+  fill: #CC8E20;
+
+`;
 
 const TitleHeader = styled.div`
   background-color: #FAF6EB; /* #E1B94E (mustard)*/
