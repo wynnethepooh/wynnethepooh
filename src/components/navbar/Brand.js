@@ -2,28 +2,50 @@ import React from 'react'
 import { Link } from "gatsby"
 import styled from "styled-components";
 
-const Brand = () => {
+const Brand = (props) => {
   return (
     <Link to="/">
-      <TitleHeader className="app-title-header no-wrap">
-        <svg viewBox="0 -25 450 170" height="95px">
-          <Path
-            id="curve"
-            d="M 50,75 Q 150,-30 250,75 T 450,75" />
-          <Text x="0">
-            <textPath xlinkHref="#curve">
-              wynne the pooh
-            </textPath>
-          </Text>
-        </svg>
-      </TitleHeader>
+      {!props.isHomePage &&
+        <TitleHeader className="app-title-header no-wrap">
+          <Svg viewBox="0 -25 450 170" height="130px">
+            <Curve
+              id="curve"
+              d="M 50,75 Q 150,-30 250,75 T 450,75" />
+            <Text x="0">
+              <textPath xlinkHref="#curve">
+                wynne the pooh
+              </textPath>
+            </Text>
+          </Svg>
+        </TitleHeader>
+      }
+      {props.isHomePage &&
+        <HomepageTitleHeader className="app-title-header no-wrap">
+          <Svg viewBox="0 -25 450 170" height="150px">
+            <Curve
+              id="curve"
+              d="M 50,75 Q 150,-30 250,75 T 450,75" />
+            <Text x="0">
+              <textPath xlinkHref="#curve">
+                wynne the pooh
+              </textPath>
+            </Text>
+          </Svg>
+        </HomepageTitleHeader>
+      }
     </Link>
   )
 }
 
 export default Brand
 
-const Path = styled.path`
+const Svg = styled.svg`
+  @media (max-width: 550px) {
+    width: 100%;
+  }
+`;
+
+const Curve = styled.path`
   fill: transparent
 `;
 
@@ -36,15 +58,35 @@ const Text = styled.text`
 `;
 
 const TitleHeader = styled.div`
-  background-color: #FAF6EB; /* #E1B94E (mustard)*/
+  /*background-color: #FAF6EB; /* #E1B94E (mustard)*/
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   /* justify-content: center; */
   font-size: calc(5px + 1vmin);
   font-family: Helvetica, sans-serif;
   color: #CC8E20;
   z-index: 11;
+  margin: 5px 0 0 -20px;
+  @media (max-width: 550px) {
+    width: 65vw;
+  }
+`;
+
+const HomepageTitleHeader = styled.div`
+  /*background-color: #FAF6EB; /* #E1B94E (mustard)*/
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  /* justify-content: center; */
+  font-size: calc(5px + 1vmin);
+  font-family: Helvetica, sans-serif;
+  color: #CC8E20;
+  z-index: 11;
+  margin: -7px 0 0 -20px;
+  @media (max-width: 550px) {
+    width: 65vw;
+  }
 `;
 
 const Title = styled.div`

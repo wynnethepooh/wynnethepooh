@@ -36,7 +36,7 @@ const GlobalStyles = createGlobalStyle`
     text-align: left;
     color: #CC8E20;
 
-    @media (max-width: 900px) {
+    @media (max-width: 1020px) {
       font-size: 27px;
     }
   }

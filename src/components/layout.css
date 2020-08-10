@@ -99,6 +99,8 @@ a:hover {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .coming-soon {

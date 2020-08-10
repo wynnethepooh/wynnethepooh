@@ -26,7 +26,7 @@ const Navbar = (props) => {
     <>
       <NavBar style={barAnimation}>
         <FlexContainer>
-          <Brand />
+          <Brand isHomePage={props.isHomePage}/>
           <NavLinks style={linkAnimation}>
             <Link to="/">Home</Link>
             <Link to="/shop">Shop</Link>
@@ -105,7 +105,7 @@ const NavLinks = styled(animated.ul)`
       border-bottom: 1px solid #CC8E20;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1020px) {
       display: none;
     }
   }
@@ -117,13 +117,13 @@ const BurgerWrapper = styled.div`
   right: 1rem;
   top: 1rem;
 
-  @media (min-width: 900px) {
+  @media (min-width: 1020px) {
     display: none;
   }
 `;
 
 const ShoppingCartWrapper = styled.span`
-  @media (max-width: 900px) {
+  @media (max-width: 1020px) {
     position: relative;
     right: 35px;
   }

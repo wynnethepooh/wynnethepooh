@@ -41,6 +41,7 @@ class Layout extends React.Component {
         <Navbar
           navbarState={this.state.navbarOpen}
           handleNavbar={this.handleNavbar}
+          isHomePage={this.props.isHomePage}
         />
         <GlobalStyle />
 

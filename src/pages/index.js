@@ -8,7 +8,7 @@ import Layout from "../components/layout"
 class Home extends React.Component {
   render() {
     return (
-    <Layout>
+    <Layout isHomePage>
       <main className="home">
         <Helmet
           htmlAttributes={{ lang: 'en' }}
