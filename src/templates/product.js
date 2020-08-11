@@ -28,7 +28,8 @@ class ProductTemplate extends React.Component {
             style={{
               display: "flex",
               marginBottom: "20px",
-              textTransform: "lowercase"
+              textTransform: "lowercase",
+              zIndex: "12"
             }}>
             ← back to shop
           </Link>
@@ -143,7 +144,7 @@ export const pageQuery = graphql`
 `
 
 const ProductPage = styled.div`
-  padding: 2.5vh 5vh
+  padding: 45px 5vh
 `;
 
 const ProductInformation = styled.div`

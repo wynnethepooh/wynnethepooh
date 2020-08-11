@@ -27,7 +27,7 @@ image:
       src: 'redstone'
 
 price: 38.00
-sold: false
+sold: true
 dimensions: ['Approximately 6in diameter']
 path: "/donut-vases/"
 customFields:

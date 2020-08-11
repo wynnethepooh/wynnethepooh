@@ -123,8 +123,11 @@ const BurgerWrapper = styled.div`
 `;
 
 const ShoppingCartWrapper = styled.span`
+  position: relative;
+
   @media (max-width: 1020px) {
-    position: relative;
-    right: 35px;
+    position: absolute;
+    right: 27px;
+    top: -16px;
   }
 `;

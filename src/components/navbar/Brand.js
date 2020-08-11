@@ -69,7 +69,8 @@ const TitleHeader = styled.div`
   z-index: 11;
   margin: 5px 0 0 -20px;
   @media (max-width: 550px) {
-    width: 65vw;
+    width: 43vw;
+    margin: -15px 0 0 -10px;
   }
 `;
 
@@ -85,7 +86,8 @@ const HomepageTitleHeader = styled.div`
   z-index: 11;
   margin: -7px 0 0 -20px;
   @media (max-width: 550px) {
-    width: 65vw;
+    width: 75vw;
+    margin: 0px 0 0 -20px;
   }
 `;
 
