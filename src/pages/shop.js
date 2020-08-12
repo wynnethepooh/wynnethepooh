@@ -23,9 +23,10 @@ class Shop extends React.Component {
           <ProductList>
             <Helmet
               htmlAttributes={{ lang: 'en' }}
-              meta={[{ name: 'description', content: siteDescription }]}
-              title={siteTitle}
-            />
+            >
+              <title>{siteTitle}</title>
+              <meta name="description" content={siteDescription}/>
+            </Helmet>
 
             {products.map(({ node }) => {
               const title = get(node, 'frontmatter.title') || node.fields.slug;

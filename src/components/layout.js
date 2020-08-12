@@ -47,7 +47,6 @@ class Layout extends React.Component {
 
         <Helmet
           htmlAttributes={{ lang: 'en' }}
-          meta={{ charSet: 'utf-8' }}
           link={[{
             href:"https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css",
             rel:"stylesheet",
@@ -61,7 +60,9 @@ class Layout extends React.Component {
           },{
             type: 'text/javascript',
             src:"https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
-          }]}/>
+          }]}>
+          <meta charSet="utf-8" />
+        </Helmet>
 
         <div className="App">
           {children}

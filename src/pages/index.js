@@ -10,10 +10,10 @@ class Home extends React.Component {
     return (
     <Layout isHomePage>
       <main className="home">
-        <Helmet
-          htmlAttributes={{ lang: 'en' }}
-          title='wynne the pooh'
-          meta={{ charSet: 'utf-8' }}/>
+        <Helmet htmlAttributes={{ lang: 'en' }}>
+          <title>wynne the pooh</title>
+          <meta charSet="utf-8" />
+        </Helmet>
 
 
       </main>

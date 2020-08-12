@@ -34,10 +34,10 @@ class ProductTemplate extends React.Component {
             ← back to shop
           </Link>
 
-          <Helmet
-            htmlAttributes={{ lang: 'en' }}
-            meta={[{ name: 'description', content: siteDescription }]}
-            title={`${product.frontmatter.title} | ${siteTitle}`}/>
+          <Helmet htmlAttributes={{ lang: 'en' }}>
+            <title>{`${product.frontmatter.title} | ${siteTitle}`}</title>
+            <meta name="description" content={siteDescription}/>
+          </Helmet>
           <h1>{product.frontmatter.title}</h1>
           <p>
           </p>
