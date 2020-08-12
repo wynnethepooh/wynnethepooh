@@ -1,23 +1,23 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
-import { Link, graphql } from 'gatsby'
-import get from 'lodash/get'
+import {Helmet} from 'react-helmet';
+import {Link, graphql} from 'gatsby';
+import get from 'lodash/get';
 
-import BuyProduct from '../components/BuyProduct'
-import Layout from '../components/layout'
+import BuyProduct from '../components/BuyProduct';
+import Layout from '../components/layout';
 import styled from 'styled-components';
 
 class ProductTemplate extends React.Component {
   render() {
-    const product = this.props.data.markdownRemark
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title')
-    const siteDescription = product.excerpt
-    const { previous, next } = this.props.pageContext
+    const product = this.props.data.markdownRemark;
+    const siteTitle = get(this.props, 'data.site.siteMetadata.title');
+    const siteDescription = product.excerpt;
+    const {previous, next} = this.props.pageContext;
     const images = product.frontmatter.image
-      .map(x => ({
-        name: x.name,
-        src: require(`./../pages${product.frontmatter.path}${x.src}.jpg`)
-      }))
+        .map((x) => ({
+          name: x.name,
+          src: require(`./../pages${product.frontmatter.path}${x.src}.jpg`),
+        }));
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
@@ -26,15 +26,15 @@ class ProductTemplate extends React.Component {
           <Link
             to="/shop"
             style={{
-              display: "flex",
-              marginBottom: "20px",
-              textTransform: "lowercase",
-              zIndex: "12"
+              display: 'flex',
+              marginBottom: '20px',
+              textTransform: 'lowercase',
+              zIndex: '12',
             }}>
             ← back to shop
           </Link>
 
-          <Helmet htmlAttributes={{ lang: 'en' }}>
+          <Helmet htmlAttributes={{lang: 'en'}}>
             <title>{`${product.frontmatter.title} | ${siteTitle}`}</title>
             <meta name="description" content={siteDescription}/>
           </Helmet>
@@ -57,14 +57,14 @@ class ProductTemplate extends React.Component {
                   <ProductImage src={require(`./../pages${product.frontmatter.path}default.jpg`)}/>
                 </DisplayBlock>
                 <ProductDescription>
-                  <div dangerouslySetInnerHTML={{ __html: product.frontmatter.description }} />
+                  <div dangerouslySetInnerHTML={{__html: product.frontmatter.description}} />
 
                   <Dimensions>
                     <DimensionsHeader>Dimensions</DimensionsHeader>
-                    {product.frontmatter.dimensions.map(dimension => {
+                    {product.frontmatter.dimensions.map((dimension) => {
                       return (
-                        <div key={dimension} dangerouslySetInnerHTML={{ __html: "- " + dimension}} />
-                      )
+                        <div key={dimension} dangerouslySetInnerHTML={{__html: '- ' + dimension}} />
+                      );
                     })}
                     <div>- Each piece is handmade so sizes may vary</div>
                   </Dimensions>
@@ -75,7 +75,7 @@ class ProductTemplate extends React.Component {
 
           <ul
             style={{
-              marginTop: "45px",
+              marginTop: '45px',
               display: 'flex',
               flexWrap: 'wrap',
               justifyContent: 'space-between',
@@ -103,11 +103,11 @@ class ProductTemplate extends React.Component {
           </ul>
         </ProductPage>
       </Layout>
-    )
+    );
   }
 }
 
-export default ProductTemplate
+export default ProductTemplate;
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -141,7 +141,7 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
 
 const ProductPage = styled.div`
   padding: 45px 5vh

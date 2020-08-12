@@ -1,5 +1,5 @@
-import React from 'react'
-import Layout from '../components/layout'
+import React from 'react';
+import Layout from '../components/layout';
 
 class About extends React.Component {
   render() {
@@ -40,4 +40,4 @@ class About extends React.Component {
   }
 }
 
-export default About
+export default About;

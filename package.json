@@ -26,7 +26,7 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^6.0.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "^3.4.1",
+    "react-scripts": "^3.4.3",
     "react-spring": "^8.0.27",
     "styled-components": "^5.1.0",
     "url-loader": "^4.1.0"
@@ -56,6 +56,10 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^7.6.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.6",
     "file-loader": "^6.0.0",
     "image-webpack-loader": "^6.0.0",
     "kill-port": "^1.6.0",

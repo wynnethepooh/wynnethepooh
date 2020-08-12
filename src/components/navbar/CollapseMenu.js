@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from "gatsby"
+import {Link} from 'gatsby';
 import styled from 'styled-components';
 
-import { useSpring, animated } from 'react-spring';
+import {useSpring, animated} from 'react-spring';
 
 const CollapseMenu = (props) => {
-  const { open } = useSpring({ open: props.navbarState ? 0 : 1 });
+  const {open} = useSpring({open: props.navbarState ? 0 : 1});
 
   if (props.navbarState === true) {
     return (
@@ -13,7 +13,7 @@ const CollapseMenu = (props) => {
         transform: open.interpolate({
           range: [0, 0.2, 0.3, 1],
           output: [0, -20, 0, -200],
-        }).interpolate(openValue => `translate3d(0, ${openValue}px, 0`),
+        }).interpolate((openValue) => `translate3d(0, ${openValue}px, 0`),
       }}
       >
         <NavLinks>

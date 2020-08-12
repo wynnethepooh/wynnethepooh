@@ -1,20 +1,19 @@
 import React from 'react';
-import { Link, graphql } from "gatsby";
-import get from 'lodash/get'
-import { Helmet } from 'react-helmet'
+import {Link, graphql} from 'gatsby';
+import get from 'lodash/get';
+import {Helmet} from 'react-helmet';
 
-import Layout from '../components/layout'
+import Layout from '../components/layout';
 import styled from 'styled-components';
 
 class Shop extends React.Component {
   render() {
-
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
+    const siteTitle = get(this, 'props.data.site.siteMetadata.title');
     const siteDescription = get(
-      this,
-      'props.data.site.siteMetadata.description'
-    )
-    const products = get(this, 'props.data.allMarkdownRemark.edges')
+        this,
+        'props.data.site.siteMetadata.description',
+    );
+    const products = get(this, 'props.data.allMarkdownRemark.edges');
 
     return (
       <Layout>
@@ -22,15 +21,15 @@ class Shop extends React.Component {
           <h1>shop</h1>
           <ProductList>
             <Helmet
-              htmlAttributes={{ lang: 'en' }}
+              htmlAttributes={{lang: 'en'}}
             >
               <title>{siteTitle}</title>
               <meta name="description" content={siteDescription}/>
             </Helmet>
 
-            {products.map(({ node }) => {
+            {products.map(({node}) => {
               const title = get(node, 'frontmatter.title') || node.fields.slug;
-              var image = get(node, 'frontmatter.image');
+              const image = get(node, 'frontmatter.image');
               const imgSrc= require(`./../pages${node.frontmatter.path}${image[0].src}.jpg`);
 
               return (
@@ -45,21 +44,21 @@ class Shop extends React.Component {
                   </Link>
                   <ProductInformation>
                     <ProductTitle>
-                      <Link style={{ boxShadow: 'none' }} to={node.fields.slug}>
+                      <Link style={{boxShadow: 'none'}} to={node.fields.slug}>
                         {title}
                       </Link>
                     </ProductTitle>
                     {node.frontmatter.sold &&
                       <strike>
-                        <ProductPrice dangerouslySetInnerHTML={{ __html: '&dollar;' + node.frontmatter.price }} />
+                        <ProductPrice dangerouslySetInnerHTML={{__html: '&dollar;' + node.frontmatter.price}} />
                       </strike>
                     }
                     {!node.frontmatter.sold &&
-                      <ProductPrice dangerouslySetInnerHTML={{ __html: '&dollar;' + node.frontmatter.price }} />
+                      <ProductPrice dangerouslySetInnerHTML={{__html: '&dollar;' + node.frontmatter.price}} />
                     }
                   </ProductInformation>
                 </Product>
-              )
+              );
             })}
           </ProductList>
         </ShopPage>
@@ -101,7 +100,7 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
 
 const ShopPage = styled.div`
   padding: 2.5vh 5vh

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-var BuyProduct = React.memo(({product, images}) => {
+const BuyProduct = React.memo(({product, images}) => {
   const [selected, setSelected] = useState(product.customFields.values[0]);
-  var filteredImgs = images.filter(x => x.name == selected);
-  var choosenImgSrc = filteredImgs.length > 0
-    ? filteredImgs[0].src
-    : images[0].src
+  const filteredImgs = images.filter((x) => x.name == selected);
+  const choosenImgSrc = filteredImgs.length > 0 ?
+    filteredImgs[0].src :
+    images[0].src;
 
   return (
     <ProductOverview>
@@ -16,40 +16,40 @@ var BuyProduct = React.memo(({product, images}) => {
       <ProductDetails>
         <BuyButton>
           <CustomField>
-            <h4 style={{ marginTop: "13px", marginRight: "10px" }}>{product.customFields.name}</h4>
+            <h4 style={{marginTop: '13px', marginRight: '10px'}}>{product.customFields.name}</h4>
             <SelectWrapper>
               <Select
-                  id={product.customFields.name}
-                  onChange={(e) => setSelected(e.target.value)}
-                  value={selected}
-                  style={{
-                      backgroundColor: "#EBE7DD",
-                      border: "none",
-                      borderRadius: "5px",
-                      paddingRight: "30px",
-                      paddingBlockStart: "13px",
-                      paddingBlockEnd: "13px",
-                      marginRight: "10px",
-                      appearance: "none"
-                  }}>
-                  {product.customFields.values.map((x) => (<option key={x}>{x}</option>))}
+                id={product.customFields.name}
+                onChange={(e) => setSelected(e.target.value)}
+                value={selected}
+                style={{
+                  backgroundColor: '#EBE7DD',
+                  border: 'none',
+                  borderRadius: '5px',
+                  paddingRight: '30px',
+                  paddingBlockStart: '13px',
+                  paddingBlockEnd: '13px',
+                  marginRight: '10px',
+                  appearance: 'none',
+                }}>
+                {product.customFields.values.map((x) => (<option key={x}>{x}</option>))}
               </Select>
             </SelectWrapper>
           </CustomField>
 
           <a
             style={{
-                backgroundColor: "#CC8E21",
-                borderRadius: "5px",
-                color: "#F5F5F5",
-                fontWeight: "500",
-                paddingBottom: "15px",
-                paddingTop: "12px",
-                paddingRight: "35px",
-                paddingLeft: "35px",
-                fontSize: "24",
-                textAlign: "center",
-                maxWidth: "140px"
+              backgroundColor: '#CC8E21',
+              borderRadius: '5px',
+              color: '#F5F5F5',
+              fontWeight: '500',
+              paddingBottom: '15px',
+              paddingTop: '12px',
+              paddingRight: '35px',
+              paddingLeft: '35px',
+              fontSize: '24',
+              textAlign: 'center',
+              maxWidth: '140px',
             }}
             id="buyButton"
             href='#'
@@ -61,28 +61,28 @@ var BuyProduct = React.memo(({product, images}) => {
             data-item-description={product.description}
             data-item-custom1-name={product.customFields.name}
             data-item-custom1-value={selected}
-            data-item-url={"https://wynnethepooh.com/" + product.path}>
+            data-item-url={'https://wynnethepooh.com/' + product.path}>
             add to cart &nbsp;  ${product.price}
           </a>
         </BuyButton>
 
         <ProductDescription>
-          <div dangerouslySetInnerHTML={{ __html: product.description }} />
+          <div dangerouslySetInnerHTML={{__html: product.description}} />
 
           <Dimensions>
             <DimensionsHeader>Dimensions</DimensionsHeader>
-            {product.dimensions.map(dimension => {
+            {product.dimensions.map((dimension) => {
               return (
-                <div key={dimension} dangerouslySetInnerHTML={{ __html: "- " + dimension}} />
-              )
+                <div key={dimension} dangerouslySetInnerHTML={{__html: '- ' + dimension}} />
+              );
             })}
             <div>- Each piece is handmade so sizes may vary</div>
           </Dimensions>
         </ProductDescription>
       </ProductDetails>
     </ProductOverview>
-  )
-})
+  );
+});
 
 export default BuyProduct;
 

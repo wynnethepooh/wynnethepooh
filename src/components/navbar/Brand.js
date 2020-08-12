@@ -1,6 +1,6 @@
-import React from 'react'
-import { Link } from "gatsby"
-import styled from "styled-components";
+import React from 'react';
+import {Link} from 'gatsby';
+import styled from 'styled-components';
 
 const Brand = (props) => {
   return (
@@ -34,10 +34,10 @@ const Brand = (props) => {
         </HomepageTitleHeader>
       }
     </Link>
-  )
-}
+  );
+};
 
-export default Brand
+export default Brand;
 
 const Svg = styled.svg`
   @media (max-width: 550px) {
