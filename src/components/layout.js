@@ -71,7 +71,7 @@ class Layout extends React.Component {
               <a className="facebook" href="https://www.facebook.com/it.me.wynne/" target="_blank">
                 <SocialMediaIcon src={Facebook} />
               </a>
-              <a className="instagram" href="https://www.instagram.com/wynnethepooh" target="_blank">
+              <a className="instagram" href="https://www.instagram.com/wynnethepooh.pot" target="_blank">
                 <SocialMediaIcon src={Instagram} />
               </a>
               <a className="linkedin" href="https://www.linkedin.com/in/wynnetran" target="_blank">
