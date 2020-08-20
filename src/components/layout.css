@@ -114,7 +114,7 @@ a:hover {
 
 .coming-soon-text {
   font-size: calc(5em);
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Jost', 'Oswald', sans-serif;
   text-transform: uppercase;
   color: white;
   letter-spacing: 3px;
@@ -209,12 +209,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
   text-transform: uppercase;
   letter-spacing: 3px;
   color: #CC8E20;
-  font-weight: bold;
   text-decoration: none;
   font-size: 3vh;
   padding: 10px;
 
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Jost', 'Oswald', sans-serif;
+  font-weight: 400;
 }
 
 /* Styling of overlay */
@@ -262,7 +262,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 #snipcart-items-header {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Jost', 'Oswald', sans-serif;
   letter-spacing: 1px;
   border: none;
   color: #ABA79F;
@@ -296,7 +296,7 @@ table#snipcart-confirm-prices tr td span,
 }
 
 #snipcart-header #snipcart-title  {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Jost', 'Oswald', sans-serif;
   left: 0;
   margin-left: 30px;
 }
@@ -310,7 +310,7 @@ table#snipcart-confirm-prices tr td span,
 #snipcart-paymentmethod-pay,
 #snipcart-sub-content .snip-actions a.js-submit {
   background-color: #CC8E20;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Jost', 'Oswald', sans-serif;
   color: white;
   font-size: 16px;
   letter-spacing: 2px;
@@ -318,7 +318,7 @@ table#snipcart-confirm-prices tr td span,
 
 #snipcart-previous,
 #snipcart-sub-content .snip-actions a.js-back {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Jost', 'Oswald', sans-serif;
   color: white;
   font-size: 16px;
   letter-spacing: 2px;
@@ -341,7 +341,7 @@ table#snipcart-confirm-prices tr td span,
 }
 
 #snipcart-items-list h2.snip-product__name {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Jost', 'Oswald', sans-serif;
   letter-spacing: 1px;
   color: #52504B;
   margin: 0;
@@ -405,12 +405,12 @@ table#snipcart-confirm-prices tr td span,
   background-color: #EBE7DD;
   color: #ABA79F;
   border: none;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Jost', 'Oswald', sans-serif;
   letter-spacing: 1px;
 }
 
 #snipcart-sub-content label {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Jost', 'Oswald', sans-serif;
   letter-spacing: 1px;
   color: #ABA79F;
 }
@@ -434,7 +434,7 @@ table#snipcart-confirm-prices tr td span,
 }
 
 #snipcart-sub-content h2 {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Jost', 'Oswald', sans-serif;
   letter-spacing: 1px;
   color: #52504B;
 }
@@ -457,6 +457,6 @@ table#snipcart-confirm-prices tr td span,
 #snipcart-loading-container {
   background-color: #FAF6EB;
   color: #52504B;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Jost', 'Oswald', sans-serif;
   letter-spacing: 2px;
 }

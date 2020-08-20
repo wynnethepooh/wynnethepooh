@@ -23,18 +23,19 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Jost', 'Oswald', sans-serif;
   }
 
   h1 {
     font-size: calc(10px + 2vmin);
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
+    font-family: 'Jost', 'Oswald', sans-serif;
+    text-transform: lowercase;
     letter-spacing: 3px;
     margin: 0;
     padding: 0 0 10px 0;
     text-align: left;
     color: #CC8E20;
+    font-weight: 500;
 
     @media (max-width: 1020px) {
       font-size: 27px;

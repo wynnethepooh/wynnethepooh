@@ -91,8 +91,9 @@ const NavLinks = styled(animated.ul)`
 
   & a {
     color: #CC8E20;
-    text-transform: uppercase;
-    font-weight: 600;
+    text-transform: lowercase;
+    font-family: 'Jost', 'Oswald', sans-serif;
+    font-weight: 400;
     letter-spacing: 3px;
     border-bottom: 1px solid transparent;
     margin: 0 1.5rem;
@@ -101,7 +102,6 @@ const NavLinks = styled(animated.ul)`
     cursor: pointer;
 
     &:hover {
-      color: #E1B94E;
       border-bottom: 1px solid #CC8E20;
     }
 

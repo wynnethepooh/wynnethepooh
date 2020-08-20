@@ -103,7 +103,7 @@ const Title = styled.div`
 const Subtitle = styled.h2`
   letter-spacing: 3px;
   font-size: calc(5px + 1vmin);
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Jost', 'Oswald', sans-serif;
   /* font-family: 'Fjalla One', sans-serif; */
   padding: 0;
   margin: -7px 0 0 -63px;

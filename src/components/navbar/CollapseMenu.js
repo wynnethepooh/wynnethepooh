@@ -52,12 +52,13 @@ const NavLinks = styled.ul`
     letter-spacing: 3px;
     line-height: 2;
     color: #CC8E20;
-    text-transform: uppercase;
+    text-transform: lowercase;
+    font-family: 'Jost', 'Oswald', sans-serif;
+    font-weight: 400;
     text-decoration: none;
     cursor: pointer;
 
     &:hover {
-      color: #E1B94E;
       border-bottom: 1px solid #CC8E20;
     }
   }
