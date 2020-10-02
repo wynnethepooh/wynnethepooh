@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import {Link} from 'gatsby';
 import styled from 'styled-components';
@@ -9,7 +10,7 @@ import CollapseMenu from './CollapseMenu';
 
 import ShoppingBag from '../../images/shopping-bag.png';
 
-const Navbar = (props) => {
+const Navbar = (props: Props) => {
   const barAnimation = useSpring({
     from: {transform: 'translate3d(0, -10rem, 0)'},
     transform: 'translate3d(0, 0, 0)',
@@ -61,6 +62,12 @@ const Navbar = (props) => {
       />
     </>
   );
+};
+
+type Props = {
+  isHomePage?: bool,
+  navbarState: bool,
+  handleNavbar: () => void
 };
 
 export default Navbar;

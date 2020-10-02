@@ -1,7 +1,8 @@
+// @flow
 import React from 'react';
 import styled from 'styled-components';
 
-const Burgermenu = (props) => {
+const Burgermenu = (props: Props) => {
   return (
     <Wrapper onClick={props.handleNavbar}>
       <div className={ props.navbarState ? 'open' : '' }>
@@ -11,6 +12,11 @@ const Burgermenu = (props) => {
       </div>
     </Wrapper>
   );
+};
+
+type Props = {
+  navbarState: bool,
+  handleNavbar: () => void
 };
 
 export default Burgermenu;

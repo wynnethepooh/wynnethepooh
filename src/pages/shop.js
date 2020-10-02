@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import {Link, graphql} from 'gatsby';
 import get from 'lodash/get';
@@ -6,7 +8,14 @@ import {Helmet} from 'react-helmet';
 import Layout from '../components/layout';
 import styled from 'styled-components';
 
-class Shop extends React.Component {
+/**
+ * Shop class.
+ */
+class Shop extends React.Component<Props> {
+  /**
+   * Renders shop object.
+   * @return {object} shop object
+   */
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title');
     const siteDescription = get(
@@ -30,7 +39,9 @@ class Shop extends React.Component {
             {products.map(({node}) => {
               const title = get(node, 'frontmatter.title') || node.fields.slug;
               const image = get(node, 'frontmatter.image');
-              const imgSrc= require(`./../pages${node.frontmatter.path}${image[0].src}.jpg`);
+              const imgSrc = require(
+                  `./../pages${node.frontmatter.path}${image[0].src}.jpg`
+              );
 
               return (
                 <Product key={node.fields.slug}>
@@ -50,11 +61,17 @@ class Shop extends React.Component {
                     </ProductTitle>
                     {node.frontmatter.sold &&
                       <strike>
-                        <ProductPrice dangerouslySetInnerHTML={{__html: '&dollar;' + node.frontmatter.price}} />
+                        <ProductPrice
+                          dangerouslySetInnerHTML={{
+                            __html: '&dollar;' + node.frontmatter.price,
+                          }} />
                       </strike>
                     }
                     {!node.frontmatter.sold &&
-                      <ProductPrice dangerouslySetInnerHTML={{__html: '&dollar;' + node.frontmatter.price}} />
+                      <ProductPrice
+                        dangerouslySetInnerHTML={{
+                          __html: '&dollar;' + node.frontmatter.price,
+                        }} />
                     }
                   </ProductInformation>
                 </Product>
@@ -67,6 +84,8 @@ class Shop extends React.Component {
     );
   }
 }
+
+type Props = {};
 
 export default Shop;
 

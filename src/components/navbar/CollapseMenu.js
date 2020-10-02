@@ -1,10 +1,11 @@
+// @flow
 import React from 'react';
 import {Link} from 'gatsby';
 import styled from 'styled-components';
 
 import {useSpring, animated} from 'react-spring';
 
-const CollapseMenu = (props) => {
+const CollapseMenu = (props: Props) => {
   const {open} = useSpring({open: props.navbarState ? 0 : 1});
 
   if (props.navbarState === true) {
@@ -20,12 +21,21 @@ const CollapseMenu = (props) => {
           <li><Link to="/" onClick={props.handleNavbar}>Home</Link></li>
           <li><Link to="/shop" onClick={props.handleNavbar}>Shop</Link></li>
           <li><Link to="/about" onClick={props.handleNavbar}>About</Link></li>
-          <li><Link to="/contact" onClick={props.handleNavbar}>Contact</Link></li>
+          <li>
+            <Link to="/contact" onClick={props.handleNavbar}>
+              Contact
+            </Link>
+          </li>
         </NavLinks>
       </CollapseWrapper>
     );
   }
   return null;
+};
+
+type Props = {
+  navbarState: bool,
+  handleNavbar: () => void
 };
 
 export default CollapseMenu;

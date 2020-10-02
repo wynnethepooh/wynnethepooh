@@ -1,7 +1,17 @@
+// @flow
+
 import React from 'react';
 import Layout from '../components/layout';
+import PropTypes from 'prop-types';
 
-class NotFoundPage extends React.Component {
+/**
+ * 404 class
+ */
+class NotFoundPage extends React.Component<Props> {
+  /**
+   * Renders 404 page.
+   * @return {object} 404 page
+   */
   render() {
     return (
       <Layout location={this.props.location}>
@@ -13,5 +23,9 @@ class NotFoundPage extends React.Component {
     );
   }
 }
+
+type Props = {
+  location: any
+};
 
 export default NotFoundPage;

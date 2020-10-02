@@ -1,11 +1,18 @@
+// @flow
+
 import React from 'react';
-import {Link} from 'gatsby';
-import logo from '../logo.svg';
 import {Helmet} from 'react-helmet';
 
 import Layout from '../components/layout';
 
-class Home extends React.Component {
+/**
+ * Home class.
+ */
+class Home extends React.Component<Props> {
+  /**
+   * Renders home object.
+   * @return {object} home object
+   */
   render() {
     return (
       <Layout isHomePage>
@@ -22,5 +29,7 @@ class Home extends React.Component {
     );
   }
 }
+
+type Props = {};
 
 export default Home;

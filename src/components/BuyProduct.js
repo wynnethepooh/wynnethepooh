@@ -1,3 +1,4 @@
+// @flow
 import React, {useState} from 'react';
 
 import styled from 'styled-components';
@@ -84,6 +85,7 @@ const BuyProduct = React.memo(({product, images}) => {
   );
 });
 
+BuyProduct.displayName = 'BuyProduct';
 export default BuyProduct;
 
 const ProductOverview = styled.div`

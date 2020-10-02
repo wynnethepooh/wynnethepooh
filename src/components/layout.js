@@ -1,40 +1,51 @@
+// @flow
+
 /**
  * Layout component that queries for data
  * with Gatsby's useStaticQuery component
  *
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
+import React from 'react';
+import {Helmet} from 'react-helmet';
+import styled from 'styled-components';
 
-import React from "react";
-import PropTypes from "prop-types";
-import { useStaticQuery, graphql } from "gatsby";
-import { Link } from "gatsby";
-import { Helmet } from 'react-helmet'
-import styled from "styled-components";
-
-import Navbar from "./navbar/Navbar";
-import "./layout.css";
+import Navbar from './navbar/Navbar';
+import './layout.css';
 import GlobalStyle from '../styles/Global';
 
-import Facebook from "../images/facebook.png";
-import Instagram from "../images/instagram.png";
-import LinkedIn from "../images/linkedin.png";
+import Facebook from '../images/facebook.png';
+import Instagram from '../images/instagram.png';
+import LinkedIn from '../images/linkedin.png';
 
-class Layout extends React.Component {
-
-  state = {
-    navbarOpen: false
+/**
+ * Layout class.
+ */
+class Layout extends React.Component<Props, State> {
+  /**
+   * Constructor.
+   * @param {object} props
+   */
+  constructor(props: Props) {
+    super(props);
+    this.state = {navbarOpen: false};
   }
 
+  /**
+   * Handles state of nav bar.
+   */
   handleNavbar = () => {
-    this.setState({ navbarOpen: !this.state.navbarOpen });
+    this.setState((state) => ({
+      navbarOpen: !state.navbarOpen,
+    }));
   }
 
+  /**
+   * Renders layout object.
+   * @return {object} layout object
+   */
   render() {
-
-    const { location, title, children } = this.props
-    const rootPath = `${__PATH_PREFIX__}/`
-    let header
+    const {children} = this.props;
 
     return (
       <>
@@ -46,47 +57,66 @@ class Layout extends React.Component {
         <GlobalStyle />
 
         <Helmet
-          htmlAttributes={{ lang: 'en' }}
+          htmlAttributes={{lang: 'en'}}
           link={[{
-            href:"https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css",
-            rel:"stylesheet",
-            type:"text/css"
+            href: 'https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css',
+            rel: 'stylesheet',
+            type: 'text/css',
           }]}
           script={[{
+            'type': 'text/javascript',
+            'id': 'snipcart',
+            'data-api-key':
+                'NGM1YThjMDgtZDBhNy00MzU5LWJiNGUtMjU2YTBjNTJlMWNhNjM3MjUzODE0ODI3MjM0MTEx',
+            'src': 'https://cdn.snipcart.com/scripts/2.0/snipcart.js',
+          }, {
             type: 'text/javascript',
-            id: "snipcart",
-            "data-api-key": "NGM1YThjMDgtZDBhNy00MzU5LWJiNGUtMjU2YTBjNTJlMWNhNjM3MjUzODE0ODI3MjM0MTEx",
-            src:"https://cdn.snipcart.com/scripts/2.0/snipcart.js"
-          },{
-            type: 'text/javascript',
-            src:"https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
+            src: 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js',
           }]}>
-          <meta charSet="utf-8" />
+          <meta charSet='utf-8' />
         </Helmet>
 
-        <div className="App">
+        <div className='App'>
           {children}
           <Footer>
             © {new Date().getFullYear()} | wynne the pooh
             <SocialMedia>
-              <a className="facebook" href="https://www.facebook.com/it.me.wynne/" target="_blank">
+              <a className='facebook'
+                href='https://www.facebook.com/it.me.wynne/'
+                target='_blank'
+                rel="noreferrer">
                 <SocialMediaIcon src={Facebook} />
               </a>
-              <a className="instagram" href="https://www.instagram.com/wynnethepooh.pot" target="_blank">
+              <a className='instagram'
+                href='https://www.instagram.com/wynnethepooh.pot'
+                target='_blank'
+                rel="noreferrer">
                 <SocialMediaIcon src={Instagram} />
               </a>
-              <a className="linkedin" href="https://www.linkedin.com/in/wynnetran" target="_blank">
+              <a className='linkedin'
+                href='https://www.linkedin.com/in/wynnetran'
+                target='_blank'
+                rel="noreferrer">
                 <SocialMediaIcon src={LinkedIn} />
               </a>
             </SocialMedia>
           </Footer>
         </div>
       </>
-    )
+    );
   }
 }
 
-export default Layout
+type State = {
+  navbarOpen: bool
+}
+
+type Props = {
+  children: any,
+  isHomePage?: bool,
+};
+
+export default Layout;
 
 const Footer = styled.div`
   margin: 5vh;

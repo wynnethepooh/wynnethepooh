@@ -2,12 +2,20 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 import {Link, graphql} from 'gatsby';
 import get from 'lodash/get';
+import PropTypes from 'prop-types';
 
 import BuyProduct from '../components/BuyProduct';
 import Layout from '../components/layout';
 import styled from 'styled-components';
 
+/**
+ * Product template class.
+ */
 class ProductTemplate extends React.Component {
+  /**
+   * Renders product template object.
+   * @return {object} product template object
+   */
   render() {
     const product = this.props.data.markdownRemark;
     const siteTitle = get(this.props, 'data.site.siteMetadata.title');
@@ -54,16 +62,26 @@ class ProductTemplate extends React.Component {
                   <ProductBanner>
                       Sold out
                   </ProductBanner>
-                  <ProductImage src={require(`./../pages${product.frontmatter.path}default.jpg`)}/>
+                  <ProductImage
+                    src={require(
+                        `./../pages${product.frontmatter.path}default.jpg`,
+                    )}/>
                 </DisplayBlock>
                 <ProductDescription>
-                  <div dangerouslySetInnerHTML={{__html: product.frontmatter.description}} />
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: product.frontmatter.description,
+                    }} />
 
                   <Dimensions>
                     <DimensionsHeader>Dimensions</DimensionsHeader>
                     {product.frontmatter.dimensions.map((dimension) => {
                       return (
-                        <div key={dimension} dangerouslySetInnerHTML={{__html: '- ' + dimension}} />
+                        <div
+                          key={dimension}
+                          dangerouslySetInnerHTML={{
+                            __html: '- ' + dimension,
+                          }} />
                       );
                     })}
                     <div>- Each piece is handmade so sizes may vary</div>
@@ -106,6 +124,48 @@ class ProductTemplate extends React.Component {
     );
   }
 }
+
+ProductTemplate.propTypes = {
+  location: PropTypes.object,
+  data: PropTypes.shape({
+    markdownRemark: PropTypes.shape({
+      excerpt: PropTypes.string,
+      frontmatter: PropTypes.shape({
+        title: PropTypes.string,
+        date: PropTypes.string,
+        price: PropTypes.number,
+        sold: PropTypes.bool,
+        id: PropTypes.number,
+        path: PropTypes.string,
+        description: PropTypes.string,
+        dimensions: PropTypes.arrayOf(PropTypes.string),
+        image: PropTypes.shape({
+          name: PropTypes.string,
+          src: PropTypes.string,
+          map: PropTypes.object,
+        }),
+      }),
+    }),
+  }),
+  pageContext: PropTypes.shape({
+    previous: PropTypes.shape({
+      fields: PropTypes.shape({
+        slug: PropTypes.string,
+      }),
+      frontmatter: PropTypes.shape({
+        title: PropTypes.string,
+      }),
+    }),
+    next: PropTypes.shape({
+      fields: PropTypes.shape({
+        slug: PropTypes.string,
+      }),
+      frontmatter: PropTypes.shape({
+        title: PropTypes.string,
+      }),
+    }),
+  }),
+};
 
 export default ProductTemplate;
 

@@ -1,18 +1,32 @@
+// @flow
+
 import React from 'react';
 import Layout from '../components/layout';
 
-class Contact extends React.Component {
+/**
+ * Contact class.
+ */
+class Contact extends React.Component<Props> {
+  /**
+   * Renders contact object.
+   * @return {object} contact object
+   */
   render() {
     return (
       <Layout>
         <div className="page">
           <h1>contact</h1>
           <p>
-          If you're interested in my pottery or just want to say hi, send me an email at <a href="mailto:wynne@wynnethepooh.com">wynne@wynnethepooh.com</a>.
+            If you&#39;re interested in my pottery or just want to say hi, send
+            me an email at <a href="mailto:wynne@wynnethepooh.com">
+            wynne@wynnethepooh.com</a>.
           </p>
         </div>
       </Layout>
     );
   }
 }
+
+type Props = {};
+
 export default Contact;
