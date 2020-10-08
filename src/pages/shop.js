@@ -40,7 +40,7 @@ class Shop extends React.Component<Props> {
               const title = get(node, 'frontmatter.title') || node.fields.slug;
               const image = get(node, 'frontmatter.image');
               const imgSrc = require(
-                  `./../pages${node.frontmatter.path}${image[0].src}.jpg`
+                  `./../pages${node.frontmatter.path}${image[0].src}.jpg`,
               );
 
               return (

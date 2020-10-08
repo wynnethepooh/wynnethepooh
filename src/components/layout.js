@@ -78,26 +78,32 @@ class Layout extends React.Component<Props, State> {
 
         <div className='App'>
           {children}
-          <Footer>
+          <Footer isHomePage={this.props.isHomePage}>
             © {new Date().getFullYear()} | wynne the pooh
             <SocialMedia>
               <a className='facebook'
                 href='https://www.facebook.com/it.me.wynne/'
                 target='_blank'
                 rel="noreferrer">
-                <SocialMediaIcon src={Facebook} />
+                <SocialMediaIcon
+                  src={Facebook}
+                  isHomePage={this.props.isHomePage} />
               </a>
               <a className='instagram'
                 href='https://www.instagram.com/wynnethepooh.pot'
                 target='_blank'
                 rel="noreferrer">
-                <SocialMediaIcon src={Instagram} />
+                <SocialMediaIcon
+                  src={Instagram}
+                  isHomePage={this.props.isHomePage} />
               </a>
               <a className='linkedin'
                 href='https://www.linkedin.com/in/wynnetran'
                 target='_blank'
                 rel="noreferrer">
-                <SocialMediaIcon src={LinkedIn} />
+                <SocialMediaIcon
+                  src={LinkedIn}
+                  isHomePage={this.props.isHomePage} />
               </a>
             </SocialMedia>
           </Footer>
@@ -120,15 +126,19 @@ export default Layout;
 
 const Footer = styled.div`
   margin: 5vh;
-  color: #CC8E20;
+  color: ${(props) => (props.isHomePage ? 'white' : '#CC8E20')};
+  background: none;
   font-size: 14px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
+  top: ${(props) => (props.isHomePage ? '-6rem' : '0')};
 
   @media (max-width: 420px) {
     flex-direction: column-reverse;
     font-size: 12px;
+    top: ${(props) => (props.isHomePage ? '-10rem' : '0')};
   }
 `;
 
@@ -140,4 +150,5 @@ const SocialMedia = styled.div`
 
 const SocialMediaIcon = styled.img`
   height: 20px;
+  filter: ${(props) => (props.isHomePage ? 'brightness(0) invert(1)' : '')};
 `;

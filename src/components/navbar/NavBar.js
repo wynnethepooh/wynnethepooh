@@ -25,10 +25,12 @@ const Navbar = (props: Props) => {
 
   return (
     <>
-      <NavBar style={barAnimation}>
+      <NavBar isHomePage={props.isHomePage} style={barAnimation}>
         <FlexContainer>
-          <Brand isHomePage={props.isHomePage}/>
-          <NavLinks style={linkAnimation}>
+          {!props.isHomePage &&
+            <Brand isHomePage={props.isHomePage}/>
+          }
+          <NavLinks isHomePage={props.isHomePage} style={linkAnimation}>
             <Link to="/">Home</Link>
             <Link to="/shop">Shop</Link>
             <Link to="/about">About</Link>
@@ -42,7 +44,7 @@ const Navbar = (props: Props) => {
                   background: 'none',
                   marginLeft: '0.5rem',
                 }}>
-                <img src={ShoppingBag} height="25px" />
+                <ShoppingIcon src={ShoppingBag} />
               </button>
               <span className="snipcart-items-count"></span>
               <span className="snipcart-total-price"></span>
@@ -52,6 +54,7 @@ const Navbar = (props: Props) => {
             <BurgerMenu
               navbarState={props.navbarState}
               handleNavbar={props.handleNavbar}
+              isHomePage={props.isHomePage}
             />
           </BurgerWrapper>
         </FlexContainer>
@@ -59,6 +62,7 @@ const Navbar = (props: Props) => {
       <CollapseMenu
         navbarState={props.navbarState}
         handleNavbar={props.handleNavbar}
+        isHomePage={props.isHomePage}
       />
     </>
   );
@@ -77,9 +81,44 @@ const NavBar = styled(animated.nav)`
   width: 100%;
   top: 0;
   left: 0;
-  background: #FAF6EB;
+  background: none;
   z-index: 10;
   font-size: 1.4rem;
+
+  -o-transition:.3s;
+  -ms-transition:.3s;
+  -moz-transition:.3s;
+  -webkit-transition:.3s;
+  transition:.3s;
+
+  &:hover {
+    background: ${(props) => (props.isHomePage ? '#FAF6EB' : 'none')};
+    color: #CC8E20;
+
+    @media (max-width: 1020px) {
+        background: none;
+    }
+  }
+
+  &:hover a {
+    color: #CC8E20;
+  }
+
+  img {
+    filter: ${(props) => (props.isHomePage ? 'brightness(0) invert(1)' : '')};
+  }
+
+  &:hover img {
+    @media (min-width: 1020px) {
+      filter: none;
+    }
+  }
+
+  @media (max-width: 1020px) {
+    width: ${(props) => (props.isHomePage ? '65px' : '')};
+    right: ${(props) => (props.isHomePage ? '0' : '')};
+    left: ${(props) => (props.isHomePage ? 'auto' : '0')};
+  }
 `;
 
 const FlexContainer = styled.div`
@@ -95,9 +134,12 @@ const NavLinks = styled(animated.ul)`
   justify-self: end;
   list-style-type: none;
   margin: auto 0;
+  position: absolute;
+  right: 50px;
+  top: 30px;
 
   & a {
-    color: #CC8E20;
+    color: ${(props) => (props.isHomePage ? 'white' : '#CC8E20')};
     text-transform: lowercase;
     font-family: 'Jost', 'Oswald', sans-serif;
     font-weight: 400;
@@ -129,12 +171,23 @@ const BurgerWrapper = styled.div`
   }
 `;
 
-const ShoppingCartWrapper = styled.span`
+const ShoppingCartWrapper = styled.div`
   position: relative;
+  background: none;
+  display: inline;
 
   @media (max-width: 1020px) {
     position: absolute;
     right: 27px;
     top: -16px;
+  }
+`;
+
+const ShoppingIcon = styled.img`
+  height: 25px;
+  margin: 19px -12px 0 0;
+
+  @media (min-width: 1020px) {
+    margin: auto auto -3px auto;
   }
 `;

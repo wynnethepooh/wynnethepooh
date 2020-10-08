@@ -94,13 +94,17 @@ a:hover {
 }
 
 .home {
-  min-height: 77vh;
-  background-image: url("../images/pottery-2.jpg");
+  height: 100vh;
+  background:
+    linear-gradient(
+      rgba(59, 41, 8, 0.4),
+      rgba(59, 41, 8, 0.4)
+    ),
+    url("../images/home-background.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
+  margin-top: -6rem;
 }
 
 .coming-soon {
@@ -146,7 +150,6 @@ a:hover {
 /* Burger bar */
 /* Position and sizing of burger button */
 .bm-burger-button {
-  background: #FAF6EB;
   position: absolute;
   width: 36px;
   height: 30px;
@@ -187,7 +190,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  background: #FAF6EB;/* #CE7E7D; */
   padding: 0 1.5em 0;
   font-size: 1.15em;
 }

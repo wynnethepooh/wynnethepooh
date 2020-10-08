@@ -10,12 +10,14 @@ const CollapseMenu = (props: Props) => {
 
   if (props.navbarState === true) {
     return (
-      <CollapseWrapper style={{
-        transform: open.interpolate({
-          range: [0, 0.2, 0.3, 1],
-          output: [0, -20, 0, -200],
-        }).interpolate((openValue) => `translate3d(0, ${openValue}px, 0`),
-      }}
+      <CollapseWrapper
+        isHomePage={props.isHomePage}
+        style={{
+          transform: open.interpolate({
+            range: [0, 0.2, 0.3, 1],
+            output: [0, -20, 0, -200],
+          }).interpolate((openValue) => `translate3d(0, ${openValue}px, 0`),
+        }}
       >
         <NavLinks>
           <li><Link to="/" onClick={props.handleNavbar}>Home</Link></li>
@@ -35,7 +37,8 @@ const CollapseMenu = (props: Props) => {
 
 type Props = {
   navbarState: bool,
-  handleNavbar: () => void
+  handleNavbar: () => void,
+  isHomePage?: bool,
 };
 
 export default CollapseMenu;
@@ -43,7 +46,7 @@ export default CollapseMenu;
 const CollapseWrapper = styled(animated.div)`
   background: #FAF6EB;
   position: fixed;
-  top: 6rem;
+  top: ${(props) => (props.isHomePage ? '0' : '6rem')};
   left: 0;
   right: 0;
   z-index: 9;
