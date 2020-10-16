@@ -76,7 +76,7 @@ class Layout extends React.Component<Props, State> {
           <meta charSet='utf-8' />
         </Helmet>
 
-        <div className='App'>
+        <Content>
           {children}
           <Footer isHomePage={this.props.isHomePage}>
             © {new Date().getFullYear()} | wynne the pooh
@@ -107,7 +107,7 @@ class Layout extends React.Component<Props, State> {
               </a>
             </SocialMedia>
           </Footer>
-        </div>
+        </Content>
       </>
     );
   }
@@ -123,6 +123,13 @@ type Props = {
 };
 
 export default Layout;
+
+const Content = styled.div`
+  text-align: center;
+  background-color: #FAF6EB;
+  font-family: 'Jost', sans-serif;
+  margin-top: 6rem;
+`;
 
 const Footer = styled.div`
   margin: 5vh;

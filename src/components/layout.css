@@ -8,6 +8,7 @@ Colors:
 #E1B94E - mustard
 #E8C1B7 - pink
 #D1A297 - dark pink
+#CD7F5D - terracotta
 
 #CC8E20 - honey
 */
@@ -45,19 +46,6 @@ footer {
   width: 30px;
   height: 30px;
   margin: 0 10px
-}
-
-.App {
-  text-align: center;
-  background-color: #FAF6EB;
-  font-family: 'Jost', sans-serif;
-  margin-top: 6rem;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
 }
 
 .no-wrap {
