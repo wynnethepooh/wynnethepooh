@@ -12,8 +12,16 @@ class NotFoundPage extends React.Component<Props> {
    * @return {object} 404 page
    */
   render() {
+    const fetch = require('isomorphic-fetch');
+    const shopify = require('shopify-buy');
+
+    const client = shopify.buildClient({
+      domain: 'wynne-the-pooh.myshopify.com',
+      storefrontAccessToken: '1e5568ef2b02e41e3e1a1755f1af254a',
+    }, fetch);
+
     return (
-      <Layout location={this.props.location}>
+      <Layout location={this.props.location} client={client}>
         <div className="page">
           <h1>Not Found</h1>
           <p>You just hit a page that doesn&#39;t exist... the sadness.</p>

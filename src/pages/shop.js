@@ -17,6 +17,13 @@ class Shop extends React.Component<Props> {
    * @return {object} shop object
    */
   render() {
+    const fetch = require('isomorphic-fetch');
+    const shopify = require('shopify-buy');
+
+    const client = shopify.buildClient({
+      domain: 'wynne-the-pooh.myshopify.com',
+      storefrontAccessToken: '1e5568ef2b02e41e3e1a1755f1af254a',
+    }, fetch);
     const siteTitle = get(this, 'props.data.site.siteMetadata.title');
     const siteDescription = get(
         this,
@@ -25,7 +32,7 @@ class Shop extends React.Component<Props> {
     const products = get(this, 'props.data.allMarkdownRemark.edges');
 
     return (
-      <Layout>
+      <Layout client={client}>
         <ShopPage>
           <h1>shop</h1>
           <ProductList>

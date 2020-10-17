@@ -7,13 +7,22 @@ import Layout from '../components/layout';
  * About class.
  */
 class About extends React.Component<Props> {
+
   /**
    * Renders about object.
    * @return {object} about object
    */
   render() {
+    const fetch = require('isomorphic-fetch');
+    const shopify = require('shopify-buy');
+
+    const client = shopify.buildClient({
+      domain: 'wynne-the-pooh.myshopify.com',
+      storefrontAccessToken: '1e5568ef2b02e41e3e1a1755f1af254a',
+    }, fetch);
+
     return (
-      <Layout>
+      <Layout client={client}>
         <div className="page">
           <h1>about</h1>
           <p>

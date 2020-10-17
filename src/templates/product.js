@@ -17,6 +17,14 @@ class ProductTemplate extends React.Component {
    * @return {object} product template object
    */
   render() {
+    const fetch = require('isomorphic-fetch');
+    const shopify = require('shopify-buy');
+
+    const client = shopify.buildClient({
+      domain: 'wynne-the-pooh.myshopify.com',
+      storefrontAccessToken: '1e5568ef2b02e41e3e1a1755f1af254a',
+    }, fetch);
+
     const product = this.props.data.markdownRemark;
     const siteTitle = get(this.props, 'data.site.siteMetadata.title');
     const siteDescription = product.excerpt;
@@ -28,7 +36,7 @@ class ProductTemplate extends React.Component {
         }));
 
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <Layout location={this.props.location} title={siteTitle} client={client}>
         <ProductPage>
 
           <Link

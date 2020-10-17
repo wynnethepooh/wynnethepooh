@@ -37,7 +37,6 @@ const Navbar = (props: Props) => {
             <Link to="/contact">Contact</Link>
             <ShoppingCartWrapper>
               <button
-                className="snipcart-checkout"
                 style={{
                   WebkitAppearance: 'none',
                   border: 'none',
@@ -46,8 +45,6 @@ const Navbar = (props: Props) => {
                 }}>
                 <ShoppingIcon src={ShoppingBag} />
               </button>
-              <span className="snipcart-items-count"></span>
-              <span className="snipcart-total-price"></span>
             </ShoppingCartWrapper>
           </NavLinks>
           <BurgerWrapper>
