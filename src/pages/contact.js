@@ -12,16 +12,9 @@ class Contact extends React.Component<Props> {
    * @return {object} contact object
    */
   render() {
-    const fetch = require('isomorphic-fetch');
-    const shopify = require('shopify-buy');
-
-    const client = shopify.buildClient({
-      domain: 'wynne-the-pooh.myshopify.com',
-      storefrontAccessToken: '1e5568ef2b02e41e3e1a1755f1af254a',
-    }, fetch);
 
     return (
-      <Layout client={client}>
+      <Layout>
         <div className="page">
           <h1>contact</h1>
           <p>

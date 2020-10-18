@@ -28,7 +28,9 @@ const Navbar = (props: Props) => {
       <NavBar isHomePage={props.isHomePage} style={barAnimation}>
         <FlexContainer>
           {!props.isHomePage &&
-            <Brand isHomePage={props.isHomePage}/>
+            <Link to="/">
+              <Brand isHomePage={props.isHomePage}/>
+            </Link>
           }
           <NavLinks isHomePage={props.isHomePage} style={linkAnimation}>
             <Link to="/">Home</Link>

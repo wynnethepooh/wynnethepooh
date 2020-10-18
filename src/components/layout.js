@@ -11,7 +11,6 @@ import {Helmet} from 'react-helmet';
 import styled from 'styled-components';
 
 import Navbar from './navbar/Navbar';
-import Cart from './shopify/Cart';
 import './layout.css';
 import GlobalStyle from '../styles/Global';
 
@@ -30,79 +29,8 @@ class Layout extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      navbarOpen: false,
-      isCartOpen: false,
-      checkout: { lineItems: [] },
-      products: [],
-      shop: {}
+      navbarOpen: false
     };
-
-    this.handleCartClose = this.handleCartClose.bind(this);
-    this.addVariantToCart = this.addVariantToCart.bind(this);
-    this.updateQuantityInCart = this.updateQuantityInCart.bind(this);
-    this.removeLineItemInCart = this.removeLineItemInCart.bind(this);
-  }
-
-  componentWillMount() {
-    this.props.client.checkout.create().then((res) => {
-      this.setState({
-        checkout: res,
-      });
-    });
-
-    this.props.client.product.fetchAll().then((res) => {
-      this.setState({
-        products: res,
-      });
-    });
-
-    this.props.client.shop.fetchInfo().then((res) => {
-      this.setState({
-        shop: res,
-      });
-    });
-  }
-
-  addVariantToCart(variantId, quantity){
-    this.setState({
-      isCartOpen: true,
-    });
-
-    const lineItemsToAdd = [{variantId, quantity: parseInt(quantity, 10)}]
-    const checkoutId = this.state.checkout.id
-
-    return this.props.client.checkout.addLineItems(checkoutId, lineItemsToAdd).then(res => {
-      this.setState({
-        checkout: res,
-      });
-    });
-  }
-
-  updateQuantityInCart(lineItemId, quantity) {
-    const checkoutId = this.state.checkout.id
-    const lineItemsToUpdate = [{id: lineItemId, quantity: parseInt(quantity, 10)}]
-
-    return this.props.client.checkout.updateLineItems(checkoutId, lineItemsToUpdate).then(res => {
-      this.setState({
-        checkout: res,
-      });
-    });
-  }
-
-  removeLineItemInCart(lineItemId) {
-    const checkoutId = this.state.checkout.id
-
-    return this.props.client.checkout.removeLineItems(checkoutId, [lineItemId]).then(res => {
-      this.setState({
-        checkout: res,
-      });
-    });
-  }
-
-  handleCartClose() {
-    this.setState({
-      isCartOpen: false,
-    });
   }
 
   /**
@@ -128,30 +56,9 @@ class Layout extends React.Component<Props, State> {
           handleNavbar={this.handleNavbar}
           isHomePage={this.props.isHomePage}
         />
-        {!this.state.isCartOpen &&
-          <CartButtonWrapper className="App__view-cart-wrapper">
-            <CartButton className="App__view-cart" onClick={()=> this.setState({isCartOpen: true})}></CartButton>
-          </CartButtonWrapper>
-        }
         <GlobalStyle />
 
-        <Helmet
-          htmlAttributes={{lang: 'en'}}
-          link={[{
-            href: 'https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css',
-            rel: 'stylesheet',
-            type: 'text/css',
-          }]}
-          script={[{
-            'type': 'text/javascript',
-            'id': 'snipcart',
-            'data-api-key':
-                'NGM1YThjMDgtZDBhNy00MzU5LWJiNGUtMjU2YTBjNTJlMWNhNjM3MjUzODE0ODI3MjM0MTEx',
-            'src': 'https://cdn.snipcart.com/scripts/2.0/snipcart.js',
-          }, {
-            type: 'text/javascript',
-            src: 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js',
-          }]}>
+        <Helmet htmlAttributes={{lang: 'en'}}>
           <meta charSet='utf-8' />
         </Helmet>
 
@@ -187,13 +94,6 @@ class Layout extends React.Component<Props, State> {
             </SocialMedia>
           </Footer>
         </Content>
-        <Cart
-          checkout={this.state.checkout}
-          isCartOpen={this.state.isCartOpen}
-          handleCartClose={this.handleCartClose}
-          updateQuantityInCart={this.updateQuantityInCart}
-          removeLineItemInCart={this.removeLineItemInCart}
-        />
       </>
     );
   }
@@ -215,6 +115,7 @@ const Content = styled.div`
   background-color: #FAF6EB;
   font-family: 'Jost', sans-serif;
   margin-top: 6rem;
+  height: 100vh;
 `;
 
 const Footer = styled.div`
@@ -226,7 +127,7 @@ const Footer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   position: relative;
-  top: ${(props) => (props.isHomePage ? '-6rem' : '0')};
+  top: ${(props) => (props.isHomePage ? '-113px' : '0')};
 
   @media (max-width: 420px) {
     flex-direction: column-reverse;
@@ -244,24 +145,4 @@ const SocialMedia = styled.div`
 const SocialMediaIcon = styled.img`
   height: 20px;
   filter: ${(props) => (props.isHomePage ? 'brightness(0) invert(1)' : '')};
-`;
-
-const CartButtonWrapper = styled.div`
-  position: fixed;
-  right: 51px;
-  top: 27px;
-  z-index: 11;
-`;
-
-const CartButton = styled.button`
-  background: none;
-  border: none;
-  height: 35px;
-  width: 35px;
-
-  @media (max-width: 1020px) {
-    position: absolute;
-    right: 15px;
-    top: 3px;
-  }
 `;

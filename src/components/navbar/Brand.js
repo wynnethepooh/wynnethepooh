@@ -5,24 +5,22 @@ import styled from 'styled-components';
 
 const Brand = (props: Props) => {
   return (
-    <Link to="/">
-      <TitleHeader
+    <TitleHeader
+      isHomePage={props.isHomePage}
+      className="app-title-header no-wrap">
+      <Svg
         isHomePage={props.isHomePage}
-        className="app-title-header no-wrap">
-        <Svg
-          isHomePage={props.isHomePage}
-          viewBox="0 -25 450 170" height="130px">
-          <Curve
-            id="curve"
-            d="M 50,75 Q 150,-30 250,75 T 450,75" />
-          <Text isHomePage={props.isHomePage} x="0">
-            <textPath xlinkHref="#curve">
-              wynne the pooh
-            </textPath>
-          </Text>
-        </Svg>
-      </TitleHeader>
-    </Link>
+        viewBox="0 -25 450 170" height="130px">
+        <Curve
+          id="curve"
+          d="M 50,75 Q 150,-30 250,75 T 450,75" />
+        <Text isHomePage={props.isHomePage} x="0">
+          <textPath xlinkHref="#curve">
+            wynne the pooh
+          </textPath>
+        </Text>
+      </Svg>
+    </TitleHeader>
   );
 };
 
@@ -63,7 +61,10 @@ const TitleHeader = styled.div`
   font-size: calc(5px + 1vmin);
   font-family: Helvetica, sans-serif;
   z-index: 11;
+  height: ${(props) => (props.isHomePage ? '100%' : '')};;
   margin: ${(props) => (props.isHomePage ? '-7px 0 0 -20px' : '5px 0 0 -20px')};
+  cursor: ${(props) => (props.isHomePage ? 'default' : 'pointer')};;
+
   @media (max-width: 550px) {
     width: ${(props) => (props.isHomePage ? '100%' : '43vw')};
     margin: ${(props) => (props.isHomePage ? '0px 0 0 -20px' : '-15px 0 0 -10px')};

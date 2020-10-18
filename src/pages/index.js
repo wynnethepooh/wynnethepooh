@@ -16,16 +16,9 @@ class Home extends React.Component<Props> {
    * @return {object} home object
    */
   render() {
-    const fetch = require('isomorphic-fetch');
-    const shopify = require('shopify-buy');
-
-    const client = shopify.buildClient({
-      domain: 'wynne-the-pooh.myshopify.com',
-      storefrontAccessToken: '1e5568ef2b02e41e3e1a1755f1af254a',
-    }, fetch);
 
     return (
-      <Layout isHomePage client={client}>
+      <Layout isHomePage>
         <main className="home">
           <Helmet htmlAttributes={{lang: 'en'}}>
             <title>wynne the pooh</title>

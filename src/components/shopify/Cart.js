@@ -24,6 +24,7 @@ class Cart extends Component {
         />
       );
     });
+    const hasItems = line_items?.length > 0;
 
     return (
       <CartWrapper
@@ -37,9 +38,17 @@ class Cart extends Component {
             ×
           </CloseButton>
         </CartHeader>
-        <ul className="Cart__line-items">
-          {line_items}
-        </ul>
+        {hasItems &&
+          <ul className="Cart__line-items">
+            {line_items}
+          </ul>
+        }
+        {!hasItems &&
+          <EmptyMessage>
+            your cart is empty.
+            <br/>fill &#39;er up!
+          </EmptyMessage>
+        }
         <Footer className="Cart__footer">
           <FooterLine className="Cart-info clearfix">
             <div className="Cart-info__total Cart-info__small">Subtotal</div>
@@ -59,7 +68,14 @@ class Cart extends Component {
               <span className="pricing">$ {this.props.checkout.totalPrice}</span>
             </div>
           </FooterLine>
-          <CheckoutButton className="Cart__checkout button" onClick={this.openCheckout}>Checkout</CheckoutButton>
+          <CheckoutButton
+              className="Cart__checkout button"
+              onClick={this.openCheckout}
+              disabled={
+                hasItems ? "false" : "true"
+              }>
+            Checkout
+          </CheckoutButton>
         </Footer>
       </CartWrapper>
     )
@@ -105,6 +121,7 @@ const CloseButton = styled.button`
   font-family: 'Jost', sans-serif;
   margin: 10px 0 15px 0;
   font-size: 30px;
+  cursor: pointer;
 `;
 
 const Footer = styled.footer`
@@ -133,4 +150,15 @@ const CheckoutButton = styled.button`
   border-radius: 3px;
   padding: 10px;
   margin: 10px 0;
+  cursor: pointer;
+
+  :disabled {
+    cursor: auto;
+    background: #D19F8A;
+  }
+`;
+
+const EmptyMessage = styled.div`
+  margin: 40px;
+  text-align: center;
 `;
