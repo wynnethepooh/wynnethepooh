@@ -39,9 +39,9 @@ class Cart extends Component {
           </CloseButton>
         </CartHeader>
         {hasItems &&
-          <ul className="Cart__line-items">
+          <LineItemList className="Cart__line-items">
             {line_items}
-          </ul>
+          </LineItemList>
         }
         {!hasItems &&
           <EmptyMessage>
@@ -70,10 +70,7 @@ class Cart extends Component {
           </FooterLine>
           <CheckoutButton
               className="Cart__checkout button"
-              onClick={this.openCheckout}
-              disabled={
-                hasItems ? "false" : "true"
-              }>
+              onClick={this.openCheckout}>
             Checkout
           </CheckoutButton>
         </Footer>
@@ -127,7 +124,7 @@ const CloseButton = styled.button`
 const Footer = styled.footer`
   color: #52504B;
   width: 100%;
-  padding: 0;
+  padding: 20px 0 0 0;
 
   flex-direction: column;
 `;
@@ -161,4 +158,9 @@ const CheckoutButton = styled.button`
 const EmptyMessage = styled.div`
   margin: 40px;
   text-align: center;
+`;
+
+const LineItemList = styled.ul`
+  list-style-type: none;
+  padding: 0;
 `;

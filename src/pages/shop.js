@@ -7,6 +7,7 @@ import {Helmet} from 'react-helmet';
 
 import Layout from '../components/layout';
 import styled from 'styled-components';
+import ProductTile from '../components/shopify/ProductTile';
 
 /**
  * Shop class.
@@ -24,59 +25,74 @@ class Shop extends React.Component<Props> {
     );
     const products = get(this, 'props.data.allMarkdownRemark.edges');
 
+    const snipcartProductList = products.map(({node}) => {
+      const title = get(node, 'frontmatter.title') || node.fields.slug;
+      const image = get(node, 'frontmatter.image');
+      const imgSrc = require(
+          `./../pages${node.frontmatter.path}default.jpg`,
+      );
+
+      return (
+        <ProductDiv key={node.fields.slug}>
+          {node.frontmatter.sold &&
+            <ProductBanner>
+              Sold out
+            </ProductBanner>
+          }
+          <Link to={node.fields.slug}>
+            <ProductImage src={imgSrc} />
+          </Link>
+          <ProductInformation>
+            <ProductTitle>
+              <Link style={{boxShadow: 'none'}} to={node.fields.slug}>
+                {title}
+              </Link>
+            </ProductTitle>
+            {node.frontmatter.sold &&
+              <strike>
+                <ProductPrice
+                  dangerouslySetInnerHTML={{
+                    __html: '&dollar;' + node.frontmatter.price,
+                  }} />
+              </strike>
+            }
+            {!node.frontmatter.sold &&
+              <ProductPrice
+                dangerouslySetInnerHTML={{
+                  __html: '&dollar;' + node.frontmatter.price,
+                }} />
+            }
+          </ProductInformation>
+        </ProductDiv>
+      );
+    });
+
+    const shopifyProductList = this.props.shopifyProducts?.map((product) => {
+      return (
+        <ProductTile
+          addVariantToCart={this.props.addVariantToCart}
+          client={this.props.client}
+          key={product.id.toString()}
+          product={product}
+        />
+      );
+    });
+
     return (
       <Layout>
+        <Helmet
+          htmlAttributes={{lang: 'en'}}
+        >
+          <title>{siteTitle}</title>
+          <meta name="description" content={siteDescription}/>
+        </Helmet>
         <ShopPage>
           <h1>shop</h1>
           <ProductList>
-            <Helmet
-              htmlAttributes={{lang: 'en'}}
-            >
-              <title>{siteTitle}</title>
-              <meta name="description" content={siteDescription}/>
-            </Helmet>
-
-            {products.map(({node}) => {
-              const title = get(node, 'frontmatter.title') || node.fields.slug;
-              const image = get(node, 'frontmatter.image');
-              const imgSrc = require(
-                  `./../pages${node.frontmatter.path}default.jpg`,
-              );
-
-              return (
-                <Product key={node.fields.slug}>
-                  {node.frontmatter.sold &&
-                    <ProductBanner>
-                      Sold out
-                    </ProductBanner>
-                  }
-                  <Link to={node.fields.slug}>
-                    <ProductImage src={imgSrc} />
-                  </Link>
-                  <ProductInformation>
-                    <ProductTitle>
-                      <Link style={{boxShadow: 'none'}} to={node.fields.slug}>
-                        {title}
-                      </Link>
-                    </ProductTitle>
-                    {node.frontmatter.sold &&
-                      <strike>
-                        <ProductPrice
-                          dangerouslySetInnerHTML={{
-                            __html: '&dollar;' + node.frontmatter.price,
-                          }} />
-                      </strike>
-                    }
-                    {!node.frontmatter.sold &&
-                      <ProductPrice
-                        dangerouslySetInnerHTML={{
-                          __html: '&dollar;' + node.frontmatter.price,
-                        }} />
-                    }
-                  </ProductInformation>
-                </Product>
-              );
-            })}
+            {shopifyProductList}
+          </ProductList>
+          <ProductList>
+            {snipcartProductList}
           </ProductList>
         </ShopPage>
       </Layout>
@@ -139,7 +155,7 @@ const ProductList = styled.div`
   }
 `;
 
-const Product = styled.div`
+const ProductDiv = styled.div`
   padding: 30px 0 0 50px;
   display: flex;
   flex-direction: column;

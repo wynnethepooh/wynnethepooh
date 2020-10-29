@@ -103,7 +103,7 @@ class Root extends React.Component<Props, State> {
 
     return (
       <RootDiv>
-        {children}
+        {React.cloneElement(children, {shopifyProducts: this.state.products, addVariantToCart: this.addVariantToCart})}
         {!this.state.isCartOpen &&
           <CartButtonWrapper className="App__view-cart-wrapper">
             <CartButton className="App__view-cart" onClick={()=> this.setState({isCartOpen: true})}></CartButton>
