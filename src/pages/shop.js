@@ -89,9 +89,6 @@ class Shop extends React.Component<Props> {
         <ShopPage>
           <h1>shop</h1>
           <ProductList>
-            {shopifyProductList}
-          </ProductList>
-          <ProductList>
             {snipcartProductList}
           </ProductList>
         </ShopPage>

@@ -2,9 +2,10 @@
 
 import React from 'react';
 import {Helmet} from 'react-helmet';
+import loadable from '@loadable/component'
 
 import Layout from '../components/layout';
-import Brand from '../components/navbar/Brand';
+const Brand = loadable(() => import('../components/navbar/Brand'));
 
 /**
  * Home class.
@@ -16,6 +17,7 @@ class Home extends React.Component<Props> {
    * @return {object} home object
    */
   render() {
+    const ogImg = require('../images/home-background.jpeg');
 
     return (
       <Layout isHomePage>
@@ -23,6 +25,9 @@ class Home extends React.Component<Props> {
           <Helmet htmlAttributes={{lang: 'en'}}>
             <title>wynne the pooh</title>
             <meta charSet="utf-8" />
+            <meta property="og:title" content="wynne the pooh" />
+            <meta property="og:url" content="https://www.wynnethepooh.com" />
+            <meta property="og:image" content={ogImg} />
           </Helmet>
           <Brand isHomePage/>
 
