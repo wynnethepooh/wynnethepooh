@@ -85,8 +85,8 @@ a:hover {
   height: 100vh;
   background:
     linear-gradient(
-      rgba(59, 41, 8, 0.4),
-      rgba(59, 41, 8, 0.4)
+      rgba(59, 41, 8, 0.6),
+      rgba(59, 41, 8, 0.6)
     ),
     url("../images/home-background.jpeg");
   background-repeat: no-repeat;

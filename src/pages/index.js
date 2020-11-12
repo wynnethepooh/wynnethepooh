@@ -6,6 +6,7 @@ import loadable from '@loadable/component'
 
 import Layout from '../components/layout';
 const Brand = loadable(() => import('../components/navbar/Brand'));
+import HomeImage from '../images/home-background.jpeg';
 
 /**
  * Home class.
@@ -27,7 +28,7 @@ class Home extends React.Component<Props> {
             <meta charSet="utf-8" />
             <meta property="og:title" content="wynne the pooh" />
             <meta property="og:url" content="https://www.wynnethepooh.com" />
-            <meta property="og:image" content={ogImg} />
+            <meta property="og:image" content={HomeImage} />
           </Helmet>
           <Brand isHomePage/>
 

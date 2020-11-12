@@ -114,7 +114,7 @@ const ProductBanner = styled.div`
   position: absolute;
   top: 40px;
   right: -5px;
-  background-color: #CC8E20;
+  background-color: #CD7F5D;
   color: white;
   padding: 3px 7px;
 

@@ -39,17 +39,6 @@ const Navbar = (props: Props) => {
             <Link to="/shop">Shop</Link>
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
-            <ShoppingCartWrapper>
-              <button
-                style={{
-                  WebkitAppearance: 'none',
-                  border: 'none',
-                  background: 'none',
-                  marginLeft: '0.5rem',
-                }}>
-                <ShoppingIcon src={ShoppingBag} />
-              </button>
-            </ShoppingCartWrapper>
           </NavLinks>
           <BurgerWrapper>
             <BurgerMenu
@@ -136,7 +125,7 @@ const NavLinks = styled(animated.ul)`
   list-style-type: none;
   margin: auto 0;
   position: absolute;
-  right: 50px;
+  right: 90px;
   top: 30px;
 
   & a {

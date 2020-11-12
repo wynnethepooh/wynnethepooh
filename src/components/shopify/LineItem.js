@@ -1,81 +1,96 @@
-import React, {Component} from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'gatsby';
 import styled from 'styled-components';
 
-class LineItem extends Component {
-  constructor(props) {
-    super(props);
+import StoreContext from '../../context/StoreContext'
 
-    this.decrementQuantity = this.decrementQuantity.bind(this);
-    this.incrementQuantity = this.incrementQuantity.bind(this);
+const LineItem = props => {
+  const { item } = props
+  const {
+    removeLineItem,
+    store: { client, checkout },
+  } = useContext(StoreContext)
+
+  const variantImage = item.variant.image ? (
+    <ProductImage
+      src={item.variant.image.src}
+      alt={`${item.title} product shot`}
+    />
+  ) : null
+
+  const selectedOptions = item.variant.selectedOptions
+    ? item.variant.selectedOptions.map(
+        option => (option.name === 'Title' && option.value === 'Default Title') ? '' : `${option.name}: ${option.value} `
+      )
+    : null
+
+  const handleRemove = () => {
+    removeLineItem(client, checkout.id, item.id)
   }
 
-  decrementQuantity(lineItemId) {
-    const updatedQuantity = this.props.line_item.quantity - 1
-    this.props.updateQuantityInCart(lineItemId, updatedQuantity);
-  }
-
-  incrementQuantity(lineItemId) {
-    const updatedQuantity = this.props.line_item.quantity + 1
-    this.props.updateQuantityInCart(lineItemId, updatedQuantity);
-  }
-
-  render() {
-    return (
-      <ListItem className="Line-item">
-        <div className="Line-item__img">
-          {this.props.line_item.variant.image ? <ProductImage src={this.props.line_item.variant.image.src} alt={`${this.props.line_item.title} product shot`}/> : null}
-        </div>
-        <Content className="Line-item__content">
-          <div className="Line-item__content-row">
-            <Title className="Line-item__title">
-              {this.props.line_item.title}
-            </Title>
-            <VariantTitle className="Line-item__variant-title">
-              {this.props.line_item.variant.title}
-            </VariantTitle>
+  return (
+    <ListItem>
+      {console.log(item)}
+      <FlexContainer>
+        <Link to={`/product/${item.variant.product.handle}/`}>
+          {variantImage}
+        </Link>
+        <Details>
+          <Title>
+            {item.title}
+          </Title>
+          {`  `}
+          <VariantTitle>
+            {item.variant.title === !'default title' ? item.variant.title : ''}
+          </VariantTitle>
+          {selectedOptions}
+          <div>
+            quantity: {item.quantity}
           </div>
-          <div className="Line-item__content-row">
-            <QuantityContainer className="Line-item__quantity-container">
-              <QuantityUpdate className="Line-item__quantity-update" onClick={() => this.decrementQuantity(this.props.line_item.id)}>-</QuantityUpdate>
-              <Quantity className="Line-item__quantity">{this.props.line_item.quantity}</Quantity>
-              <QuantityUpdate className="Line-item__quantity-update" onClick={() => this.incrementQuantity(this.props.line_item.id)}>+</QuantityUpdate>
-            </QuantityContainer>
-            <PriceRow>
-              <span className="Line-item__price">
-                $ { (this.props.line_item.quantity * this.props.line_item.variant.price).toFixed(2) }
-              </span>
-              <RemoveButton className="Line-item__remove" onClick={()=> this.props.removeLineItemInCart(this.props.line_item.id)}>remove</RemoveButton>
-            </PriceRow>
-          </div>
-        </Content>
-      </ListItem>
-    );
-  }
+        </Details>
+      </FlexContainer>
+      <RemoveButton onClick={handleRemove}>
+        remove x
+      </RemoveButton>
+    </ListItem>
+  )
 }
 
-export default LineItem;
-
-const ProductImage = styled.img`
-  width: 70px;
-`;
+export default LineItem
 
 const ListItem = styled.li`
   display: flex;
+  margin-bottom: 30px;
+  position: relative;
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+`;
+
+const Details = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+`;
+
+const ProductImage = styled.img`
+  width: 70px;
 `;
 
 const Content = styled.div`
   padding: 0 0 0 20px;
 `;
 
-const Title = styled.div`
+const Title = styled.p`
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
 `;
 
 const VariantTitle = styled.div`
   font-size: smaller;
-`;
-
-const QuantityContainer = styled.div`
-  padding: 10px 0 10px 0
+  margin-bottom: 10px;
 `;
 
 const QuantityUpdate = styled.button`
@@ -100,4 +115,11 @@ const RemoveButton = styled.button`
   background: none;
   font-family: 'Jost', sans-serif;
   cursor: pointer;
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: smaller;
+  white-space: nowrap;
 `;

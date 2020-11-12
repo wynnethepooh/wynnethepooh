@@ -1,36 +1,33 @@
-import React from 'react';
+import React from 'react'
+import { Link, graphql } from 'gatsby'
+import Image from 'gatsby-image';
+import styled from 'styled-components';
 import {Helmet} from 'react-helmet';
-import {Link, graphql} from 'gatsby';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';
 
 import BuyProduct from '../components/BuyProduct';
+import Product from '../components/shopify/Product';
 import Layout from '../components/layout';
-import styled from 'styled-components';
 
 /**
  * Product template class.
  */
-class ProductTemplate extends React.Component {
+class ProductPage extends React.Component {
   /**
    * Renders product template object.
    * @return {object} product template object
    */
   render() {
 
-    const product = this.props.data.markdownRemark;
+    const shopifyProduct = get(this, 'props.data.shopifyProduct');
     const siteTitle = get(this.props, 'data.site.siteMetadata.title');
-    const siteDescription = product.excerpt;
+    const siteDescription = shopifyProduct.excerpt;
     const {previous, next} = this.props.pageContext;
-    const images = product.frontmatter.image
-        .map((x) => ({
-          name: x.name,
-          src: require(`./../pages${product.frontmatter.path}${x.src}.jpg`),
-        }));
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <ProductPage>
+        <ProductContainer>
 
           <Link
             to="/shop"
@@ -39,54 +36,53 @@ class ProductTemplate extends React.Component {
               marginBottom: '20px',
               textTransform: 'lowercase',
               zIndex: '12',
+              width: 'fit-content',
             }}>
             ← back to shop
           </Link>
 
           <Helmet htmlAttributes={{lang: 'en'}}>
-            <title>{`${product.frontmatter.title} | ${siteTitle}`}</title>
+            <title>{`${shopifyProduct.title} | ${siteTitle}`}</title>
             <meta name="description" content={siteDescription}/>
           </Helmet>
-          <h1>{product.frontmatter.title}</h1>
           <p>
           </p>
 
           <ProductInformation>
-            {!product.frontmatter.sold &&
-              <BuyProduct product={product.frontmatter} images={images}>
-              </BuyProduct>
+            {shopifyProduct.availableForSale &&
+              <>
+                <BuyProduct
+                  product={shopifyProduct}
+                  addVariantToCart={this.props.addVariantToCart}
+                  client={this.props.client}
+                  key={shopifyProduct.id.toString()}
+                  product={shopifyProduct}/>
+
+              </>
             }
 
-            {product.frontmatter.sold &&
+            {!shopifyProduct.availableForSale &&
               <ProductOverview>
                 <DisplayBlock>
                   <ProductBanner>
                       Sold out
                   </ProductBanner>
-                  <ProductImage
-                    src={require(
-                        `./../pages${product.frontmatter.path}default.jpg`,
-                    )}/>
+                  {shopifyProduct.images.map(image => (
+                    <Img
+                      fluid={image.localFile.childImageSharp.fluid}
+                      key={image.id}
+                      alt={shopifyProduct.title}
+                    />
+                  ))}
                 </DisplayBlock>
                 <ProductDescription>
+                  <h1>{shopifyProduct.title}</h1>
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: product.frontmatter.description,
+                      __html: shopifyProduct.descriptionHtml,
                     }} />
 
-                  <Dimensions>
-                    <DimensionsHeader>Dimensions</DimensionsHeader>
-                    {product.frontmatter.dimensions.map((dimension) => {
-                      return (
-                        <div
-                          key={dimension}
-                          dangerouslySetInnerHTML={{
-                            __html: '- ' + dimension,
-                          }} />
-                      );
-                    })}
-                    <div>- Each piece is handmade so sizes may vary</div>
-                  </Dimensions>
+
                 </ProductDescription>
               </ProductOverview>
             }
@@ -120,91 +116,67 @@ class ProductTemplate extends React.Component {
               }
             </li>
           </ul>
-        </ProductPage>
+        </ProductContainer>
       </Layout>
     );
   }
 }
 
-ProductTemplate.propTypes = {
-  location: PropTypes.object,
-  data: PropTypes.shape({
-    markdownRemark: PropTypes.shape({
-      excerpt: PropTypes.string,
-      frontmatter: PropTypes.shape({
-        title: PropTypes.string,
-        date: PropTypes.string,
-        price: PropTypes.number,
-        sold: PropTypes.bool,
-        id: PropTypes.number,
-        path: PropTypes.string,
-        description: PropTypes.string,
-        dimensions: PropTypes.arrayOf(PropTypes.string),
-        image: PropTypes.shape({
-          name: PropTypes.string,
-          src: PropTypes.string,
-          map: PropTypes.object,
-        }),
-      }),
-    }),
-  }),
-  pageContext: PropTypes.shape({
-    previous: PropTypes.shape({
-      fields: PropTypes.shape({
-        slug: PropTypes.string,
-      }),
-      frontmatter: PropTypes.shape({
-        title: PropTypes.string,
-      }),
-    }),
-    next: PropTypes.shape({
-      fields: PropTypes.shape({
-        slug: PropTypes.string,
-      }),
-      frontmatter: PropTypes.shape({
-        title: PropTypes.string,
-      }),
-    }),
-  }),
-};
+export default ProductPage
 
-export default ProductTemplate;
-
-export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
-    site {
-      siteMetadata {
-        title
-        author
-      }
-    }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+export const query = graphql`
+  query($handle: String!) {
+    shopifyProduct(handle: { eq: $handle }) {
       id
-      excerpt
-      html
-      frontmatter {
-        title
-        date(formatString: "MMMM DD, YYYY")
-        price
-        sold
+      title
+      handle
+      productType
+      description
+      descriptionHtml
+      shopifyId
+      options {
         id
-        path
-        description
-        dimensions
-        image {
+        name
+        values
+      }
+      variants {
+        id
+        title
+        price
+        availableForSale
+        shopifyId
+        selectedOptions {
           name
-          src
-        }
-        customFields {
-          name
-          values
+          value
         }
       }
+      priceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+        maxVariantPrice {
+          amount
+          currencyCode
+        }
+      }
+      images {
+        originalSrc
+        id
+        localFile {
+          childImageSharp {
+            fluid(maxWidth: 910) {
+              ...GatsbyImageSharpFluid_withWebp_tracedSVG
+            }
+          }
+        }
+      }
+      availableForSale
     }
   }
-`;
+`
 
-const ProductPage = styled.div`
+const ProductContainer = styled.div`
   padding: 45px 5vh
 `;
 
@@ -219,9 +191,10 @@ const ProductBanner = styled.div`
   position: absolute;
   top: 40px;
   right: -7px;
-  background-color: #CC8E20;
+  background-color: #CD7F5D;
   color: white;
   padding: 3px 7px;
+  z-index: 1;
 `;
 
 const ProductOverview = styled.div`
@@ -243,6 +216,7 @@ const ProductImage = styled.img`
 `;
 
 const ProductDescription = styled.div`
+  text-transform: lowercase;
   margin-left: 30px;
   text-align: left;
 
@@ -265,4 +239,14 @@ const DimensionsHeader = styled.h4`
 const DisplayBlock = styled.div`
   position: relative;
   display: inline-block;
+`;
+
+const Img = styled(Image)`
+  position: relative;
+  width: 400px;
+  min-width: 400px
+
+  @media (max-width: 700px) {
+    width: 80vw;
+  }
 `;

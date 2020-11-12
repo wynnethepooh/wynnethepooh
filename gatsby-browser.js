@@ -15,7 +15,7 @@ exports.wrapPageElement = ({ element, props }) => {
 
   const client = shopify.buildClient({
     domain: 'wynne-the-pooh.myshopify.com',
-    storefrontAccessToken: '1e5568ef2b02e41e3e1a1755f1af254a',
+    storefrontAccessToken: process.env.GATSBY_SHOPIFY_ACCESS_TOKEN,
   }, fetch);
 
   return <Root client={client} {...props}>{element}</Root>

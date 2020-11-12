@@ -7,11 +7,12 @@ import {useSpring, animated} from 'react-spring';
 
 const CollapseMenu = (props: Props) => {
   const {open} = useSpring({open: props.navbarState ? 0 : 1});
+  const ishomepage = props.isHomePage ? "true" : "";
 
   if (props.navbarState === true) {
     return (
       <CollapseWrapper
-        isHomePage={props.isHomePage}
+        ishomepage={ishomepage}
         style={{
           transform: open.interpolate({
             range: [0, 0.2, 0.3, 1],
@@ -46,7 +47,7 @@ export default CollapseMenu;
 const CollapseWrapper = styled(animated.div)`
   background: #FAF6EB;
   position: fixed;
-  top: ${(props) => (props.isHomePage ? '0' : '6rem')};
+  top: ${(props) => (props.ishomepage ? '0' : '6rem')};
   left: 0;
   right: 0;
   z-index: 9;

@@ -1,82 +1,76 @@
-import React, {Component} from 'react';
+import React, {useContext, Component} from 'react';
 import styled from 'styled-components';
+import StoreContext from '../../context/StoreContext';
 import LineItem from './LineItem';
 
-class Cart extends Component {
-  constructor(props) {
-    super(props);
+const Cart = () => {
+  const {
+    closeCart,
+    store: { checkout },
+    isCartOpen,
+    toggleCart
+  } = useContext(StoreContext)
 
-    this.openCheckout = this.openCheckout.bind(this);
+  const handleCheckout = () => {
+    window.open(checkout.webUrl)
   }
 
-  openCheckout() {
-    window.open(this.props.checkout.webUrl);
-  }
+  const lineItems = checkout.lineItems.map(item => (
+    <LineItem key={item.id.toString()} item={item} />
+  ))
 
-  render() {
-    let line_items = this.props.checkout.lineItems.map((line_item) => {
-      return (
-        <LineItem
-          updateQuantityInCart={this.props.updateQuantityInCart}
-          removeLineItemInCart={this.props.removeLineItemInCart}
-          key={line_item.id.toString()}
-          line_item={line_item}
-        />
-      );
-    });
-    const hasItems = line_items?.length > 0;
+  const hasItems = lineItems?.length > 0;
 
-    return (
-      <CartWrapper
-          className={`Cart ${this.props.isCartOpen ? 'Cart--open' : ''}`}
-          isCartOpen={this.props.isCartOpen}>
-        <CartHeader className="Cart__header">
-          <Header>Your cart</Header>
-          <CloseButton
-            onClick={this.props.handleCartClose}
-            className="Cart__close">
-            ×
-          </CloseButton>
-        </CartHeader>
-        {hasItems &&
-          <LineItemList className="Cart__line-items">
-            {line_items}
-          </LineItemList>
-        }
-        {!hasItems &&
-          <EmptyMessage>
-            your cart is empty.
-            <br/>fill &#39;er up!
-          </EmptyMessage>
-        }
-        <Footer className="Cart__footer">
-          <FooterLine className="Cart-info clearfix">
-            <div className="Cart-info__total Cart-info__small">Subtotal</div>
-            <div className="Cart-info__pricing">
-              <span className="pricing">$ {this.props.checkout.subtotalPrice}</span>
-            </div>
-          </FooterLine>
-          <FooterLine className="Cart-info clearfix">
-            <div className="Cart-info__total Cart-info__small">Taxes</div>
-            <div className="Cart-info__pricing">
-              <span className="pricing">$ {this.props.checkout.totalTax}</span>
-            </div>
-          </FooterLine>
-          <FooterLine className="Cart-info clearfix" isTotal>
-            <div className="Cart-info__total Cart-info__small">Total</div>
-            <div className="Cart-info__pricing">
-              <span className="pricing">$ {this.props.checkout.totalPrice}</span>
-            </div>
-          </FooterLine>
-          <CheckoutButton
-              className="Cart__checkout button"
-              onClick={this.openCheckout}>
-            Checkout
-          </CheckoutButton>
-        </Footer>
-      </CartWrapper>
-    )
-  }
+  return (
+    <CartWrapper
+        className={`Cart ${isCartOpen ? 'Cart--open' : ''}`}
+        isCartOpen={isCartOpen}>
+      <CartHeader className="Cart__header">
+        <Header>Your cart</Header>
+        <CloseButton
+          onClick={toggleCart}
+          className="Cart__close">
+          ×
+        </CloseButton>
+      </CartHeader>
+      {hasItems &&
+        <LineItemList className="Cart__line-items">
+          {lineItems}
+        </LineItemList>
+      }
+      {!hasItems &&
+        <EmptyMessage>
+          your cart is empty.
+          <br/>fill &#39;er up!
+        </EmptyMessage>
+      }
+      <Footer className="Cart__footer">
+        <FooterLine className="Cart-info clearfix">
+          <div className="Cart-info__total Cart-info__small">Subtotal</div>
+          <div className="Cart-info__pricing">
+            <span className="pricing">$ {checkout.subtotalPrice}</span>
+          </div>
+        </FooterLine>
+        <FooterLine className="Cart-info clearfix">
+          <div className="Cart-info__total Cart-info__small">Taxes</div>
+          <div className="Cart-info__pricing">
+            <span className="pricing">$ {checkout.totalTax}</span>
+          </div>
+        </FooterLine>
+        <FooterLine className="Cart-info clearfix" isTotal>
+          <div className="Cart-info__total Cart-info__small">Total</div>
+          <div className="Cart-info__pricing">
+            <span className="pricing">$ {checkout.totalPrice}</span>
+          </div>
+        </FooterLine>
+        <CheckoutButton
+            className="Cart__checkout button"
+            onClick={handleCheckout}>
+          Checkout
+        </CheckoutButton>
+      </Footer>
+    </CartWrapper>
+  )
 }
 
 export default Cart;
