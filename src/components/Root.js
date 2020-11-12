@@ -7,8 +7,8 @@
  */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import GlobalStyles from '../styles/GlobalStyles';
 import Cart from './shopify/Cart';
-import CartButton from './navbar/CartButton';
 import ContextProvider from '../provider/ContextProvider';
 
 const Root = (props) => {
@@ -16,9 +16,9 @@ const Root = (props) => {
 
   return (
     <ContextProvider>
+      <GlobalStyles />
       <RootDiv>
         {React.cloneElement(children)}
-        <CartButton />
         <Cart />
       </RootDiv>
     </ContextProvider>

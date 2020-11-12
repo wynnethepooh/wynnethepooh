@@ -7,6 +7,7 @@ import {useSpring, animated, config} from 'react-spring';
 import Brand from './Brand';
 import BurgerMenu from './BurgerMenu';
 import CollapseMenu from './CollapseMenu';
+import CartButton from './CartButton';
 
 import ShoppingBag from '../../images/shopping-bag.png';
 
@@ -39,6 +40,7 @@ const Navbar = (props: Props) => {
             <Link to="/shop">Shop</Link>
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
+            <CartButton ishomepage={ishomepage}/>
           </NavLinks>
           <BurgerWrapper>
             <BurgerMenu

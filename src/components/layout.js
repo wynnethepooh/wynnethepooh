@@ -11,8 +11,6 @@ import {Helmet} from 'react-helmet';
 import styled from 'styled-components';
 
 import Navbar from './navbar/Navbar';
-import './layout.css';
-import GlobalStyle from '../styles/Global';
 
 import Facebook from '../images/facebook.png';
 import Instagram from '../images/instagram.png';
@@ -56,7 +54,6 @@ class Layout extends React.Component<Props, State> {
           handleNavbar={this.handleNavbar}
           isHomePage={this.props.isHomePage}
         />
-        <GlobalStyle />
 
         <Helmet htmlAttributes={{lang: 'en'}}>
           <meta charSet='utf-8' />

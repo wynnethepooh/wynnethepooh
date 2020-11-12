@@ -4,14 +4,14 @@ import StoreContext from '../../context/StoreContext';
 
 import ShoppingBag from '../../images/shopping-bag.png';
 
-const CartButton = () => {
+const CartButton = (props: Props) => {
   const storeContext = useContext(StoreContext);
 
   return (
     <CartWrapper className="App__view-cart-wrapper">
       <ViewCartButton className="App__view-cart" onClick={storeContext.toggleCart}>
         <ShoppingCartWrapper>
-          <ShoppingIcon src={ShoppingBag} />
+          <ShoppingIcon ishomepage={props.ishomepage} src={ShoppingBag} />
         </ShoppingCartWrapper>
       </ViewCartButton>
     </CartWrapper>
@@ -22,8 +22,8 @@ export default CartButton;
 
 const CartWrapper = styled.div`
   position: fixed;
-  right: 35px;
-  top: 27px;
+  right: -50px;
+  top: -3px;
   z-index: 11;
 `;
 
