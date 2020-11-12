@@ -7,9 +7,12 @@
  */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import loadable from '@loadable/component'
+
 import GlobalStyles from '../styles/GlobalStyles';
-import Cart from './shopify/Cart';
 import ContextProvider from '../provider/ContextProvider';
+
+const Cart = loadable(() => import('./shopify/Cart'));
 
 const Root = (props) => {
   const {children} = props;
