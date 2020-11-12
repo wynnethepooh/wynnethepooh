@@ -47,7 +47,8 @@ export default CollapseMenu;
 const CollapseWrapper = styled(animated.div)`
   background: #FAF6EB;
   position: fixed;
-  top: ${(props) => (props.ishomepage ? '0' : '6rem')};
+  padding-top: ${(props) => (props.ishomepage ? '0' : '5rem')};
+  top: 0;
   left: 0;
   right: 0;
   z-index: 9;
