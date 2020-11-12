@@ -5,10 +5,12 @@ import {Link, graphql, useStaticQuery} from 'gatsby';
 import Image from 'gatsby-image';
 import get from 'lodash/get';
 import {Helmet} from 'react-helmet';
-
-import Layout from '../components/layout';
+import loadable from '@loadable/component';
 import styled from 'styled-components';
+
 import StoreContext from '../context/StoreContext';
+
+const Layout = loadable(() => import('../components/layout'));
 
 const Shop = () => {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title');

@@ -1,7 +1,9 @@
 // @flow
 
 import React from 'react';
-import Layout from '../components/layout';
+import loadable from '@loadable/component';
+
+const Layout = loadable(() => import('../components/layout'));
 
 /**
  * 404 class

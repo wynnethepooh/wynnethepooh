@@ -4,9 +4,10 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 import loadable from '@loadable/component';
 
-import Layout from '../components/layout';
-const Brand = loadable(() => import('../components/navbar/Brand'));
 import HomeImage from '../images/home-background.jpeg';
+
+const Layout = loadable(() => import('../components/layout'));
+const Brand = loadable(() => import('../components/navbar/Brand'));
 
 /**
  * Home class.
