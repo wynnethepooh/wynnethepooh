@@ -8,7 +8,6 @@ import {Helmet} from 'react-helmet';
 
 import Layout from '../components/layout';
 import styled from 'styled-components';
-import ProductTile from '../components/shopify/ProductTile';
 import StoreContext from '../context/StoreContext';
 
 const Shop = () => {

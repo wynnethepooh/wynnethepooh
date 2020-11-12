@@ -2,7 +2,6 @@
 import React, {useState} from 'react';
 import Image from 'gatsby-image';
 import styled from 'styled-components';
-import ProductTile from './shopify/ProductTile';
 import ProductForm from './shopify/ProductForm';
 
 const BuyProduct = React.memo(({product}) => {

@@ -133,6 +133,9 @@ const ContextProvider = ({ children }) => {
         },
         openCart: () => {
           setCartStatus(true);
+        },
+        closeCart: () => {
+          setCartStatus(false);
         }
       }}
     >

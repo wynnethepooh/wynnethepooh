@@ -5,10 +5,13 @@ import styled from 'styled-components';
 import {Helmet} from 'react-helmet';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';
+import loadable from '@loadable/component';
 
-import BuyProduct from '../components/BuyProduct';
 import Product from '../components/shopify/Product';
 import Layout from '../components/layout';
+
+const BuyProduct = loadable(() => import('../components/BuyProduct'));
+const SoldOutProduct = loadable(() => import('../components/SoldOutProduct'));
 
 /**
  * Product template class.
@@ -50,41 +53,11 @@ class ProductPage extends React.Component {
 
           <ProductInformation>
             {shopifyProduct.availableForSale &&
-              <>
-                <BuyProduct
-                  product={shopifyProduct}
-                  addVariantToCart={this.props.addVariantToCart}
-                  client={this.props.client}
-                  key={shopifyProduct.id.toString()}
-                  product={shopifyProduct}/>
-
-              </>
+              <BuyProduct product={shopifyProduct} />
             }
 
             {!shopifyProduct.availableForSale &&
-              <ProductOverview>
-                <DisplayBlock>
-                  <ProductBanner>
-                      Sold out
-                  </ProductBanner>
-                  {shopifyProduct.images.map(image => (
-                    <Img
-                      fluid={image.localFile.childImageSharp.fluid}
-                      key={image.id}
-                      alt={shopifyProduct.title}
-                    />
-                  ))}
-                </DisplayBlock>
-                <ProductDescription>
-                  <h1>{shopifyProduct.title}</h1>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: shopifyProduct.descriptionHtml,
-                    }} />
-
-
-                </ProductDescription>
-              </ProductOverview>
+              <SoldOutProduct product={shopifyProduct}/>
             }
           </ProductInformation>
 
@@ -186,17 +159,6 @@ const ProductInformation = styled.div`
   align-content: space-evenly;
 `;
 
-const ProductBanner = styled.div`
-  text-transform: lowercase;
-  position: absolute;
-  top: 40px;
-  right: -7px;
-  background-color: #CD7F5D;
-  color: white;
-  padding: 3px 7px;
-  z-index: 1;
-`;
-
 const ProductOverview = styled.div`
   display: flex;
   flex-direction: row;
@@ -236,17 +198,13 @@ const DimensionsHeader = styled.h4`
   font-weight: 500;
 `;
 
-const DisplayBlock = styled.div`
-  position: relative;
-  display: inline-block;
-`;
-
 const Img = styled(Image)`
   position: relative;
   width: 400px;
-  min-width: 400px
+  min-width: 400px;
 
   @media (max-width: 700px) {
     width: 80vw;
+    min-width: 80vw;
   }
 `;

@@ -107,50 +107,54 @@ const ProductForm = ({ product }) => {
             __html: product.descriptionHtml,
           }} />
       </ProductDescription>
-      <VariantFlexContainer>
-        {options.size > 1 &&
-          options.map(({ id, name, values }, index) => (
-            <React.Fragment key={id}>
-              <Label htmlFor={name}>{name} </Label>
-              <Select
-                name={name}
-                key={id}
-                onChange={event => handleOptionChange(index, event)}
-              >
-                {values.map(value => (
-                  <option
-                    value={value}
-                    key={`${name}-${value}`}
-                    disabled={checkDisabled(name, value)}
+      {available &&
+        <>
+          <VariantFlexContainer>
+            {options.size > 1 &&
+              options.map(({ id, name, values }, index) => (
+                <React.Fragment key={id}>
+                  <Label htmlFor={name}>{name} </Label>
+                  <Select
+                    name={name}
+                    key={id}
+                    onChange={event => handleOptionChange(index, event)}
                   >
-                    {value}
-                  </option>
-                ))}
-              </Select>
-              <br />
-            </React.Fragment>
-        ))}
-      </VariantFlexContainer>
-      <FlexContainer>
-        <Input
-          type="number"
-          id="quantity"
-          name="quantity"
-          min="1"
-          step="1"
-          onChange={handleQuantityChange}
-          value={quantity}
-        />
-        <br />
-        <Button
-          type="submit"
-          disabled={!available || adding}
-          onClick={handleAddToCart}
-        >
-          add to cart
-        </Button>
-      </FlexContainer>
-      {!available && <p>This Product is out of Stock!</p>}
+                    {values.map(value => (
+                      <option
+                        value={value}
+                        key={`${name}-${value}`}
+                        disabled={checkDisabled(name, value)}
+                      >
+                        {value}
+                      </option>
+                    ))}
+                  </Select>
+                  <br />
+                </React.Fragment>
+            ))}
+          </VariantFlexContainer>
+          <FlexContainer>
+            <Input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="1"
+              step="1"
+              onChange={handleQuantityChange}
+              value={quantity}
+            />
+            <br />
+            <Button
+              type="submit"
+              disabled={!available || adding}
+              onClick={handleAddToCart}
+            >
+              add to cart
+            </Button>
+          </FlexContainer>
+        </>
+      }
+      {!available && <OutOfStock>This Product is out of Stock!</OutOfStock>}
     </>
   )
 }
@@ -259,4 +263,8 @@ const Select = styled.select`
   background: #FFFDFA;
   color: #52504B;
   width: fit-content;
+`;
+
+const OutOfStock = styled.p`
+  font-style: italic;
 `;

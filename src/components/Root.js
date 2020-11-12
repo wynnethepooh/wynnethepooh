@@ -7,7 +7,7 @@
  */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import loadable from '@loadable/component'
+import loadable from '@loadable/component';
 
 import GlobalStyles from '../styles/GlobalStyles';
 import ContextProvider from '../provider/ContextProvider';

@@ -9,12 +9,14 @@ const LineItem = props => {
   const {
     removeLineItem,
     store: { client, checkout },
+    closeCart,
   } = useContext(StoreContext)
 
   const variantImage = item.variant.image ? (
     <ProductImage
       src={item.variant.image.src}
       alt={`${item.title} product shot`}
+      onClick={closeCart}
     />
   ) : null
 

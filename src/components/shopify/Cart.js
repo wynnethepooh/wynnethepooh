@@ -5,7 +5,6 @@ import LineItem from './LineItem';
 
 const Cart = () => {
   const {
-    closeCart,
     store: { checkout },
     isCartOpen,
     toggleCart
@@ -133,6 +132,8 @@ const FooterLine = styled.div`
 `;
 
 const CheckoutButton = styled.button`
+  font-family: 'Jost', sans-serif;
+  font-size: large;
   text-transform: lowercase;
   color: white;
   width: 100%;
