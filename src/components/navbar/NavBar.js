@@ -28,7 +28,7 @@ const Navbar = (props: Props) => {
 
   return (
     <>
-      <NavBar ishomepage={ishomepage} style={barAnimation}>
+      <NavBarAnimatedDiv ishomepage={ishomepage} style={barAnimation}>
         <FlexContainer>
           {!props.isHomePage &&
             <Link to="/">
@@ -40,7 +40,9 @@ const Navbar = (props: Props) => {
             <Link to="/shop">Shop</Link>
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
-            <CartButton ishomepage={ishomepage}/>
+            <CartButton
+              key={props.navbarState}
+              ishomepage={ishomepage} />
           </NavLinks>
           <BurgerWrapper>
             <BurgerMenu
@@ -50,7 +52,7 @@ const Navbar = (props: Props) => {
             />
           </BurgerWrapper>
         </FlexContainer>
-      </NavBar>
+      </NavBarAnimatedDiv>
       <CollapseMenu
         navbarState={props.navbarState}
         handleNavbar={props.handleNavbar}
@@ -68,7 +70,7 @@ type Props = {
 
 export default Navbar;
 
-const NavBar = styled(animated.nav)`
+const NavBarAnimatedDiv = styled(animated.nav)`
   position: fixed;
   width: 100%;
   top: 0;

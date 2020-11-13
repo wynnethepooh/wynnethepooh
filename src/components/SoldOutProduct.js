@@ -2,9 +2,8 @@
 import React, {useState} from 'react';
 import Image from 'gatsby-image';
 import styled from 'styled-components';
-import ProductForm from './shopify/ProductForm';
 
-const BuyProduct = React.memo(({product}) => {
+const SoldOutProduct = React.memo(({product}) => {
 
   return (
     <ProductOverview>
@@ -33,8 +32,8 @@ const BuyProduct = React.memo(({product}) => {
   );
 });
 
-BuyProduct.displayName = 'BuyProduct';
-export default BuyProduct;
+SoldOutProduct.displayName = 'SoldOutProduct';
+export default SoldOutProduct;
 
 const ProductOverview = styled.div`
   display: flex;

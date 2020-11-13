@@ -22,7 +22,9 @@ const CartButton = (props: Props) => {
     <CartWrapper className="App__view-cart-wrapper">
       <ViewCartButton className="App__view-cart" onClick={storeContext.toggleCart}>
         <ShoppingCartWrapper>
-          <ShoppingIcon ishomepage={props.ishomepage} src={ShoppingBag} />
+          <ShoppingIcon
+            src={ShoppingBag}
+            ishomepage={props.ishomepage} />
           {hasItems &&
             <CartCounter>
               {quantity}
@@ -92,4 +94,9 @@ const CartCounter = styled.div`
   top: 20px;
   position: fixed;
   line-height: 20px;
+
+  @media (min-width: 1020px) {
+    right: -53px;
+    top: 19px;
+  }
 `;
