@@ -1,26 +1,34 @@
+// @flow
 import React from 'react';
 import {Link} from 'gatsby';
 import styled from 'styled-components';
 
 import {useSpring, animated} from 'react-spring';
 
-const CollapseMenu = (props) => {
+const CollapseMenu = (props: Props) => {
   const {open} = useSpring({open: props.navbarState ? 0 : 1});
+  const ishomepage = props.isHomePage ? "true" : "";
 
   if (props.navbarState === true) {
     return (
-      <CollapseWrapper style={{
-        transform: open.interpolate({
-          range: [0, 0.2, 0.3, 1],
-          output: [0, -20, 0, -200],
-        }).interpolate((openValue) => `translate3d(0, ${openValue}px, 0`),
-      }}
+      <CollapseWrapper
+        ishomepage={ishomepage}
+        style={{
+          transform: open.interpolate({
+            range: [0, 0.2, 0.3, 1],
+            output: [0, -20, 0, -200],
+          }).interpolate((openValue) => `translate3d(0, ${openValue}px, 0`),
+        }}
       >
         <NavLinks>
           <li><Link to="/" onClick={props.handleNavbar}>Home</Link></li>
           <li><Link to="/shop" onClick={props.handleNavbar}>Shop</Link></li>
           <li><Link to="/about" onClick={props.handleNavbar}>About</Link></li>
-          <li><Link to="/contact" onClick={props.handleNavbar}>Contact</Link></li>
+          <li>
+            <Link to="/contact" onClick={props.handleNavbar}>
+              Contact
+            </Link>
+          </li>
         </NavLinks>
       </CollapseWrapper>
     );
@@ -28,12 +36,19 @@ const CollapseMenu = (props) => {
   return null;
 };
 
+type Props = {
+  navbarState: bool,
+  handleNavbar: () => void,
+  isHomePage?: bool,
+};
+
 export default CollapseMenu;
 
 const CollapseWrapper = styled(animated.div)`
   background: #FAF6EB;
   position: fixed;
-  top: 6rem;
+  padding-top: ${(props) => (props.ishomepage ? '0' : '5rem')};
+  top: 0;
   left: 0;
   right: 0;
   z-index: 9;

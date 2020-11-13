@@ -1,26 +1,46 @@
+// @flow
+
 import React from 'react';
-import {Link} from 'gatsby';
-import logo from '../logo.svg';
 import {Helmet} from 'react-helmet';
+import loadable from '@loadable/component';
 
-import Layout from '../components/layout';
+import HomeImage from '../images/home-background.jpeg';
+import SEO from '../components/seo';
 
-class Home extends React.Component {
+const Layout = loadable(() => import('../components/layout'));
+const Brand = loadable(() => import('../components/navbar/Brand'));
+
+/**
+ * Home class.
+ */
+class Home extends React.Component<Props> {
+
+  /**
+   * Renders home object.
+   * @return {object} home object
+   */
   render() {
+
     return (
-      <Layout isHomePage>
-        <main className="home">
-          <Helmet htmlAttributes={{lang: 'en'}}>
-            <title>wynne the pooh</title>
-            <meta charSet="utf-8" />
-          </Helmet>
+      <>
+        <SEO
+          title="wynne the pooh"
+          keywords={[`ceramics`, `pot`, `pottery`]} />
+        <Layout isHomePage>
+          <main className="home">
+            <Helmet htmlAttributes={{lang: 'en'}}>
+              <title>wynne the pooh</title>
+              <meta charSet="utf-8" />
+            </Helmet>
+            <Brand isHomePage/>
 
-
-        </main>
-      </Layout>
-
+          </main>
+        </Layout>
+      </>
     );
   }
 }
+
+type Props = {};
 
 export default Home;

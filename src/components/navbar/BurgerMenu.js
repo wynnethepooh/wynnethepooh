@@ -1,9 +1,12 @@
+// @flow
 import React from 'react';
 import styled from 'styled-components';
 
-const Burgermenu = (props) => {
+const Burgermenu = (props: Props) => {
   return (
-    <Wrapper onClick={props.handleNavbar}>
+    <Wrapper
+      isHomePage={props.isHomePage}
+      onClick={props.handleNavbar}>
       <div className={ props.navbarState ? 'open' : '' }>
         <span>&nbsp;</span>
         <span>&nbsp;</span>
@@ -11,6 +14,12 @@ const Burgermenu = (props) => {
       </div>
     </Wrapper>
   );
+};
+
+type Props = {
+  navbarState: bool,
+  handleNavbar: () => void,
+  isHomePage?: bool
 };
 
 export default Burgermenu;
@@ -22,7 +31,7 @@ const Wrapper = styled.div`
   display: block;
 
   & span {
-    background: #CC8E20;
+    background: ${(props) => (props.isHomePage ? 'white' : '#CC8E20')};
     display: block;
     position: relative;
     width: 2rem;
@@ -38,11 +47,13 @@ const Wrapper = styled.div`
   .open span:nth-child(3) {
     transform: rotate(45deg);
     top: -11px;
+    background: #CC8E20;
   }
 
   .open span:nth-child(1) {
     transform: rotate(-45deg);
     top: 11px;
+    background: #CC8E20;
   }
 
 `;

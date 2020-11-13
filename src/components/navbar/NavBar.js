@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import {Link} from 'gatsby';
 import styled from 'styled-components';
@@ -6,10 +7,11 @@ import {useSpring, animated, config} from 'react-spring';
 import Brand from './Brand';
 import BurgerMenu from './BurgerMenu';
 import CollapseMenu from './CollapseMenu';
+import CartButton from './CartButton';
 
 import ShoppingBag from '../../images/shopping-bag.png';
 
-const Navbar = (props) => {
+const Navbar = (props: Props) => {
   const barAnimation = useSpring({
     from: {transform: 'translate3d(0, -10rem, 0)'},
     transform: 'translate3d(0, 0, 0)',
@@ -22,57 +24,95 @@ const Navbar = (props) => {
     config: config.wobbly,
   });
 
+  const ishomepage = props.isHomePage ? "true" : "";
+
   return (
     <>
-      <NavBar style={barAnimation}>
+      <NavBarAnimatedDiv ishomepage={ishomepage} style={barAnimation}>
         <FlexContainer>
-          <Brand isHomePage={props.isHomePage}/>
-          <NavLinks style={linkAnimation}>
+          {!props.isHomePage &&
+            <Link to="/">
+              <Brand isHomePage={props.isHomePage}/>
+            </Link>
+          }
+          <NavLinks ishomepage={ishomepage} style={linkAnimation}>
             <Link to="/">Home</Link>
             <Link to="/shop">Shop</Link>
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
-            <ShoppingCartWrapper>
-              <button
-                className="snipcart-checkout"
-                style={{
-                  WebkitAppearance: 'none',
-                  border: 'none',
-                  background: 'none',
-                  marginLeft: '0.5rem',
-                }}>
-                <img src={ShoppingBag} height="25px" />
-              </button>
-              <span className="snipcart-items-count"></span>
-              <span className="snipcart-total-price"></span>
-            </ShoppingCartWrapper>
+            <CartButton
+              key={props.navbarState}
+              ishomepage={ishomepage} />
           </NavLinks>
           <BurgerWrapper>
             <BurgerMenu
               navbarState={props.navbarState}
               handleNavbar={props.handleNavbar}
+              isHomePage={props.isHomePage}
             />
           </BurgerWrapper>
         </FlexContainer>
-      </NavBar>
+      </NavBarAnimatedDiv>
       <CollapseMenu
         navbarState={props.navbarState}
         handleNavbar={props.handleNavbar}
+        isHomePage={props.isHomePage}
       />
     </>
   );
 };
 
+type Props = {
+  isHomePage?: bool,
+  navbarState: bool,
+  handleNavbar: () => void
+};
+
 export default Navbar;
 
-const NavBar = styled(animated.nav)`
+const NavBarAnimatedDiv = styled(animated.nav)`
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
-  background: #FAF6EB;
+  background: none;
   z-index: 10;
   font-size: 1.4rem;
+
+  -o-transition:.3s;
+  -ms-transition:.3s;
+  -moz-transition:.3s;
+  -webkit-transition:.3s;
+  transition:.3s;
+
+  &:hover {
+    background: ${(props) => (props.ishomepage == "true" ? '#FAF6EB' : 'none')};
+    color: #CC8E20;
+
+    @media (max-width: 1020px) {
+        background: none;
+    }
+  }
+
+  &:hover a {
+    color: #CC8E20;
+  }
+
+  img {
+    filter: ${(props) => (props.ishomepage == "true" ? 'brightness(0) invert(1)' : '')};
+  }
+
+  &:hover img {
+    @media (min-width: 1020px) {
+      filter: none;
+    }
+  }
+
+  @media (max-width: 1020px) {
+    width: ${(props) => (props.ishomepage == "true" ? '65px' : '')};
+    right: ${(props) => (props.ishomepage == "true" ? '0' : '')};
+    left: ${(props) => (props.ishomepage == "true" ? 'auto' : '0')};
+  }
 `;
 
 const FlexContainer = styled.div`
@@ -88,9 +128,12 @@ const NavLinks = styled(animated.ul)`
   justify-self: end;
   list-style-type: none;
   margin: auto 0;
+  position: absolute;
+  right: 90px;
+  top: 30px;
 
   & a {
-    color: #CC8E20;
+    color: ${(props) => (props.ishomepage == "true" ? 'white' : '#CC8E20')};
     text-transform: lowercase;
     font-family: 'Jost', 'Oswald', sans-serif;
     font-weight: 400;
@@ -122,12 +165,23 @@ const BurgerWrapper = styled.div`
   }
 `;
 
-const ShoppingCartWrapper = styled.span`
+const ShoppingCartWrapper = styled.div`
   position: relative;
+  background: none;
+  display: inline;
 
   @media (max-width: 1020px) {
     position: absolute;
     right: 27px;
     top: -16px;
+  }
+`;
+
+const ShoppingIcon = styled.img`
+  height: 25px;
+  margin: 19px -12px 0 0;
+
+  @media (min-width: 1020px) {
+    margin: auto auto -3px auto;
   }
 `;

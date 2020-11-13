@@ -1,106 +1,149 @@
-import React from 'react';
-import {Link, graphql} from 'gatsby';
+// @flow
+
+import React, { useContext } from 'react';
+import {Link, graphql, useStaticQuery} from 'gatsby';
+import Image from 'gatsby-image';
 import get from 'lodash/get';
 import {Helmet} from 'react-helmet';
-
-import Layout from '../components/layout';
+import loadable from '@loadable/component';
 import styled from 'styled-components';
 
-class Shop extends React.Component {
-  render() {
+import StoreContext from '../context/StoreContext';
+import SEO from '../components/seo';
+
+const Layout = loadable(() => import('../components/layout'));
+
+const Shop = () => {
+    const {
+      store: { checkout },
+    } = useContext(StoreContext)
+
+    const { allShopifyProduct } = useStaticQuery(
+        graphql`
+          query {
+            site {
+              siteMetadata {
+                title
+                author
+              }
+            }
+            allShopifyProduct(sort: { fields: [createdAt], order: DESC }) {
+              edges {
+                node {
+                  id
+                  title
+                  handle
+                  createdAt
+                  images {
+                    id
+                    originalSrc
+                    localFile {
+                      childImageSharp {
+                        fluid(maxWidth: 910) {
+                          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                        }
+                      }
+                    }
+                  }
+                  variants {
+                    price
+                  }
+                  availableForSale
+                }
+              }
+            }
+          }
+        `
+      )
+
+    const getPrice = price =>
+      Intl.NumberFormat(undefined, {
+        currency: checkout.currencyCode ? checkout.currencyCode : 'USD',
+        minimumFractionDigits: 0,
+        style: 'currency',
+      }).format(parseFloat(price ? price : 0))
+
+    const shopifyProductList =
+      allShopifyProduct.edges ? (
+        allShopifyProduct.edges.map(
+          ({
+            node: {
+              id,
+              handle,
+              title,
+              images: [firstImage],
+              variants: [firstVariant],
+              availableForSale
+            },
+          }) => (
+            <ProductDiv key={id}>
+              {!availableForSale &&
+                <ProductBanner>
+                  Sold out
+                </ProductBanner>
+              }
+              <Link to={`/product/${handle}/`}>
+                {firstImage && firstImage.localFile && (
+                  <Img
+                    fluid={firstImage.localFile.childImageSharp.fluid}
+                    alt={handle}
+                  />
+                )}
+              </Link>
+              <ProductInformation>
+                <ProductTitle>
+                  <Link style={{boxShadow: 'none'}} to={`/product/${handle}/`}>
+                    {title}
+                  </Link>
+                </ProductTitle>
+                {!availableForSale &&
+                  <strike>
+                    <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
+                  </strike>
+                }
+                {availableForSale &&
+                  <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
+                }
+              </ProductInformation>
+            </ProductDiv>
+          )
+        )
+      ) : (
+        <p>No Products found!</p>
+      );
+
     const siteTitle = get(this, 'props.data.site.siteMetadata.title');
     const siteDescription = get(
-        this,
-        'props.data.site.siteMetadata.description',
+      this,
+      'props.data.site.siteMetadata.description',
     );
-    const products = get(this, 'props.data.allMarkdownRemark.edges');
+
+
 
     return (
-      <Layout>
-        <ShopPage>
-          <h1>shop</h1>
-          <ProductList>
-            <Helmet
-              htmlAttributes={{lang: 'en'}}
-            >
-              <title>{siteTitle}</title>
-              <meta name="description" content={siteDescription}/>
-            </Helmet>
-
-            {products.map(({node}) => {
-              const title = get(node, 'frontmatter.title') || node.fields.slug;
-              const image = get(node, 'frontmatter.image');
-              const imgSrc= require(`./../pages${node.frontmatter.path}${image[0].src}.jpg`);
-
-              return (
-                <Product key={node.fields.slug}>
-                  {node.frontmatter.sold &&
-                    <ProductBanner>
-                      Sold out
-                    </ProductBanner>
-                  }
-                  <Link to={node.fields.slug}>
-                    <ProductImage src={imgSrc} />
-                  </Link>
-                  <ProductInformation>
-                    <ProductTitle>
-                      <Link style={{boxShadow: 'none'}} to={node.fields.slug}>
-                        {title}
-                      </Link>
-                    </ProductTitle>
-                    {node.frontmatter.sold &&
-                      <strike>
-                        <ProductPrice dangerouslySetInnerHTML={{__html: '&dollar;' + node.frontmatter.price}} />
-                      </strike>
-                    }
-                    {!node.frontmatter.sold &&
-                      <ProductPrice dangerouslySetInnerHTML={{__html: '&dollar;' + node.frontmatter.price}} />
-                    }
-                  </ProductInformation>
-                </Product>
-              );
-            })}
-          </ProductList>
-        </ShopPage>
-      </Layout>
-
+      <>
+        <SEO title="shop | wynne the pooh" />
+        <Layout>
+          <Helmet
+            htmlAttributes={{lang: 'en'}}
+          >
+            <title>shop | wynne the pooh</title>
+            <meta name="description" content={siteDescription}/>
+          </Helmet>
+          <ShopPage>
+            <h1>shop</h1>
+            <ProductList>
+              {shopifyProductList}
+            </ProductList>
+          </ShopPage>
+        </Layout>
+      </>
     );
-  }
 }
 
-export default Shop;
+type Props = {};
 
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-        description
-      }
-    }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      edges {
-        node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            path
-            image {
-              name
-              src
-            }
-            price
-            sold
-          }
-        }
-      }
-    }
-  }
-`;
+export default Shop;
 
 const ShopPage = styled.div`
   padding: 2.5vh 5vh
@@ -120,7 +163,7 @@ const ProductList = styled.div`
   }
 `;
 
-const Product = styled.div`
+const ProductDiv = styled.div`
   padding: 30px 0 0 50px;
   display: flex;
   flex-direction: column;
@@ -151,9 +194,10 @@ const ProductBanner = styled.div`
   position: absolute;
   top: 40px;
   right: -5px;
-  background-color: #CC8E20;
+  background-color: #CD7F5D;
   color: white;
   padding: 3px 7px;
+  z-index: 1;
 
   @media (max-width: 700px) {
     top: 15px;
@@ -184,4 +228,13 @@ const ProductPrice = styled.h3`
   text-align: right;
   margin: 10px 0;
   font-size: 1rem;
+`;
+
+const Img = styled(Image)`
+  position: relative;
+  width: 250px;
+
+  @media(max-width: 700px) {
+    width: 35vw;
+  }
 `;
