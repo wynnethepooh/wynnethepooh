@@ -110,8 +110,8 @@ const GlobalStyles = createGlobalStyle`
     height: 100vh;
     background:
       linear-gradient(
-        rgba(59, 41, 8, 0.6),
-        rgba(59, 41, 8, 0.6)
+        rgba(115, 75, 1, 0.6),
+        rgba(115, 75, 1, 0.6)
       ),
       url(${BackgroundImg});
     background-repeat: no-repeat;
