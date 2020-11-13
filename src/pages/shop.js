@@ -9,6 +9,7 @@ import loadable from '@loadable/component';
 import styled from 'styled-components';
 
 import StoreContext from '../context/StoreContext';
+import SEO from '../components/seo';
 
 const Layout = loadable(() => import('../components/layout'));
 
@@ -120,23 +121,24 @@ const Shop = () => {
 
 
     return (
-      <Layout>
-        <Helmet
-          htmlAttributes={{lang: 'en'}}
-        >
-          <title>shop | wynne the pooh</title>
-          <meta name="description" content={siteDescription}/>
-        </Helmet>
-        <ShopPage>
-          <h1>shop</h1>
-          <ProductList>
-            {shopifyProductList}
-          </ProductList>
-        </ShopPage>
-      </Layout>
-
+      <>
+        <SEO title="shop | wynne the pooh" />
+        <Layout>
+          <Helmet
+            htmlAttributes={{lang: 'en'}}
+          >
+            <title>shop | wynne the pooh</title>
+            <meta name="description" content={siteDescription}/>
+          </Helmet>
+          <ShopPage>
+            <h1>shop</h1>
+            <ProductList>
+              {shopifyProductList}
+            </ProductList>
+          </ShopPage>
+        </Layout>
+      </>
     );
-//  }
 }
 
 type Props = {};

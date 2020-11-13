@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import loadable from '@loadable/component';
 
 import Product from '../components/shopify/Product';
+import SEO from '../components/seo';
 
 const Layout = loadable(() => import('../components/layout'));
 const BuyProduct = loadable(() => import('../components/BuyProduct'));
@@ -29,68 +30,74 @@ class ProductPage extends React.Component {
     const {previous, next} = this.props.pageContext;
 
     return (
-      <Layout location={this.props.location} title={siteTitle}>
-        <ProductContainer>
-
-          <Link
-            to="/shop"
-            style={{
-              display: 'flex',
-              marginBottom: '20px',
-              textTransform: 'lowercase',
-              zIndex: '12',
-              width: 'fit-content',
-            }}>
-            ← back to shop
-          </Link>
-
+      <>
+        <SEO
+          title={`${shopifyProduct.title} | ${siteTitle}`}
+          description={shopifyProduct.description}
+          image={shopifyProduct.images[0].originalSrc} />
+        <Layout location={this.props.location} title={siteTitle}>
           <Helmet htmlAttributes={{lang: 'en'}}>
             <title>{`${shopifyProduct.title} | ${siteTitle}`}</title>
-            <meta name="description" content={siteDescription}/>
+            <meta name="description" content={shopifyProduct.description}/>
           </Helmet>
-          <p>
-          </p>
 
-          <ProductInformation>
-            {shopifyProduct.availableForSale &&
-              <BuyProduct product={shopifyProduct} />
-            }
+          <ProductContainer>
 
-            {!shopifyProduct.availableForSale &&
-              <SoldOutProduct product={shopifyProduct}/>
-            }
-          </ProductInformation>
+            <Link
+              to="/shop"
+              style={{
+                display: 'flex',
+                marginBottom: '20px',
+                textTransform: 'lowercase',
+                zIndex: '12',
+                width: 'fit-content',
+              }}>
+              ← back to shop
+            </Link>
+            <p>
+            </p>
 
-          <ul
-            style={{
-              marginTop: '45px',
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
-              listStyle: 'none',
-              padding: 0,
-              textTransform: 'lowercase',
-            }}
-          >
-            <li>
-              {
-                previous &&
-                <Link to={previous.fields.slug} rel="prev">
-                  ← {previous.frontmatter.title}
-                </Link>
+            <ProductInformation>
+              {shopifyProduct.availableForSale &&
+                <BuyProduct product={shopifyProduct} />
               }
-            </li>
-            <li>
-              {
-                next &&
-                <Link to={next.fields.slug} rel="next">
-                  {next.frontmatter.title} →
-                </Link>
+
+              {!shopifyProduct.availableForSale &&
+                <SoldOutProduct product={shopifyProduct}/>
               }
-            </li>
-          </ul>
-        </ProductContainer>
-      </Layout>
+            </ProductInformation>
+
+            <ul
+              style={{
+                marginTop: '45px',
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-between',
+                listStyle: 'none',
+                padding: 0,
+                textTransform: 'lowercase',
+              }}
+            >
+              <li>
+                {
+                  previous &&
+                  <Link to={previous.fields.slug} rel="prev">
+                    ← {previous.frontmatter.title}
+                  </Link>
+                }
+              </li>
+              <li>
+                {
+                  next &&
+                  <Link to={next.fields.slug} rel="next">
+                    {next.frontmatter.title} →
+                  </Link>
+                }
+              </li>
+            </ul>
+          </ProductContainer>
+        </Layout>
+      </>
     );
   }
 }
