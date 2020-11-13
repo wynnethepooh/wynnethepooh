@@ -24,7 +24,7 @@ class ProductPage extends React.Component {
   render() {
 
     const shopifyProduct = get(this, 'props.data.shopifyProduct');
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title');
+    const siteTitle = get(this, 'props.data.site.siteMetadata.title');
     const siteDescription = shopifyProduct.excerpt;
     const {previous, next} = this.props.pageContext;
 
@@ -99,6 +99,12 @@ export default ProductPage
 
 export const query = graphql`
   query($handle: String!) {
+    site {
+      siteMetadata {
+        title
+        author
+      }
+    }
     shopifyProduct(handle: { eq: $handle }) {
       id
       title

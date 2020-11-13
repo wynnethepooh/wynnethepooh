@@ -13,12 +13,6 @@ import StoreContext from '../context/StoreContext';
 const Layout = loadable(() => import('../components/layout'));
 
 const Shop = () => {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title');
-    const siteDescription = get(
-        this,
-        'props.data.site.siteMetadata.description',
-    );
-
     const {
       store: { checkout },
     } = useContext(StoreContext)
@@ -26,6 +20,12 @@ const Shop = () => {
     const { allShopifyProduct } = useStaticQuery(
         graphql`
           query {
+            site {
+              siteMetadata {
+                title
+                author
+              }
+            }
             allShopifyProduct(sort: { fields: [createdAt], order: DESC }) {
               edges {
                 node {
@@ -111,12 +111,20 @@ const Shop = () => {
         <p>No Products found!</p>
       );
 
+    const siteTitle = get(this, 'props.data.site.siteMetadata.title');
+    const siteDescription = get(
+      this,
+      'props.data.site.siteMetadata.description',
+    );
+
+
+
     return (
       <Layout>
         <Helmet
           htmlAttributes={{lang: 'en'}}
         >
-          <title>{siteTitle}</title>
+          <title>shop | wynne the pooh</title>
           <meta name="description" content={siteDescription}/>
         </Helmet>
         <ShopPage>

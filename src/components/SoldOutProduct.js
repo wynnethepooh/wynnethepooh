@@ -56,6 +56,7 @@ const ProductDetails = styled.div`
 const ProductDescription = styled.div`
   text-transform: lowercase;
   text-align: left;
+  margin-left: 2.5vh;
 
   @media (max-width: 700px) {
     margin: 20px 0;

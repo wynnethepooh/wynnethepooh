@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import {Helmet} from 'react-helmet';
 import loadable from '@loadable/component';
 
 const Layout = loadable(() => import('../components/layout'));
@@ -18,6 +19,9 @@ class About extends React.Component<Props> {
 
     return (
       <Layout>
+        <Helmet htmlAttributes={{lang: 'en'}}>
+          <title>about | wynne the pooh</title>
+        </Helmet>
         <div className="page">
           <h1>about</h1>
           <p>
