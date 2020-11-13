@@ -146,7 +146,11 @@ type Props = {};
 export default Shop;
 
 const ShopPage = styled.div`
-  padding: 2.5vh 5vh
+  padding: 2.5vh 0 2.5vh 5vh;
+
+  @media (max-width: 700px) {
+    padding: 2.5vh 5vh;
+  }
 `;
 
 const ProductList = styled.div`
@@ -169,6 +173,7 @@ const ProductDiv = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  margin-bottom: 20px;
 
   @media (max-width: 700px) {
     padding: 0px;
@@ -213,13 +218,19 @@ const ProductImage = styled.img`
   }
 `;
 
-const ProductTitle = styled.h3`
+const ProductTitle = styled.p`
   overflow-wrap: break-word;
   text-align: left;
   padding-right: 10px;
   text-transform: lowercase;
   margin: 10px 0;
   font-size: 1rem;
+
+  a {
+    font-weight: normal;
+    color: #52504B;
+  }
+
 `;
 
 const ProductPrice = styled.h3`

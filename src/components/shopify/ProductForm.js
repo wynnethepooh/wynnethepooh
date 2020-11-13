@@ -98,6 +98,11 @@ const ProductForm = ({ product }) => {
     style: 'currency',
   }).format(variant.price)
 
+  const hasVariants =
+      options.length > 0
+      && options[0].name !== "Title"
+      && options[0].value !== "Default Title";
+
   return (
     <>
       <Price>{price}</Price>
@@ -109,8 +114,8 @@ const ProductForm = ({ product }) => {
       </ProductDescription>
       {available &&
         <>
-          <VariantFlexContainer>
-            {options.size > 1 &&
+          <FlexContainer>
+            {hasVariants &&
               options.map(({ id, name, values }, index) => (
                 <React.Fragment key={id}>
                   <Label htmlFor={name}>{name} </Label>
@@ -132,7 +137,7 @@ const ProductForm = ({ product }) => {
                   <br />
                 </React.Fragment>
             ))}
-          </VariantFlexContainer>
+          </FlexContainer>
           <FlexContainer>
             <Input
               type="number"
@@ -222,13 +227,6 @@ const FlexContainer = styled.div`
   text-transform: lowercase;
 `;
 
-const VariantFlexContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-  text-transform: lowercase;
-`;
-
 const Input = styled.input`
   padding: 10px;
   margin-right: 20px;
@@ -251,6 +249,7 @@ const Button = styled.button`
 `;
 
 const Label = styled.label`
+  margin-right: 10px;
   padding: 10px 0;
   text-align: left;
 `;
@@ -267,4 +266,5 @@ const Select = styled.select`
 
 const OutOfStock = styled.p`
   font-style: italic;
+  text-transform: lowercase;
 `;
