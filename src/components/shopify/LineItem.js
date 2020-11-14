@@ -64,6 +64,7 @@ const ListItem = styled.li`
   display: flex;
   margin-bottom: 30px;
   position: relative;
+  max-width: 300px;
 `;
 
 const FlexContainer = styled.div`
@@ -124,4 +125,8 @@ const RemoveButton = styled.button`
   bottom: 0;
   font-size: smaller;
   white-space: nowrap;
+
+  @media (max-width: 420px) {
+    right: 10px;
+  }
 `;

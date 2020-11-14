@@ -185,8 +185,7 @@ const ProductDiv = styled.div`
 
 const ProductInformation = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   width: 250px;
 
   @media (max-width: 700px) {
@@ -223,7 +222,7 @@ const ProductTitle = styled.p`
   text-align: left;
   padding-right: 10px;
   text-transform: lowercase;
-  margin: 10px 0;
+  margin: 10px 0 0 0;
   font-size: 1rem;
 
   a {
@@ -233,12 +232,12 @@ const ProductTitle = styled.p`
 
 `;
 
-const ProductPrice = styled.h3`
+const ProductPrice = styled.p`
   font-weight: normal;
   white-space: nowrap;
-  text-align: right;
-  margin: 10px 0;
-  font-size: 1rem;
+  text-align: left;
+  margin: 5px 0 0 0;
+  font-size: 0.85rem;
 `;
 
 const Img = styled(Image)`

@@ -32,17 +32,19 @@ const Cart = () => {
           ×
         </CloseButton>
       </CartHeader>
-      {hasItems &&
-        <LineItemList className="Cart__line-items">
-          {lineItems}
-        </LineItemList>
-      }
-      {!hasItems &&
-        <EmptyMessage>
-          your cart is empty.
-          <br/>fill &#39;er up!
-        </EmptyMessage>
-      }
+      <ScrollableDiv>
+        {hasItems &&
+          <LineItemList className="Cart__line-items">
+            {lineItems}
+          </LineItemList>
+        }
+        {!hasItems &&
+          <EmptyMessage>
+            your cart is empty.
+            <br/>fill &#39;er up!
+          </EmptyMessage>
+        }
+      </ScrollableDiv>
       <Footer className="Cart__footer">
         <FooterLine className="Cart-info clearfix">
           <div className="Cart-info__total Cart-info__small">Subtotal</div>
@@ -85,6 +87,7 @@ const CartWrapper = styled.div`
   transition:.3s;
 
   right: ${(props) => (props.isCartOpen ? '0' : '-350px')};
+  max-width: 83vw;
   width: 300px;
   height: 100%;
   top: 0;
@@ -92,12 +95,20 @@ const CartWrapper = styled.div`
   z-index: 12;
 
   background: #FFFCF5;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ScrollableDiv = styled.div`
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const CartHeader = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  min-height: 70px;
 `;
 
 const Header = styled.h1`
@@ -117,7 +128,8 @@ const CloseButton = styled.button`
 const Footer = styled.footer`
   color: #52504B;
   width: 100%;
-  padding: 20px 0 0 0;
+  padding: 20px 0 30px 0;
+  min-height: 140px;
 
   flex-direction: column;
 `;
@@ -158,4 +170,5 @@ const EmptyMessage = styled.div`
 const LineItemList = styled.ul`
   list-style-type: none;
   padding: 0;
+  max-width: 300px;
 `;
