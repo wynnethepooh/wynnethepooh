@@ -19,7 +19,7 @@ class NotFoundPage extends React.Component<Props> {
 
     return (
       <>
-        <SEO title="404 | wynne the pooh" />
+        <SEO title="404" />
         <Layout location={this.props.location}>
           <Helmet htmlAttributes={{lang: 'en'}}>
             <title>wynne the pooh</title>

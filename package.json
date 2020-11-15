@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@loadable/component": "^5.14.1",
+    "@milosmladenovicwork/react-image-magnify": "^2.7.4",
     "apollo-client": "^2.6.10",
     "apollo-server": "^2.16.1",
     "axios": "^0.19.0",
@@ -38,8 +39,10 @@
     "react-helmet": "^6.0.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.4.3",
+    "react-slick": "^0.27.13",
     "react-spring": "^8.0.27",
     "shopify-buy": "^2.11.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^5.1.0",
     "typescript": "^4.0.2",
     "url-loader": "^4.1.0",

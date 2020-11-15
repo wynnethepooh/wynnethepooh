@@ -29,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
     color: #52504B;
     font-family: 'Jost', san-serif;
     margin: 0;
+    text-transform: lowercase;
   }
 
   h1 {

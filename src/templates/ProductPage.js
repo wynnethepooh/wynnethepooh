@@ -30,17 +30,12 @@ class ProductPage extends React.Component {
     return (
       <>
         <SEO
-          title={`${shopifyProduct.title} | ${siteTitle}`}
+          title={`${shopifyProduct.title}`}
           description={shopifyProduct.description}
           image={shopifyProduct.images[0].originalSrc} />
+
         <Layout location={this.props.location} title={siteTitle}>
-          <Helmet htmlAttributes={{lang: 'en'}}>
-            <title>{`${shopifyProduct.title} | ${siteTitle}`}</title>
-            <meta name="description" content={shopifyProduct.description}/>
-          </Helmet>
-
           <ProductContainer>
-
             <Link
               to="/shop"
               style={{

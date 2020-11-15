@@ -149,14 +149,8 @@ const Shop = () => {
 
     return (
       <>
-        <SEO title="shop | wynne the pooh" />
+        <SEO title="shop"/>
         <Layout>
-          <Helmet
-            htmlAttributes={{lang: 'en'}}
-          >
-            <title>shop | wynne the pooh</title>
-            <meta name="description" content={siteDescription}/>
-          </Helmet>
           <ShopPage>
             {shopifyCollections}
           </ShopPage>
@@ -200,7 +194,7 @@ const CollectionDiv = styled.div`
 `;
 
 const CollectionTitle = styled.h1`
-  color: #CD7F5D;
+  color: #CC8E20;
 `;
 
 const ProductDiv = styled.div`

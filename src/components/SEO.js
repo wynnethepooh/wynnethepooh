@@ -28,7 +28,7 @@ const SEO = ({ description, lang, meta, title, image, keywords }) => {
         },
         {
           property: `og:title`,
-          content: title || defaultTitle,
+          content: `${title} | ${defaultTitle}` || defaultTitle,
         },
         {
           property: `og:description`,

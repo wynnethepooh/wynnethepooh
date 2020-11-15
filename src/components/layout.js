@@ -9,7 +9,7 @@
 import React from 'react';
 import {Helmet} from 'react-helmet';
 import styled from 'styled-components';
-import loadable from '@loadable/component'
+import loadable from '@loadable/component';
 
 import Facebook from '../images/facebook.png';
 import Instagram from '../images/instagram.png';

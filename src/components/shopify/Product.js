@@ -2,7 +2,10 @@
 import React, {useState} from 'react';
 import Image from 'gatsby-image';
 import styled from 'styled-components';
+import loadable from '@loadable/component';
+
 import ProductForm from './ProductForm';
+const ZoomCarousel = loadable(() => import('./ZoomCarousel'));
 
 const Product = React.memo(({product, soldOut}) => {
 
@@ -14,13 +17,16 @@ const Product = React.memo(({product, soldOut}) => {
               Sold out
           </ProductBanner>
         }
-        {product.images.map(image => (
-          <Img
-            fluid={image.localFile.childImageSharp.fluid}
-            key={image.id}
-            alt={product.title}
-          />
-        ))}
+        <ZoomCarousel
+          images={product.images}
+          alt={product.title}
+          {...{
+            rimProps: {
+              isHintEnabled: true,
+              shouldHideHintAfterFirstActivation: true,
+              enlargedImagePosition: 'over'
+            }
+          }}/>
       </DisplayBlock>
 
       <ProductDetails>
@@ -122,17 +128,6 @@ const ProductDescription = styled.div`
 
   @media (max-width: 700px) {
     margin: 20px 0;
-  }
-`;
-
-const Img = styled(Image)`
-  position: relative;
-  width: 400px;
-  min-width: 400px;
-
-  @media (max-width: 700px) {
-    width: 80vw;
-    min-width: 80vw;
   }
 `;
 

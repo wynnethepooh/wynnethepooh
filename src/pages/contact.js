@@ -19,11 +19,8 @@ class Contact extends React.Component<Props> {
 
     return (
       <>
-        <SEO title="contact | wynne the pooh" />
+        <SEO title="contact" />
         <Layout>
-          <Helmet htmlAttributes={{lang: 'en'}}>
-            <title>contact | wynne the pooh</title>
-          </Helmet>
           <div className="page">
             <h1>contact</h1>
             <p>

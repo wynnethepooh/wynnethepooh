@@ -20,11 +20,8 @@ class About extends React.Component<Props> {
 
     return (
       <>
-        <SEO title="about | wynne the pooh" />
+        <SEO title="about" />
         <Layout>
-          <Helmet htmlAttributes={{lang: 'en'}}>
-            <title>about | wynne the pooh</title>
-          </Helmet>
           <div className="page">
             <h1>about</h1>
             <p>
@@ -45,7 +42,7 @@ class About extends React.Component<Props> {
             </p>
 
             <p>
-              I had a successful sale at Slab&#39;s holiday studio sale, and since
+              I had a successful sale at Slab&#39;s 2019 holiday studio sale, and since
               then I&#39;ve
               been creating pieces for friends, but I&#39;m hoping to open up an
               online shop with my quarantine pieces soon, so check back in!

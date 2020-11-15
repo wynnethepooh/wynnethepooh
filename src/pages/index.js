@@ -4,7 +4,6 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 import loadable from '@loadable/component';
 
-import HomeImage from '../images/home-background.jpeg';
 import SEO from '../components/seo';
 
 const Layout = loadable(() => import('../components/layout'));
@@ -24,7 +23,7 @@ class Home extends React.Component<Props> {
     return (
       <>
         <SEO
-          title="wynne the pooh"
+          title="home"
           keywords={[`ceramics`, `pot`, `pottery`]} />
         <Layout isHomePage>
           <main className="home">
