@@ -18,7 +18,7 @@ const Shop = () => {
       store: { checkout },
     } = useContext(StoreContext)
 
-    const { allShopifyProduct } = useStaticQuery(
+    const { allShopifyCollection } = useStaticQuery(
         graphql`
           query {
             site {
@@ -27,28 +27,31 @@ const Shop = () => {
                 author
               }
             }
-            allShopifyProduct(sort: { fields: [createdAt], order: DESC }) {
+            allShopifyCollection(sort: { fields: [products___availableForSale], order: DESC }) {
               edges {
                 node {
-                  id
                   title
-                  handle
-                  createdAt
-                  images {
+                  products {
                     id
-                    originalSrc
-                    localFile {
-                      childImageSharp {
-                        fluid(maxWidth: 910) {
-                          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                    title
+                    handle
+                    createdAt
+                    images {
+                      id
+                      originalSrc
+                      localFile {
+                        childImageSharp {
+                          fluid(maxWidth: 910) {
+                            ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                          }
                         }
                       }
                     }
+                    variants {
+                      price
+                    }
+                    availableForSale
                   }
-                  variants {
-                    price
-                  }
-                  availableForSale
                 }
               }
             }
@@ -61,55 +64,79 @@ const Shop = () => {
         currency: checkout.currencyCode ? checkout.currencyCode : 'USD',
         minimumFractionDigits: 0,
         style: 'currency',
-      }).format(parseFloat(price ? price : 0))
+      }).format(parseFloat(price ? price : 0));
 
-    const shopifyProductList =
-      allShopifyProduct.edges ? (
-        allShopifyProduct.edges.map(
-          ({
-            node: {
+    const shopifyProductList = (products) =>
+      products && products.length > 0 ? (
+        products
+          .sort((a,b) => b.availableForSale - a.availableForSale)
+          .map(
+            ({
               id,
               handle,
               title,
               images: [firstImage],
               variants: [firstVariant],
               availableForSale
-            },
-          }) => (
-            <ProductDiv key={id}>
-              {!availableForSale &&
-                <ProductBanner>
-                  Sold out
-                </ProductBanner>
-              }
-              <Link to={`/product/${handle}/`}>
-                {firstImage && firstImage.localFile && (
-                  <Img
-                    fluid={firstImage.localFile.childImageSharp.fluid}
-                    alt={handle}
-                  />
-                )}
-              </Link>
-              <ProductInformation>
-                <ProductTitle>
-                  <Link style={{boxShadow: 'none'}} to={`/product/${handle}/`}>
-                    {title}
-                  </Link>
-                </ProductTitle>
+              ,
+            }) => (
+              <ProductDiv key={id}>
                 {!availableForSale &&
-                  <strike>
+                  <ProductBanner>
+                    Sold out
+                  </ProductBanner>
+                }
+                <Link to={`/product/${handle}/`}>
+                  {firstImage && firstImage.localFile && (
+                    <Img
+                      fluid={firstImage.localFile.childImageSharp.fluid}
+                      alt={handle}
+                    />
+                  )}
+                </Link>
+                <ProductInformation>
+                  <ProductTitle>
+                    <Link style={{boxShadow: 'none'}} to={`/product/${handle}/`}>
+                      {title}
+                    </Link>
+                  </ProductTitle>
+                  {!availableForSale &&
+                    <strike>
+                      <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
+                    </strike>
+                  }
+                  {availableForSale &&
                     <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
-                  </strike>
-                }
-                {availableForSale &&
-                  <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
-                }
-              </ProductInformation>
-            </ProductDiv>
+                  }
+                </ProductInformation>
+              </ProductDiv>
+            )
           )
-        )
       ) : (
         <p>No Products found!</p>
+      );
+
+    const shopifyCollections = allShopifyCollection.edges ?
+      allShopifyCollection.edges.map(
+        ({
+          node: {
+            title,
+            products
+          }
+        }) => (
+          <>
+            {products && products.length > 0 &&
+              <CollectionDiv>
+                <CollectionTitle>{title}</CollectionTitle>
+                <ProductList>
+                  {shopifyProductList(products)}
+                </ProductList>
+              </CollectionDiv>
+            }
+          </>
+        )
+      ) : (
+        <p>No products found!</p>
       );
 
     const siteTitle = get(this, 'props.data.site.siteMetadata.title');
@@ -131,10 +158,7 @@ const Shop = () => {
             <meta name="description" content={siteDescription}/>
           </Helmet>
           <ShopPage>
-            <h1>shop</h1>
-            <ProductList>
-              {shopifyProductList}
-            </ProductList>
+            {shopifyCollections}
           </ShopPage>
         </Layout>
       </>
@@ -149,7 +173,7 @@ const ShopPage = styled.div`
   padding: 2.5vh 0 2.5vh 5vh;
 
   @media (max-width: 700px) {
-    padding: 2.5vh 5vh;
+    padding: 2.5vh 3vh;
   }
 `;
 
@@ -167,8 +191,20 @@ const ProductList = styled.div`
   }
 `;
 
+const CollectionDiv = styled.div`
+  margin: 50px 0 0 0;
+
+  @media (max-width: 550px) {
+    margin: 0 0 20px 0;
+  }
+`;
+
+const CollectionTitle = styled.h1`
+  color: #CD7F5D;
+`;
+
 const ProductDiv = styled.div`
-  padding: 30px 0 0 50px;
+  padding: 5px 0 0 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -245,6 +281,6 @@ const Img = styled(Image)`
   width: 250px;
 
   @media(max-width: 700px) {
-    width: 35vw;
+    width: 40vw;
   }
 `;
