@@ -1,77 +1,153 @@
-import React, {Component} from 'react';
-import VariantSelector from './VariantSelector';
+// @flow
+import React, {useState} from 'react';
+import Image from 'gatsby-image';
+import styled from 'styled-components';
+import ProductForm from './ProductForm';
 
-class Product extends Component {
-  constructor(props) {
-    super(props);
+const Product = React.memo(({product, soldOut}) => {
 
-    let defaultOptionValues = {};
-    this.props.product.options.forEach((selector) => {
-      defaultOptionValues[selector.name] = selector.values[0].value;
-    });
-    this.state = { selectedOptions: defaultOptionValues };
+  return (
+    <ProductOverview>
+      <DisplayBlock>
+        {soldOut &&
+          <ProductBanner>
+              Sold out
+          </ProductBanner>
+        }
+        {product.images.map(image => (
+          <Img
+            fluid={image.localFile.childImageSharp.fluid}
+            key={image.id}
+            alt={product.title}
+          />
+        ))}
+      </DisplayBlock>
 
-    this.handleOptionChange = this.handleOptionChange.bind(this);
-    this.handleQuantityChange = this.handleQuantityChange.bind(this);
-    this.findImage = this.findImage.bind(this);
-  }
+      <ProductDetails>
+        <h1>{product.title}</h1>
+        {soldOut &&
+          <div
+            dangerouslySetInnerHTML={{
+              __html: product.descriptionHtml,
+            }} />
+        }
+        {!soldOut &&
+          <ProductForm product={product} />
+        }
+      </ProductDetails>
+    </ProductOverview>
+  );
+});
 
-  findImage(images, variantId) {
-    const primary = images[0];
-
-    const image = images.filter(function (image) {
-      return image.variant_ids.includes(variantId);
-    })[0];
-
-    return (image || primary).src;
-  }
-
-  handleOptionChange(event) {
-    const target = event.target
-    let selectedOptions = this.state.selectedOptions;
-    selectedOptions[target.name] = target.value;
-
-    const selectedVariant = this.props.client.product.helpers.variantForOptions(this.props.product, selectedOptions)
-
-    this.setState({
-      selectedVariant: selectedVariant,
-      selectedVariantImage: selectedVariant.attrs.image
-    });
-  }
-
-  handleQuantityChange(event) {
-    this.setState({
-      selectedVariantQuantity: event.target.value
-    });
-  }
-
-  render() {
-    let variantImage = this.state.selectedVariantImage || this.props.product.images[0]
-    let variant = this.state.selectedVariant || this.props.product.variants[0]
-    let variantQuantity = this.state.selectedVariantQuantity || 1
-    let variantSelectors = this.props.product.options.map((option) => {
-      return (
-        <VariantSelector
-          handleOptionChange={this.handleOptionChange}
-          key={option.id.toString()}
-          option={option}
-        />
-      );
-    });
-    return (
-      <div className="Product">
-        {this.props.product.images.length ? <img src={variantImage.src} alt={`${this.props.product.title} product shot`}/> : null}
-        <h5 className="Product__title">{this.props.product.title}</h5>
-        <span className="Product__price">${variant.price}</span>
-        {variantSelectors}
-        <label className="Product__option">
-          Quantity
-          <input min="1" type="number" defaultValue={variantQuantity} onChange={this.handleQuantityChange}></input>
-        </label>
-        <button className="Product__buy button" onClick={() => this.props.addVariantToCart(variant.id, variantQuantity)}>Add to Cart</button>
-      </div>
-    );
-  }
-}
-
+Product.displayName = 'Product';
 export default Product;
+
+const ProductOverview = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+`;
+
+const ProductDetails = styled.div`
+  margin-left: 2.5vh;
+  text-align: left;
+  text-transform: lowercase;
+
+  @media (max-width: 700px) {
+    margin: 20px 0;
+  }
+`;
+
+const BuyButton = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
+
+const CustomField = styled.div`
+  display: flex;
+`;
+
+const SelectWrapper = styled.div`
+  overflow: hidden;
+  position: relative;
+
+  :after {
+    content: "▾";
+    padding: 12px 8px;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    z-index: 1;
+    text-align: center;
+    width: 10%;
+    pointer-events: none;
+  }
+`;
+
+const Select = styled.select`
+  border-radius: 0;
+  border-color: #e0dcd1;
+  padding: 15px;
+  padding-right: 30px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  -webkit-appearance: none;
+  background-color: #FAF6EB;
+  color: #52504B;
+  font-size: 15px;
+  font-family: 'Jost', sans-serif;
+  text-transform: lowercase;
+`;
+
+const Dimensions = styled.div`
+  margin-top: 20px;
+  text-align: left;
+  font-size: 14px;
+`;
+
+const DimensionsHeader = styled.h4`
+  margin: 7px 0;
+  font-weight: 500;
+`;
+
+const ProductDescription = styled.div`
+  text-transform: lowercase;
+  text-align: left;
+
+  @media (max-width: 700px) {
+    margin: 20px 0;
+  }
+`;
+
+const Img = styled(Image)`
+  position: relative;
+  width: 400px;
+  min-width: 400px;
+
+  @media (max-width: 700px) {
+    width: 80vw;
+    min-width: 80vw;
+  }
+`;
+
+const DisplayBlock = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+const ProductBanner = styled.div`
+  text-transform: lowercase;
+  position: absolute;
+  top: 40px;
+  right: -7px;
+  background-color: #CD7F5D;
+  color: white;
+  padding: 3px 7px;
+  z-index: 1;
+`;

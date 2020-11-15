@@ -7,12 +7,10 @@ import get from 'lodash/get';
 import PropTypes from 'prop-types';
 import loadable from '@loadable/component';
 
-import Product from '../components/shopify/Product';
 import SEO from '../components/seo';
 
 const Layout = loadable(() => import('../components/layout'));
-const BuyProduct = loadable(() => import('../components/BuyProduct'));
-const SoldOutProduct = loadable(() => import('../components/SoldOutProduct'));
+const Product = loadable(() => import('../components/shopify/Product'));
 
 /**
  * Product template class.
@@ -58,13 +56,7 @@ class ProductPage extends React.Component {
             </p>
 
             <ProductInformation>
-              {shopifyProduct.availableForSale &&
-                <BuyProduct product={shopifyProduct} />
-              }
-
-              {!shopifyProduct.availableForSale &&
-                <SoldOutProduct product={shopifyProduct}/>
-              }
+              <Product product={shopifyProduct} soldOut={!shopifyProduct.availableForSale}/>
             </ProductInformation>
 
             <ul
