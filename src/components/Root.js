@@ -5,7 +5,7 @@
  *
  * This contains the Shopify client logic.
  */
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import loadable from '@loadable/component';
 
@@ -26,7 +26,7 @@ const Root = (props) => {
       </RootDiv>
     </ContextProvider>
   );
-}
+};
 
 export default Root;
 

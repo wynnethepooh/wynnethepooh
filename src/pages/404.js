@@ -16,7 +16,6 @@ class NotFoundPage extends React.Component<Props> {
    * @return {object} 404 page
    */
   render() {
-
     return (
       <>
         <SEO title="404" />

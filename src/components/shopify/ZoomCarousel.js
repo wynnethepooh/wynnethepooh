@@ -1,36 +1,36 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components';
 import ReactImageMagnify from '@milosmladenovicwork/react-image-magnify';
 import ReactSlick from 'react-slick';
 
 import './react-slick.css';
 
-const ZoomCarousel = props => {
+const ZoomCarousel = (props) => {
   const {
-      rimProps,
-      rsProps
+    rimProps,
+    rsProps,
   } = props;
 
   const dataSource = [];
 
-  props.images.map(image => (
+  props.images.map((image) => (
     dataSource.push({
       imgSrc: image.originalSrc,
-      alt: props.alt || ''
+      alt: props.alt || '',
     })
   ));
 
   return (
     <CarouselContainer>
       <ReactSlick
-          {...{
-              dots: true,
-              infinite: true,
-              speed: 500,
-              slidesToShow: 1,
-              slidesToScroll: 1
-          }}
-          {...rsProps}
+        {...{
+          dots: true,
+          infinite: true,
+          speed: 500,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }}
+        {...rsProps}
       >
         {dataSource.map((src, index) => (
           <div key={index}>
@@ -40,14 +40,14 @@ const ZoomCarousel = props => {
                   alt: src.alt,
                   isFluidWidth: true,
                   src: src.imgSrc,
-                  sizes: '(max-width: 400px) 400px'
+                  sizes: '(max-width: 400px) 400px',
                 },
                 largeImage: {
                   src: src.imgSrc,
                   width: 1426,
-                  height: 2000
+                  height: 2000,
                 },
-                lensStyle: { backgroundColor: 'rgba(0,0,0,.6)' }
+                lensStyle: {backgroundColor: 'rgba(0,0,0,.6)'},
               }}
               {...rimProps}
             />
@@ -56,7 +56,7 @@ const ZoomCarousel = props => {
       </ReactSlick>
     </CarouselContainer>
   );
-}
+};
 
 export default ZoomCarousel;
 

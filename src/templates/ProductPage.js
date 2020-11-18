@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link, graphql } from 'gatsby'
+import React from 'react';
+import {Link, graphql} from 'gatsby';
 import Image from 'gatsby-image';
 import styled from 'styled-components';
 import {Helmet} from 'react-helmet';
@@ -21,7 +21,6 @@ class ProductPage extends React.Component {
    * @return {object} product template object
    */
   render() {
-
     const shopifyProduct = get(this, 'props.data.shopifyProduct');
     const siteTitle = get(this, 'props.data.site.siteMetadata.title');
     const siteDescription = shopifyProduct.excerpt;
@@ -89,7 +88,7 @@ class ProductPage extends React.Component {
   }
 }
 
-export default ProductPage
+export default ProductPage;
 
 export const query = graphql`
   query($handle: String!) {
@@ -147,7 +146,7 @@ export const query = graphql`
       availableForSale
     }
   }
-`
+`;
 
 const ProductContainer = styled.div`
   padding: 45px 5vh

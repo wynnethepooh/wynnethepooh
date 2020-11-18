@@ -11,13 +11,11 @@ const Layout = loadable(() => import('../components/layout'));
  * About class.
  */
 class About extends React.Component<Props> {
-
   /**
    * Renders about object.
    * @return {object} about object
    */
   render() {
-
     return (
       <>
         <SEO title="about" />

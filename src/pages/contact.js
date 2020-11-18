@@ -16,7 +16,6 @@ class Contact extends React.Component<Props> {
    * @return {object} contact object
    */
   render() {
-
     return (
       <>
         <SEO title="contact" />

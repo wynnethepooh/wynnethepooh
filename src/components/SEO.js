@@ -5,13 +5,13 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import { Helmet } from "react-helmet"
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Helmet} from 'react-helmet';
 
-const SEO = ({ description, lang, meta, title, image, keywords }) => {
-  const metaDescription = 'handmade ceramics by wynne tran'
-  const defaultTitle = 'wynne the pooh'
+const SEO = ({description, lang, meta, title, image, keywords}) => {
+  const metaDescription = 'handmade ceramics by wynne tran';
+  const defaultTitle = 'wynne the pooh';
   const ogImg = require('../images/home-background.jpeg');
 
   return (
@@ -59,28 +59,28 @@ const SEO = ({ description, lang, meta, title, image, keywords }) => {
           content: description || metaDescription,
         },
       ].concat(
-         keywords?.length > 0
-           ? {
-               name: `keywords`,
-               content: keywords.join(`, `),
-             }
-           : []
-       ).concat(meta)}
+         keywords?.length > 0 ?
+           {
+             name: `keywords`,
+             content: keywords.join(`, `),
+           } :
+           [],
+      ).concat(meta)}
     />
-  )
-}
+  );
+};
 
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
-}
+};
 
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
-}
+};
 
-export default SEO
+export default SEO;

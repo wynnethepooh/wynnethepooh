@@ -28,7 +28,7 @@ class Layout extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      navbarOpen: false
+      navbarOpen: false,
     };
   }
 

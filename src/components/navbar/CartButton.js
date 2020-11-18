@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import reduce from 'lodash/reduce';
 import styled from 'styled-components';
 import StoreContext from '../../context/StoreContext';
@@ -7,16 +7,16 @@ import ShoppingBag from '../../images/shopping-bag.png';
 
 const useQuantity = () => {
   const {
-    store: { checkout },
-  } = useContext(StoreContext)
-  const items = checkout ? checkout.lineItems : []
-  const total = reduce(items, (acc, item) => acc + item.quantity, 0)
-  return [total !== 0, total]
-}
+    store: {checkout},
+  } = useContext(StoreContext);
+  const items = checkout ? checkout.lineItems : [];
+  const total = reduce(items, (acc, item) => acc + item.quantity, 0);
+  return [total !== 0, total];
+};
 
 const CartButton = (props: Props) => {
   const storeContext = useContext(StoreContext);
-  const [hasItems, quantity] = useQuantity()
+  const [hasItems, quantity] = useQuantity();
 
   return (
     <CartWrapper className="App__view-cart-wrapper">
@@ -33,8 +33,8 @@ const CartButton = (props: Props) => {
         </ShoppingCartWrapper>
       </ViewCartButton>
     </CartWrapper>
-  )
-}
+  );
+};
 
 export default CartButton;
 

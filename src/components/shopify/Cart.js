@@ -5,25 +5,25 @@ import LineItem from './LineItem';
 
 const Cart = () => {
   const {
-    store: { checkout },
+    store: {checkout},
     isCartOpen,
-    toggleCart
-  } = useContext(StoreContext)
+    toggleCart,
+  } = useContext(StoreContext);
 
   const handleCheckout = () => {
-    window.open(checkout.webUrl)
-  }
+    window.open(checkout.webUrl);
+  };
 
-  const lineItems = checkout.lineItems.map(item => (
+  const lineItems = checkout.lineItems.map((item) => (
     <LineItem key={item.id.toString()} item={item} />
-  ))
+  ));
 
   const hasItems = lineItems?.length > 0;
 
   return (
     <CartWrapper
-        className={`Cart ${isCartOpen ? 'Cart--open' : ''}`}
-        isCartOpen={isCartOpen}>
+      className={`Cart ${isCartOpen ? 'Cart--open' : ''}`}
+      isCartOpen={isCartOpen}>
       <CartHeader className="Cart__header">
         <Header>Your cart</Header>
         <CloseButton
@@ -65,14 +65,14 @@ const Cart = () => {
           </div>
         </FooterLine>
         <CheckoutButton
-            className="Cart__checkout button"
-            onClick={handleCheckout}>
+          className="Cart__checkout button"
+          onClick={handleCheckout}>
           Checkout
         </CheckoutButton>
       </Footer>
     </CartWrapper>
-  )
-}
+  );
+};
 
 export default Cart;
 

@@ -1,73 +1,34 @@
-// @flow
-
-import React, {useContext} from 'react';
-import {Link, graphql, useStaticQuery} from 'gatsby';
+import React from 'react';
+import {Link, graphql} from 'gatsby';
 import Image from 'gatsby-image';
-import get from 'lodash/get';
-import {Helmet} from 'react-helmet';
-import loadable from '@loadable/component';
 import styled from 'styled-components';
+import get from 'lodash/get';
+import loadable from '@loadable/component';
 
-import StoreContext from '../context/StoreContext';
 import SEO from '../components/seo';
 
 const Layout = loadable(() => import('../components/layout'));
 
-const Shop = () => {
-  const {
-    store: {checkout},
-  } = useContext(StoreContext);
+/**
+ * Product template class.
+ */
+class CollectionPage extends React.Component {
+  /**
+   * Renders product template object.
+   * @return {object} product template object
+   */
+  render() {
+    const shopifyCollection = get(this, 'props.data.shopifyCollection');
+    const siteTitle = get(this, 'props.data.site.siteMetadata.title');
 
-  const {allShopifyCollection} = useStaticQuery(
-      graphql`
-          query {
-            site {
-              siteMetadata {
-                title
-                author
-              }
-            }
-            allShopifyCollection(sort: { fields: [products___availableForSale], order: DESC }) {
-              edges {
-                node {
-                  title
-                  description
-                  products {
-                    id
-                    title
-                    handle
-                    createdAt
-                    images {
-                      id
-                      originalSrc
-                      localFile {
-                        childImageSharp {
-                          fluid(maxWidth: 910) {
-                            ...GatsbyImageSharpFluid_withWebp_tracedSVG
-                          }
-                        }
-                      }
-                    }
-                    variants {
-                      price
-                    }
-                    availableForSale
-                  }
-                }
-              }
-            }
-          }
-        `,
-  );
+    const getPrice = (price) =>
+      Intl.NumberFormat(undefined, {
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        style: 'currency',
+      }).format(parseFloat(price ? price : 0));
 
-  const getPrice = (price) =>
-    Intl.NumberFormat(undefined, {
-      currency: checkout.currencyCode ? checkout.currencyCode : 'USD',
-      minimumFractionDigits: 0,
-      style: 'currency',
-    }).format(parseFloat(price ? price : 0));
-
-  const shopifyProductList = (products) =>
+    const shopifyProductList = (products) =>
       products && products.length > 0 ? (
         products
             .sort((a, b) => b.availableForSale - a.availableForSale)
@@ -117,58 +78,87 @@ const Shop = () => {
         <p>No Products found!</p>
       );
 
-  const shopifyCollections = allShopifyCollection.edges ?
-      allShopifyCollection.edges.map(
-          ({
-            node: {
-              title,
-              description,
-              products,
-            },
-          }) => (
-            <>
-              {products && products.length > 0 &&
-              <CollectionDiv>
-                <CollectionTitle>{title}</CollectionTitle>
-                <CollectionDescription>{description}</CollectionDescription>
-                <ProductList>
-                  {shopifyProductList(products)}
-                </ProductList>
-              </CollectionDiv>
+    return (
+      <>
+        <SEO
+          title={`${shopifyCollection.title}`}
+          description={shopifyCollection.description}
+          image={shopifyCollection.images ? shopifyCollection.images[0].originalSrc : ''} />
+
+        <Layout location={this.props.location} >
+          <PageContainer>
+            <Link
+              to="/shop"
+              style={{
+                display: 'flex',
+                marginBottom: '20px',
+                textTransform: 'lowercase',
+                zIndex: '12',
+                width: 'fit-content',
+              }}>
+              ← shop all
+            </Link>
+            <p>
+            </p>
+
+            <CollectionDiv>
+              <CollectionTitle>{shopifyCollection.title}</CollectionTitle>
+              <CollectionDescription>{shopifyCollection.description}</CollectionDescription>
+              <ProductList>
+                {shopifyProductList(shopifyCollection.products)}
+              </ProductList>
+            </CollectionDiv>
+          </PageContainer>
+        </Layout>
+      </>
+    );
+  }
+}
+
+export default CollectionPage;
+
+export const query = graphql`
+  query($handle: String!) {
+    site {
+      siteMetadata {
+        title
+        author
+      }
+    }
+    shopifyCollection(handle: { eq: $handle }) {
+      title
+      description
+      products {
+        id
+        title
+        handle
+        createdAt
+        images {
+          id
+          originalSrc
+          localFile {
+            childImageSharp {
+              fluid(maxWidth: 910) {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
               }
-            </>
-          ),
-      ) : (
-        <p>No products found!</p>
-      );
+            }
+          }
+        }
+        variants {
+          price
+        }
+        availableForSale
+      }
+    }
+  }
+`;
 
-  const siteTitle = get(this, 'props.data.site.siteMetadata.title');
-  const siteDescription = get(
-      this,
-      'props.data.site.siteMetadata.description',
-  );
-
-
-  return (
-    <>
-      <SEO title="shop"/>
-      <Layout>
-        <ShopPage>
-          {shopifyCollections}
-        </ShopPage>
-      </Layout>
-    </>
-  );
-};
-
-type Props = {};
-
-export default Shop;
-
-const ShopPage = styled.div`
+const PageContainer = styled.div`
+  margin-top: 150px;
   padding: 2.5vh 0 2.5vh 5vh;
 
   @media (max-width: 700px) {
+    margin-top: 100px;
     padding: 2.5vh 3vh;
   }
 `;
@@ -188,7 +178,7 @@ const ProductList = styled.div`
 `;
 
 const CollectionDiv = styled.div`
-  margin: 50px 0 0 0;
+  margin: 30px 0 0 0;
 
   @media (max-width: 550px) {
     margin: 0 0 20px 0;

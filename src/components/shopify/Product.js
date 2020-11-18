@@ -8,7 +8,6 @@ import ProductForm from './ProductForm';
 const ZoomCarousel = loadable(() => import('./ZoomCarousel'));
 
 const Product = React.memo(({product, soldOut}) => {
-
   return (
     <ProductOverview>
       <DisplayBlock>
@@ -24,8 +23,8 @@ const Product = React.memo(({product, soldOut}) => {
             rimProps: {
               isHintEnabled: true,
               shouldHideHintAfterFirstActivation: true,
-              enlargedImagePosition: 'over'
-            }
+              enlargedImagePosition: 'over',
+            },
           }}/>
       </DisplayBlock>
 

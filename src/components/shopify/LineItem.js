@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
-import { Link } from 'gatsby';
+import React, {useContext} from 'react';
+import {Link} from 'gatsby';
 import styled from 'styled-components';
 
-import StoreContext from '../../context/StoreContext'
+import StoreContext from '../../context/StoreContext';
 
-const LineItem = props => {
-  const { item } = props
+const LineItem = (props) => {
+  const {item} = props;
   const {
     removeLineItem,
-    store: { client, checkout },
+    store: {client, checkout},
     closeCart,
-  } = useContext(StoreContext)
+  } = useContext(StoreContext);
 
   const variantImage = item.variant.image ? (
     <ProductImage
@@ -18,17 +18,17 @@ const LineItem = props => {
       alt={`${item.title} product shot`}
       onClick={closeCart}
     />
-  ) : null
+  ) : null;
 
-  const selectedOptions = item.variant.selectedOptions
-    ? item.variant.selectedOptions.map(
-        option => (option.name === 'Title' && option.value === 'Default Title') ? '' : `${option.name}: ${option.value} `
-      )
-    : null
+  const selectedOptions = item.variant.selectedOptions ?
+    item.variant.selectedOptions.map(
+        (option) => (option.name === 'Title' && option.value === 'Default Title') ? '' : `${option.name}: ${option.value} `,
+    ) :
+    null;
 
   const handleRemove = () => {
-    removeLineItem(client, checkout.id, item.id)
-  }
+    removeLineItem(client, checkout.id, item.id);
+  };
 
   return (
     <ListItem>
@@ -55,10 +55,10 @@ const LineItem = props => {
         remove x
       </RemoveButton>
     </ListItem>
-  )
-}
+  );
+};
 
-export default LineItem
+export default LineItem;
 
 const ListItem = styled.li`
   display: flex;

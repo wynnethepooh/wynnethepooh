@@ -24,7 +24,7 @@ const Navbar = (props: Props) => {
     config: config.wobbly,
   });
 
-  const ishomepage = props.isHomePage ? "true" : "";
+  const ishomepage = props.isHomePage ? 'true' : '';
 
   return (
     <>
@@ -86,7 +86,7 @@ const NavBarAnimatedDiv = styled(animated.nav)`
   transition:.3s;
 
   &:hover {
-    background: ${(props) => (props.ishomepage == "true" ? '#FAF6EB' : 'none')};
+    background: ${(props) => (props.ishomepage == 'true' ? '#FAF6EB' : 'none')};
     color: #CC8E20;
 
     @media (max-width: 1020px) {
@@ -99,7 +99,7 @@ const NavBarAnimatedDiv = styled(animated.nav)`
   }
 
   img {
-    filter: ${(props) => (props.ishomepage == "true" ? 'brightness(0) invert(1)' : '')};
+    filter: ${(props) => (props.ishomepage == 'true' ? 'brightness(0) invert(1)' : '')};
   }
 
   &:hover img {
@@ -109,9 +109,9 @@ const NavBarAnimatedDiv = styled(animated.nav)`
   }
 
   @media (max-width: 1020px) {
-    width: ${(props) => (props.ishomepage == "true" ? '65px' : '')};
-    right: ${(props) => (props.ishomepage == "true" ? '0' : '')};
-    left: ${(props) => (props.ishomepage == "true" ? 'auto' : '0')};
+    width: ${(props) => (props.ishomepage == 'true' ? '65px' : '')};
+    right: ${(props) => (props.ishomepage == 'true' ? '0' : '')};
+    left: ${(props) => (props.ishomepage == 'true' ? 'auto' : '0')};
   }
 `;
 
@@ -133,7 +133,7 @@ const NavLinks = styled(animated.ul)`
   top: 30px;
 
   & a {
-    color: ${(props) => (props.ishomepage == "true" ? 'white' : '#CC8E20')};
+    color: ${(props) => (props.ishomepage == 'true' ? 'white' : '#CC8E20')};
     text-transform: lowercase;
     font-family: 'Jost', 'Oswald', sans-serif;
     font-weight: 400;

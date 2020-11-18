@@ -7,7 +7,7 @@ import {useSpring, animated} from 'react-spring';
 
 const CollapseMenu = (props: Props) => {
   const {open} = useSpring({open: props.navbarState ? 0 : 1});
-  const ishomepage = props.isHomePage ? "true" : "";
+  const ishomepage = props.isHomePage ? 'true' : '';
 
   if (props.navbarState === true) {
     return (

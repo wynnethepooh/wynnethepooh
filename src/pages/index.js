@@ -13,13 +13,11 @@ const Brand = loadable(() => import('../components/navbar/Brand'));
  * Home class.
  */
 class Home extends React.Component<Props> {
-
   /**
    * Renders home object.
    * @return {object} home object
    */
   render() {
-
     return (
       <>
         <SEO
@@ -28,7 +26,6 @@ class Home extends React.Component<Props> {
         <Layout isHomePage>
           <main className="home">
             <Helmet htmlAttributes={{lang: 'en'}}>
-              <title>wynne the pooh</title>
               <meta charSet="utf-8" />
             </Helmet>
             <Brand isHomePage/>
