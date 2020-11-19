@@ -182,13 +182,20 @@ const Shop = (props) => {
       <SEO title="shop"/>
       <Layout shopifyCollections={props.shopifyCollections}>
         <ShopPage>
-          <ShopTitle>
-            shop
-          </ShopTitle>
-          <CollectionLinks>
-            {shopifyCollectionLinks}
-          </CollectionLinks>
-          {shopifyCollections}
+          {process.env.GATSBY_COMING_SOON &&
+            <h1>COMING SOON</h1>
+          }
+          {!process.env.GATSBY_COMING_SOON &&
+            <>
+              <ShopTitle>
+                shop
+              </ShopTitle>
+              <CollectionLinks>
+                {shopifyCollectionLinks}
+              </CollectionLinks>
+              {shopifyCollections}
+            </>
+          }
         </ShopPage>
       </Layout>
     </>
