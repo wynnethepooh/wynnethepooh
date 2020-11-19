@@ -10,6 +10,7 @@ import styled from 'styled-components';
 
 import StoreContext from '../context/StoreContext';
 import SEO from '../components/seo';
+import ComingSoonBackground from '../components/ComingSoonBackground';
 
 const Layout = loadable(() => import('../components/layout'));
 
@@ -181,22 +182,20 @@ const Shop = (props) => {
     <>
       <SEO title="shop"/>
       <Layout shopifyCollections={props.shopifyCollections}>
-        <ShopPage>
-          {process.env.GATSBY_COMING_SOON &&
-            <h1>COMING SOON</h1>
-          }
-          {!process.env.GATSBY_COMING_SOON &&
-            <>
-              <ShopTitle>
-                shop
-              </ShopTitle>
-              <CollectionLinks>
-                {shopifyCollectionLinks}
-              </CollectionLinks>
-              {shopifyCollections}
-            </>
-          }
-        </ShopPage>
+        {process.env.GATSBY_COMING_SOON &&
+          <ComingSoonBackground />
+        }
+        {!process.env.GATSBY_COMING_SOON &&
+          <ShopPage>
+            <ShopTitle>
+              shop
+            </ShopTitle>
+            <CollectionLinks>
+              {shopifyCollectionLinks}
+            </CollectionLinks>
+            {shopifyCollections}
+          </ShopPage>
+        }
       </Layout>
     </>
   );
@@ -368,6 +367,6 @@ const Img = styled(Image)`
   }
 
   @media(max-width: 550px) {
-      width: 41vw;
-    }
+    width: 41vw;
+  }
 `;
