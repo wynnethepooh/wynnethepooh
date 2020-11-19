@@ -31,8 +31,9 @@ type Props = {
 export default Brand;
 
 const Svg = styled.svg`
-  width: ${(props) => (props.isHomePage ? '90vw' : '')};
+  width: ${(props) => (props.isHomePage ? '100vw' : '')};
   height: ${(props) => (props.isHomePage ? '700px' : '')};
+  z-index: 2;
 
   @media (max-width: 550px) {
     width: 100%;
@@ -66,7 +67,7 @@ const TitleHeader = styled.div`
   cursor: ${(props) => (props.isHomePage ? 'default' : 'pointer')};;
 
   @media (max-width: 550px) {
-    width: ${(props) => (props.isHomePage ? '100%' : '43vw')};
-    margin: ${(props) => (props.isHomePage ? '0px 0 0 -20px' : '-15px 0 0 -10px')};
+    width: ${(props) => (props.isHomePage ? '' : '43vw')};
+    margin: ${(props) => (props.isHomePage ? '' : '-15px 0 0 -10px')};
   }
 `;

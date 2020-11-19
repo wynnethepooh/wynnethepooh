@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 import StoreContext from '../context/StoreContext';
 import SEO from '../components/seo';
-import ComingSoonBackground from '../components/ComingSoonBackground';
+import BackgroundTheme from '../components/BackgroundTheme';
 
 const Layout = loadable(() => import('../components/layout'));
 
@@ -183,7 +183,10 @@ const Shop = (props) => {
       <SEO title="shop"/>
       <Layout shopifyCollections={props.shopifyCollections}>
         {process.env.GATSBY_COMING_SOON &&
-          <ComingSoonBackground />
+          <ComingSoonContainer>
+            <BackgroundTheme />
+            <ComingSoonText>first collection drops<br /> 11.21.20 at 10am PST</ComingSoonText>
+          </ComingSoonContainer>
         }
         {!process.env.GATSBY_COMING_SOON &&
           <ShopPage>
@@ -368,5 +371,42 @@ const Img = styled(Image)`
 
   @media(max-width: 550px) {
     width: 41vw;
+  }
+`;
+
+const ComingSoonContainer = styled.div`
+  height: 70vh;
+  position: relative;
+
+  @media(min-width: 550px) {
+    padding-top: 20vh;
+  }
+`;
+
+const ComingSoonText = styled.div`
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+  letter-spacing: 1px;
+  color: #CC8E20;
+  z-index: 3;
+
+  position: fixed;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  left: 0;
+  top: 40%;
+  height: 70vh;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+
+  @media (max-width: 700px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 1.2rem;
   }
 `;
