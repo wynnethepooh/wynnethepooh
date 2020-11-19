@@ -85,7 +85,7 @@ class CollectionPage extends React.Component {
           description={shopifyCollection.description}
           image={shopifyCollection.images ? shopifyCollection.images[0].originalSrc : ''} />
 
-        <Layout location={this.props.location} >
+        <Layout location={this.props.location} shopifyCollections={this.props.shopifyCollections}>
           <PageContainer>
             <Link
               to="/shop"
@@ -188,11 +188,13 @@ const CollectionDiv = styled.div`
 const CollectionTitle = styled.h1`
   color: #CC8E20;
   padding-bottom: 5px;
+  text-align: center;
 `;
 
 const CollectionDescription = styled.p`
   margin: 0 0 30px;
   color: #CC8E20;
+  text-align: center;
 `;
 
 const ProductDiv = styled.div`

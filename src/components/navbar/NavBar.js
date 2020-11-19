@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'gatsby';
 import styled from 'styled-components';
 import {useSpring, animated, config} from 'react-spring';
@@ -26,6 +26,24 @@ const Navbar = (props: Props) => {
 
   const ishomepage = props.isHomePage ? 'true' : '';
 
+  const [hoverOnSublinks, setHoverOnSublinks] = useState(false);
+  const [areSublinksOpen, setSublinksOpen] = useState(false);
+  const {open} = useSpring({open: hoverOnSublinks ? 0 : 1});
+
+  const shopifyCollectionLinks =
+    props.shopifyCollections.map((shopifyCollection) => (
+      <>
+        {shopifyCollection.products && shopifyCollection.products.length > 0 &&
+          <Link
+              to={`/collection/${shopifyCollection.handle}`}
+              key={shopifyCollection.handle}>
+            {shopifyCollection.title}
+          </Link>
+        }
+      </>
+    ),
+  );
+
   return (
     <>
       <NavBarAnimatedDiv ishomepage={ishomepage} style={barAnimation}>
@@ -37,7 +55,37 @@ const Navbar = (props: Props) => {
           }
           <NavLinks ishomepage={ishomepage} style={linkAnimation}>
             <Link to="/">Home</Link>
-            <Link to="/shop">Shop</Link>
+            <Link
+                to="/shop"
+                onMouseEnter={() => setHoverOnSublinks(true)}
+                onMouseLeave={() => {
+                  // Set a timeout so that the menu doesn't close before the user has time to
+                  // move their mouse over it
+                  setTimeout(() => {
+                    setHoverOnSublinks(false)
+                  }, 500)
+                }}>
+              Shop
+            </Link>
+            <CollectionLinks
+                hoverOnSublinks={hoverOnSublinks}
+                areSublinksOpen={areSublinksOpen}
+                onMouseEnter={() => setSublinksOpen(true)}
+                onMouseLeave={() => {
+                  // Set a timeout so that the menu doesn't close before the user has time to
+                  // move their mouse over it
+                  setTimeout(() => {
+                    setSublinksOpen(false)
+                  }, 200)
+                }}
+                style={{
+                  transform: open.interpolate({
+                    range: [0, 0.2, 0.3, 1],
+                    output: [0, -20, 0, -200],
+                  }).interpolate((openValue) => `translate3d(0, ${openValue}px, 0`),
+                }}>
+              {shopifyCollectionLinks}
+            </CollectionLinks>
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
             <CartButton
@@ -57,6 +105,7 @@ const Navbar = (props: Props) => {
         navbarState={props.navbarState}
         handleNavbar={props.handleNavbar}
         isHomePage={props.isHomePage}
+        shopifyCollections={props.shopifyCollections}
       />
     </>
   );
@@ -183,5 +232,22 @@ const ShoppingIcon = styled.img`
 
   @media (min-width: 1020px) {
     margin: auto auto -3px auto;
+  }
+`;
+
+const CollectionLinks = styled.div`
+  display: ${(props) => (props.hoverOnSublinks == true || props.areSublinksOpen == true ? 'flex' : 'none')};
+  flex-direction: column;
+  position: absolute;
+  left: 153px;
+  top: 30px;
+  background: rgb(250, 246, 235, 0.93);
+  font-size: smaller;
+  padding: 10px 0;
+  z-index: 0;
+
+  a {
+    padding: 3px 0;
+    letter-spacing: 1px;
   }
 `;

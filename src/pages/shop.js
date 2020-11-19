@@ -13,7 +13,7 @@ import SEO from '../components/seo';
 
 const Layout = loadable(() => import('../components/layout'));
 
-const Shop = () => {
+const Shop = (props) => {
   const {
     store: {checkout},
   } = useContext(StoreContext);
@@ -32,6 +32,7 @@ const Shop = () => {
                 node {
                   title
                   description
+                  handle
                   products {
                     id
                     title
@@ -83,9 +84,9 @@ const Shop = () => {
                 }) => (
                   <ProductDiv key={id}>
                     {!availableForSale &&
-                  <ProductBanner>
-                    Sold out
-                  </ProductBanner>
+                      <ProductBanner>
+                        Sold out
+                      </ProductBanner>
                     }
                     <Link to={`/product/${handle}/`}>
                       {firstImage && firstImage.localFile && (
@@ -128,19 +129,46 @@ const Shop = () => {
           }) => (
             <>
               {products && products.length > 0 &&
-              <CollectionDiv>
-                <CollectionTitle>{title}</CollectionTitle>
-                <CollectionDescription>{description}</CollectionDescription>
-                <ProductList>
-                  {shopifyProductList(products)}
-                </ProductList>
-              </CollectionDiv>
+                <CollectionDiv key={title}>
+                  <CollectionTitle>{title}</CollectionTitle>
+                  <CollectionDescription>{description}</CollectionDescription>
+                  <ProductList>
+                    {shopifyProductList(products)}
+                  </ProductList>
+                </CollectionDiv>
               }
             </>
           ),
       ) : (
         <p>No products found!</p>
       );
+
+  const shopifyCollectionLinks = allShopifyCollection.edges ?
+    allShopifyCollection.edges.map(
+        ({
+          node: {
+            title,
+            handle,
+            products,
+          },
+        }) => (
+          <>
+            {products && products.length > 0 &&
+              <Link
+                  to={`/collection/${handle}`}
+                  style={{
+                    whiteSpace: 'nowrap',
+                    padding: '7px 20px'
+                  }}
+                  key={title}>
+                {title}
+              </Link>
+            }
+          </>
+        ),
+    ) : (
+      <p>No products found!</p>
+    );
 
   const siteTitle = get(this, 'props.data.site.siteMetadata.title');
   const siteDescription = get(
@@ -152,8 +180,14 @@ const Shop = () => {
   return (
     <>
       <SEO title="shop"/>
-      <Layout>
+      <Layout shopifyCollections={props.shopifyCollections}>
         <ShopPage>
+          <ShopTitle>
+            shop
+          </ShopTitle>
+          <CollectionLinks>
+            {shopifyCollectionLinks}
+          </CollectionLinks>
           {shopifyCollections}
         </ShopPage>
       </Layout>
@@ -166,10 +200,44 @@ type Props = {};
 export default Shop;
 
 const ShopPage = styled.div`
-  padding: 2.5vh 0 2.5vh 5vh;
+  padding: 2.5vh 5vh 2.5vh 5vh;
 
   @media (max-width: 700px) {
     padding: 2.5vh 3vh;
+  }
+`;
+
+const ShopTitle = styled.h1`
+  text-align: center;
+  font-size: xx-large;
+  padding: 50px 0 40px 0;
+
+  @media (max-width: 550px) {
+    padding: 0 0 20px 0;
+  }
+`;
+
+const CollectionLinks = styled.div`
+  display: flex;
+  width: 92vw;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  @media (max-width: 550px) {
+    margin-bottom: 20px;
+    width: 100vw;
+    left: -3vh;
+    position: relative;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+
+    overflow-x: auto;
+    -ms-overflow-style: none;  /* hide scrollbar on Internet Explorer 10+ */
+    scrollbar-width: none;  /* hide scrollbar on Firefox */
+
+    ::-webkit-scrollbar {
+        display: none;  /* Safari and Chrome */
+    }
   }
 `;
 
@@ -189,9 +257,11 @@ const ProductList = styled.div`
 
 const CollectionDiv = styled.div`
   margin: 50px 0 0 0;
+  width: 97vw;
 
   @media (max-width: 550px) {
     margin: 0 0 20px 0;
+    width: auto
   }
 `;
 

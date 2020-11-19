@@ -19,7 +19,7 @@ class About extends React.Component<Props> {
     return (
       <>
         <SEO title="about" />
-        <Layout>
+        <Layout shopifyCollections={this.props.shopifyCollections}>
           <div className="page">
             <h1>about</h1>
             <p>

@@ -19,7 +19,7 @@ class Contact extends React.Component<Props> {
     return (
       <>
         <SEO title="contact" />
-        <Layout>
+        <Layout shopifyCollections={this.props.shopifyCollections}>
           <div className="page">
             <h1>contact</h1>
             <p>

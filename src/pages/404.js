@@ -19,7 +19,7 @@ class NotFoundPage extends React.Component<Props> {
     return (
       <>
         <SEO title="404" />
-        <Layout location={this.props.location}>
+        <Layout location={this.props.location} shopifyCollections={this.props.shopifyCollections}>
           <Helmet htmlAttributes={{lang: 'en'}}>
             <title>wynne the pooh</title>
           </Helmet>

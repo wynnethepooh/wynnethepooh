@@ -33,7 +33,7 @@ class ProductPage extends React.Component {
           description={shopifyProduct.description}
           image={shopifyProduct.images[0].originalSrc} />
 
-        <Layout location={this.props.location} title={siteTitle}>
+        <Layout location={this.props.location} title={siteTitle} shopifyCollections={this.props.shopifyCollections}>
           <ProductContainer>
             <Link
               to="/shop"

@@ -54,6 +54,7 @@ class Layout extends React.Component<Props, State> {
           navbarState={this.state.navbarOpen}
           handleNavbar={this.handleNavbar}
           isHomePage={this.props.isHomePage}
+          shopifyCollections={this.props.shopifyCollections}
         />
 
         <Helmet htmlAttributes={{lang: 'en'}}>

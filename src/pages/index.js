@@ -23,7 +23,7 @@ class Home extends React.Component<Props> {
         <SEO
           title="home"
           keywords={[`ceramics`, `pot`, `pottery`]} />
-        <Layout isHomePage>
+        <Layout isHomePage shopifyCollections={this.props.shopifyCollections}>
           <main className="home">
             <Helmet htmlAttributes={{lang: 'en'}}>
               <meta charSet="utf-8" />
