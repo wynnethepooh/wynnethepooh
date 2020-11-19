@@ -223,6 +223,10 @@ const CollectionLinks = styled.div`
   justify-content: center;
   flex-wrap: wrap;
 
+  @media (max-width: 700px) {
+    margin-bottom: 30px;
+  }
+
   @media (max-width: 550px) {
     margin-bottom: 20px;
     width: 100vw;
@@ -259,7 +263,7 @@ const CollectionDiv = styled.div`
   margin: 50px 0 0 0;
   width: 97vw;
 
-  @media (max-width: 550px) {
+  @media (max-width: 700px) {
     margin: 0 0 20px 0;
     width: auto
   }
@@ -353,6 +357,10 @@ const Img = styled(Image)`
   width: 250px;
 
   @media(max-width: 700px) {
-    width: 40vw;
+    width: 43vw;
   }
+
+  @media(max-width: 550px) {
+      width: 41vw;
+    }
 `;
