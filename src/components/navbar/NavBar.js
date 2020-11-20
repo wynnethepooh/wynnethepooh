@@ -55,37 +55,42 @@ const Navbar = (props: Props) => {
           }
           <NavLinks ishomepage={ishomepage} style={linkAnimation}>
             <Link to="/">Home</Link>
-            <Link
-                to="/shop"
-                onMouseEnter={() => setHoverOnSublinks(true)}
-                onMouseLeave={() => {
-                  // Set a timeout so that the menu doesn't close before the user has time to
-                  // move their mouse over it
-                  setTimeout(() => {
-                    setHoverOnSublinks(false)
-                  }, 500)
-                }}>
-              Shop
-            </Link>
-            <CollectionLinks
-                hoverOnSublinks={hoverOnSublinks}
-                areSublinksOpen={areSublinksOpen}
-                onMouseEnter={() => setSublinksOpen(true)}
-                onMouseLeave={() => {
-                  // Set a timeout so that the menu doesn't close before the user has time to
-                  // move their mouse over it
-                  setTimeout(() => {
-                    setSublinksOpen(false)
-                  }, 200)
-                }}
-                style={{
-                  transform: open.interpolate({
-                    range: [0, 0.2, 0.3, 1],
-                    output: [0, -20, 0, -200],
-                  }).interpolate((openValue) => `translate3d(0, ${openValue}px, 0`),
-                }}>
-              {shopifyCollectionLinks}
-            </CollectionLinks>
+            <Link to="/shop">Shop</Link>
+            {!process.env.GATSBY_COMING_SOON &&
+              <>
+                <Link
+                    to="/shop"
+                    onMouseEnter={() => setHoverOnSublinks(true)}
+                    onMouseLeave={() => {
+                      // Set a timeout so that the menu doesn't close before the user has time to
+                      // move their mouse over it
+                      setTimeout(() => {
+                        setHoverOnSublinks(false)
+                      }, 500)
+                    }}>
+                  Shop
+                </Link>
+                <CollectionLinks
+                    hoverOnSublinks={hoverOnSublinks}
+                    areSublinksOpen={areSublinksOpen}
+                    onMouseEnter={() => setSublinksOpen(true)}
+                    onMouseLeave={() => {
+                      // Set a timeout so that the menu doesn't close before the user has time to
+                      // move their mouse over it
+                      setTimeout(() => {
+                        setSublinksOpen(false)
+                      }, 200)
+                    }}
+                    style={{
+                      transform: open.interpolate({
+                        range: [0, 0.2, 0.3, 1],
+                        output: [0, -20, 0, -200],
+                      }).interpolate((openValue) => `translate3d(0, ${openValue}px, 0`),
+                    }}>
+                  {shopifyCollectionLinks}
+                </CollectionLinks>
+              </>
+            }
             <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
             <CartButton
