@@ -42,11 +42,9 @@ const CollapseMenu = (props: Props) => {
         <NavLinks>
           <li><Link to="/" onClick={props.handleNavbar}>Home</Link></li>
           <li><Link to="/shop" onClick={props.handleNavbar}>Shop</Link></li>
-          {!process.env.GATSBY_COMING_SOON &&
-            <CollectionLinks areSublinksOpen={areSublinksOpen}>
-              {shopifyCollectionLinks}
-            </CollectionLinks>
-          }
+          <CollectionLinks areSublinksOpen={areSublinksOpen}>
+            {shopifyCollectionLinks}
+          </CollectionLinks>
           <li><Link to="/about" onClick={props.handleNavbar}>About</Link></li>
           <li>
             <Link to="/contact" onClick={props.handleNavbar}>

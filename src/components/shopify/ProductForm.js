@@ -112,54 +112,61 @@ const ProductForm = ({product}) => {
             __html: product.descriptionHtml,
           }} />
       </ProductDescription>
-      {available &&
-        <>
-          <FlexContainer>
-            {hasVariants &&
-              options.map(({id, name, values}, index) => (
-                <React.Fragment key={id}>
-                  <Label htmlFor={name}>{name} </Label>
-                  <Select
-                    name={name}
-                    key={id}
-                    onChange={(event) => handleOptionChange(index, event)}
+      <FlexContainer>
+        {hasVariants &&
+          options.map(({id, name, values}, index) => (
+            <React.Fragment key={id}>
+              <Label htmlFor={name}>{name} </Label>
+              <Select
+                name={name}
+                key={id}
+                onChange={(event) => handleOptionChange(index, event)}
+              >
+                {values.map((value) => (
+                  <option
+                    value={value}
+                    key={`${name}-${value}`}
+                    disabled={checkDisabled(name, value)}
                   >
-                    {values.map((value) => (
-                      <option
-                        value={value}
-                        key={`${name}-${value}`}
-                        disabled={checkDisabled(name, value)}
-                      >
-                        {value}
-                      </option>
-                    ))}
-                  </Select>
-                  <br />
-                </React.Fragment>
-              ))}
-          </FlexContainer>
-          <FlexContainer>
-            <Input
-              type="number"
-              id="quantity"
-              name="quantity"
-              min="1"
-              step="1"
-              onChange={handleQuantityChange}
-              value={quantity}
-            />
-            <br />
-            <Button
-              type="submit"
-              disabled={!available || adding}
-              onClick={handleAddToCart}
-            >
-              add to cart
-            </Button>
-          </FlexContainer>
-        </>
+                    {value}
+                  </option>
+                ))}
+              </Select>
+              <br />
+            </React.Fragment>
+          ))}
+      </FlexContainer>
+      {available &&
+        <FlexContainer>
+          <Input
+            type="number"
+            id="quantity"
+            name="quantity"
+            min="1"
+            step="1"
+            onChange={handleQuantityChange}
+            value={quantity}
+          />
+          <br />
+          <Button
+            type="submit"
+            disabled={!available || adding}
+            onClick={handleAddToCart}
+          >
+            add to cart
+          </Button>
+        </FlexContainer>
       }
-      {!available && <OutOfStock>This Product is out of Stock!</OutOfStock>}
+      {!available &&
+        <OutOfStock>
+          <p>Uh oh, this product is out of stock!</p>
+          <p>
+            message me at <a href="mailto:&#119;&#121;&#110;&#110;&#101;&#064;&#119;&#121;&#110;&#110;&#101;&#116;&#104;&#101;&#112;&#111;&#111;&#104;&#046;&#099;&#111;&#109;">
+            &#119;&#121;&#110;&#110;&#101;&#064;&#119;&#121;&#110;&#110;&#101;&#116;&#104;&#101;&#112;&#111;&#111;&#104;&#046;&#099;&#111;&#109;</a> if
+            you&#39;d like to order one in advance!
+          </p>
+        </OutOfStock>
+      }
     </>
   );
 };
@@ -264,7 +271,12 @@ const Select = styled.select`
   width: fit-content;
 `;
 
-const OutOfStock = styled.p`
+const OutOfStock = styled.div`
   font-style: italic;
   text-transform: lowercase;
+  margin: 20px 0 0 0;
+
+  p {
+    margin: 10px 0;
+  }
 `;

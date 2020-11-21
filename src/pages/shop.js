@@ -50,6 +50,10 @@ const Shop = (props) => {
                         }
                       }
                     }
+                    options {
+                      name
+                      values
+                    }
                     variants {
                       price
                     }
@@ -69,6 +73,10 @@ const Shop = (props) => {
       style: 'currency',
     }).format(parseFloat(price ? price : 0));
 
+  const hasOptions = (options) => {
+    return options.length >= 1 && options[0].name !== 'Title';
+  }
+
   const shopifyProductList = (products) =>
       products && products.length > 0 ? (
         products
@@ -79,6 +87,7 @@ const Shop = (props) => {
                   handle,
                   title,
                   images: [firstImage],
+                  options,
                   variants: [firstVariant],
                   availableForSale
                   ,
@@ -104,12 +113,15 @@ const Shop = (props) => {
                         </Link>
                       </ProductTitle>
                       {!availableForSale &&
-                    <strike>
-                      <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
-                    </strike>
+                        <strike>
+                          <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
+                        </strike>
                       }
                       {availableForSale &&
-                    <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
+                        <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
+                      }
+                      {hasOptions(options) &&
+                        <ProductOptions>{options[0].values.length} {options[0].name} options available</ProductOptions>
                       }
                     </ProductInformation>
                   </ProductDiv>
@@ -182,23 +194,15 @@ const Shop = (props) => {
     <>
       <SEO title="shop"/>
       <Layout shopifyCollections={props.shopifyCollections}>
-        {process.env.GATSBY_COMING_SOON &&
-          <ComingSoonContainer>
-            <BackgroundTheme />
-            <ComingSoonText>first collection drops<br /> 11.21.20 at 10am PST</ComingSoonText>
-          </ComingSoonContainer>
-        }
-        {!process.env.GATSBY_COMING_SOON &&
-          <ShopPage>
-            <ShopTitle>
-              shop
-            </ShopTitle>
-            <CollectionLinks>
-              {shopifyCollectionLinks}
-            </CollectionLinks>
-            {shopifyCollections}
-          </ShopPage>
-        }
+        <ShopPage>
+          <ShopTitle>
+            shop
+          </ShopTitle>
+          <CollectionLinks>
+            {shopifyCollectionLinks}
+          </CollectionLinks>
+          {shopifyCollections}
+        </ShopPage>
       </Layout>
     </>
   );
@@ -359,6 +363,12 @@ const ProductPrice = styled.p`
   text-align: left;
   margin: 5px 0 0 0;
   font-size: 0.85rem;
+`;
+
+const ProductOptions = styled.p`
+  font-style: italic;
+  font-size: 14.5px;
+  margin: 10px 0;
 `;
 
 const Img = styled(Image)`

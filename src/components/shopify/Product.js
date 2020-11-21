@@ -31,10 +31,20 @@ const Product = React.memo(({product, soldOut}) => {
       <ProductDetails>
         <h1>{product.title}</h1>
         {soldOut &&
-          <div
-            dangerouslySetInnerHTML={{
-              __html: product.descriptionHtml,
-            }} />
+          <>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: product.descriptionHtml,
+              }} />
+            <OutOfStock>
+              <p>Uh oh, this product is out of stock!</p>
+              <p>
+                message me at <a href="mailto:&#119;&#121;&#110;&#110;&#101;&#064;&#119;&#121;&#110;&#110;&#101;&#116;&#104;&#101;&#112;&#111;&#111;&#104;&#046;&#099;&#111;&#109;">
+                &#119;&#121;&#110;&#110;&#101;&#064;&#119;&#121;&#110;&#110;&#101;&#116;&#104;&#101;&#112;&#111;&#111;&#104;&#046;&#099;&#111;&#109;</a> if
+                you&#39;d like to order one in advance!
+              </p>
+            </OutOfStock>
+          </>
         }
         {!soldOut &&
           <ProductForm product={product} />
@@ -144,4 +154,14 @@ const ProductBanner = styled.div`
   color: white;
   padding: 3px 7px;
   z-index: 1;
+`;
+
+const OutOfStock = styled.div`
+  font-style: italic;
+  text-transform: lowercase;
+  margin: 40px 0 0 0;
+
+  p {
+    margin: 10px 0;
+  }
 `;
