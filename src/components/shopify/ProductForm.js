@@ -126,7 +126,6 @@ const ProductForm = ({product}) => {
                   <option
                     value={value}
                     key={`${name}-${value}`}
-                    disabled={checkDisabled(name, value)}
                   >
                     {value}
                   </option>
