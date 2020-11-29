@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import {Link} from 'gatsby';
 import styled from 'styled-components';
+import Collapse from "@kunukn/react-collapse";
 
 import {useSpring, animated} from 'react-spring';
 
@@ -10,7 +11,10 @@ const CollapseMenu = (props: Props) => {
   const ishomepage = props.isHomePage ? 'true' : '';
 
   const [areSublinksOpen, setSublinksOpen] = useState(false);
-  const {openSublinks} = useSpring({openSublinks: areSublinksOpen ? 0 : 1});
+
+  const toggleSublinks = () => {
+    setSublinksOpen(!areSublinksOpen);
+  }
 
   const shopifyCollectionLinks =
     props.shopifyCollections.map((shopifyCollection) => (
@@ -43,10 +47,20 @@ const CollapseMenu = (props: Props) => {
       >
         <NavLinks>
           <li><Link to="/" onClick={props.handleNavbar}>Home</Link></li>
-          <li><Link to="/shop" onClick={props.handleNavbar}>Shop</Link></li>
-          <CollectionLinks areSublinksOpen={areSublinksOpen}>
-            {shopifyCollectionLinks}
-          </CollectionLinks>
+          <li>
+            <Link to="/shop" onClick={props.handleNavbar}>Shop</Link>
+            {areSublinksOpen &&
+              <MoreButton onClick={toggleSublinks}>--</MoreButton>
+            }
+            {!areSublinksOpen &&
+              <MoreButton onClick={toggleSublinks}>+</MoreButton>
+            }
+          </li>
+          <Collapse isOpen={areSublinksOpen}>
+            <CollectionLinks>
+              {shopifyCollectionLinks}
+            </CollectionLinks>
+          </Collapse>
           <li><Link to="/about" onClick={props.handleNavbar}>About</Link></li>
           <li>
             <Link to="/contact" onClick={props.handleNavbar}>
@@ -103,10 +117,13 @@ const NavLinks = styled.ul`
       border-bottom: 1px solid #CC8E20;
     }
   }
+
+  .collapse-css-transition {
+    transition: height 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 `;
 
 const CollectionLinks = styled.div`
-//  display: ${(props) => (props.areSublinksOpen == true ? 'flex' : 'none')};
   display: flex;
   z-index: 0;
   flex-direction: column;
@@ -124,4 +141,17 @@ const CollectionLinks = styled.div`
     font-size: 1.2rem;
     line-height: 1.2rem;
   }
+`;
+
+const MoreButton = styled.button`
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  color: #CC8E20;
+  background: none;
+  font-family: 'Jost', sans-serif;
+  text-transform: lowercase;
+  font-size: x-large;
+  margin-left: 10px;
 `;

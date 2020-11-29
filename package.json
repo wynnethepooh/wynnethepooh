@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@kunukn/react-collapse": "^2.2.9",
     "@loadable/component": "^5.14.1",
     "@milosmladenovicwork/react-image-magnify": "^2.7.4",
     "apollo-client": "^2.6.10",
