@@ -141,7 +141,7 @@ const Shop = (props) => {
             },
           }) => (
             <>
-              {products && products.length > 0 &&
+              {products && products.length > 0 && !title.includes("early access") &&
                 <CollectionDiv key={title}>
                   <CollectionTitle>{title}</CollectionTitle>
                   <CollectionDescription>{description}</CollectionDescription>
@@ -166,7 +166,7 @@ const Shop = (props) => {
           },
         }) => (
           <>
-            {products && products.length > 0 &&
+            {products && products.length > 0 && !title.includes("early access") &&
               <Link
                   to={`/collection/${handle}`}
                   style={{

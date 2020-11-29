@@ -15,7 +15,9 @@ const CollapseMenu = (props: Props) => {
   const shopifyCollectionLinks =
     props.shopifyCollections.map((shopifyCollection) => (
       <>
-        {shopifyCollection.products && shopifyCollection.products.length > 0 &&
+        {shopifyCollection.products &&
+            shopifyCollection.products.length > 0 &&
+            !shopifyCollection.title.includes("early access") &&
           <li>
             <Link
                 to={`/collection/${shopifyCollection.handle}`}

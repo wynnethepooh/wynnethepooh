@@ -33,7 +33,9 @@ const Navbar = (props: Props) => {
   const shopifyCollectionLinks =
     props.shopifyCollections.map((shopifyCollection) => (
       <>
-        {shopifyCollection.products && shopifyCollection.products.length > 0 &&
+        {shopifyCollection.products &&
+            shopifyCollection.products.length > 0 &&
+            !shopifyCollection.title.includes("early access") &&
           <Link
               to={`/collection/${shopifyCollection.handle}`}
               key={shopifyCollection.handle}>
