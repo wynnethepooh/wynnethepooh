@@ -62,14 +62,24 @@ class CollectionPage extends React.Component {
                           {title}
                         </Link>
                       </ProductTitle>
-                      {!availableForSale &&
-                    <strike>
-                      <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
-                    </strike>
-                      }
-                      {availableForSale &&
-                    <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
-                      }
+                      <PriceFlexbox>
+                        {!availableForSale &&
+                          <strike>
+                            <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
+                          </strike>
+                        }
+                        {availableForSale && firstVariant.compareAtPrice &&
+                          <>
+                            <strike>
+                              <ProductPrice>{getPrice(firstVariant.compareAtPrice)}</ProductPrice>
+                            </strike>
+                            <SaleProductPrice>{getPrice(firstVariant.price)}</SaleProductPrice>
+                          </>
+                        }
+                        {availableForSale && !firstVariant.compareAtPrice &&
+                          <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
+                        }
+                      </PriceFlexbox>
                     </ProductInformation>
                   </ProductDiv>
                 ),
@@ -146,6 +156,7 @@ export const query = graphql`
         }
         variants {
           price
+          compareAtPrice
         }
         availableForSale
       }
@@ -262,12 +273,27 @@ const ProductTitle = styled.p`
 
 `;
 
+const PriceFlexbox = styled.div`
+  display: flex;
+`;
+
 const ProductPrice = styled.p`
   font-weight: normal;
   white-space: nowrap;
   text-align: left;
   margin: 5px 0 0 0;
   font-size: 0.85rem;
+`;
+
+const SaleProductPrice = styled.p`
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: left;
+  margin: 5px 0 0 0;
+  font-size: 0.85rem;
+  color: #CD7F5D;
+  display: inline-block;
+  margin-left: 10px;
 `;
 
 const Img = styled(Image)`

@@ -98,6 +98,12 @@ const ProductForm = ({product}) => {
     style: 'currency',
   }).format(variant.price);
 
+  const compareAtPrice = Intl.NumberFormat(undefined, {
+    currency: minVariantPrice.currencyCode,
+    minimumFractionDigits: 2,
+    style: 'currency',
+  }).format(variant.compareAtPrice);
+
   const hasVariants =
       options.length > 0 &&
       options[0].name !== 'Title' &&
@@ -105,7 +111,19 @@ const ProductForm = ({product}) => {
 
   return (
     <>
-      <Price>{price}</Price>
+      <PriceFlexbox>
+        {variant.compareAtPrice &&
+          <>
+            <strike>
+              <Price>{compareAtPrice}</Price>
+            </strike>
+            <SalePrice>{price}</SalePrice>
+          </>
+        }
+        {!variant.compareAtPrice &&
+          <Price>{price}</Price>
+        }
+      </PriceFlexbox>
       <ProductDescription>
         <div
           dangerouslySetInnerHTML={{
@@ -220,10 +238,22 @@ const ProductDescription = styled.div`
   }
 `;
 
+const PriceFlexbox = styled.div`
+  display: flex;
+`;
+
 const Price = styled.h3`
   text-align: left;
   margin-top: 0;
   font-weight: normal;
+`;
+
+const SalePrice = styled.h3`
+  text-align: left;
+  margin-top: 0;
+  font-weight: 500;
+  color: #CD7F5D;
+  margin-left: 10px;
 `;
 
 const FlexContainer = styled.div`

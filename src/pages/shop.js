@@ -54,6 +54,7 @@ const Shop = (props) => {
                   tags
                   variants {
                     price
+                    compareAtPrice
                   }
                   availableForSale
                 }
@@ -88,6 +89,7 @@ const Shop = (props) => {
                     tags
                     variants {
                       price
+                      compareAtPrice
                     }
                     availableForSale
                   }
@@ -144,14 +146,24 @@ const Shop = (props) => {
                           {title}
                         </Link>
                       </ProductTitle>
-                      {!availableForSale &&
-                        <strike>
+                      <PriceFlexbox>
+                        {!availableForSale &&
+                          <strike>
+                            <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
+                          </strike>
+                        }
+                        {availableForSale && firstVariant.compareAtPrice &&
+                          <>
+                            <strike>
+                              <ProductPrice>{getPrice(firstVariant.compareAtPrice)}</ProductPrice>
+                            </strike>
+                            <SaleProductPrice>{getPrice(firstVariant.price)}</SaleProductPrice>
+                          </>
+                        }
+                        {availableForSale && !firstVariant.compareAtPrice &&
                           <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
-                        </strike>
-                      }
-                      {availableForSale &&
-                        <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
-                      }
+                        }
+                      </PriceFlexbox>
                       {hasOptions(options) &&
                         <ProductOptions>{options[0].values.length} {options[0].name} options available</ProductOptions>
                       }
@@ -211,11 +223,6 @@ const Shop = (props) => {
           },
         }) => (
           <ProductDiv key={id}>
-            {!availableForSale &&
-              <ProductBanner>
-                Sold out
-              </ProductBanner>
-            }
             <Link to={`/product/${handle}/`}>
               {firstImage && firstImage.localFile && (
                 <Img
@@ -230,14 +237,19 @@ const Shop = (props) => {
                   {title}
                 </Link>
               </ProductTitle>
-              {!availableForSale &&
-                <strike>
+              <PriceFlexbox>
+                {firstVariant.compareAtPrice &&
+                  <>
+                    <strike>
+                      <ProductPrice>{getPrice(firstVariant.compareAtPrice)}</ProductPrice>
+                    </strike>
+                    <SaleProductPrice>{getPrice(firstVariant.price)}</SaleProductPrice>
+                  </>
+                }
+                {!firstVariant.compareAtPrice &&
                   <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
-                </strike>
-              }
-              {availableForSale &&
-                <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
-              }
+                }
+              </PriceFlexbox>
               {hasOptions(options) &&
                 <ProductOptions>{options[0].values.length} {options[0].name} options available</ProductOptions>
               }
@@ -501,12 +513,26 @@ const ProductTitle = styled.p`
 
 `;
 
+const PriceFlexbox = styled.div`
+  display: flex;
+`;
+
 const ProductPrice = styled.p`
   font-weight: normal;
   white-space: nowrap;
   text-align: left;
   margin: 5px 0 0 0;
   font-size: 0.85rem;
+`;
+
+const SaleProductPrice = styled.p`
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: left;
+  margin: 5px 0 0 0;
+  font-size: 0.85rem;
+  color: #CD7F5D;
+  margin-left: 10px;
 `;
 
 const ProductOptions = styled.p`

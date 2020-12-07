@@ -1,4 +1,5 @@
 import React, {useContext, Component} from 'react';
+import {Link} from 'gatsby';
 import styled from 'styled-components';
 import StoreContext from '../../context/StoreContext';
 import LineItem from './LineItem';
@@ -117,6 +118,8 @@ const Header = styled.h1`
 
 const CloseButton = styled.button`
   background: none;
+  outline: none;
+  cursor: pointer;
   border: none;
   color: #CC8E20;
   font-family: 'Jost', sans-serif;

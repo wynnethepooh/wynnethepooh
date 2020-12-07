@@ -115,6 +115,7 @@ export const query = graphql`
         id
         title
         price
+        compareAtPrice
         availableForSale
         shopifyId
         selectedOptions {
