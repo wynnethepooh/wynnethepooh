@@ -1,6 +1,6 @@
 // @flow
 
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {Link, graphql, useStaticQuery} from 'gatsby';
 import Image from 'gatsby-image';
 import get from 'lodash/get';
@@ -200,72 +200,93 @@ const Shop = (props) => {
         <p>No products found!</p>
       );
 
-  const availableProducts = allShopifyProduct.edges
+  const allProductData = [];
+  allShopifyProduct.edges
     .filter(
-        ({
-          node: {
-            availableForSale,
-            tags
-          }
-        }) => (
-          availableForSale == true && !tags.includes("early")
-        ))
+      ({
+        node: {
+          tags
+        }
+      }) => (
+        !tags.includes("early")
+      ))
     .map(
-        ({
-          node: {
-            id,
-            handle,
-            title,
-            images: [firstImage],
-            options,
-            variants: [firstVariant],
-            availableForSale
-          },
-        }) => (
-          <ProductDiv key={id}>
-            <Link to={`/product/${handle}/`}>
-              {firstImage && firstImage.localFile && (
+      ({
+        node: {
+          id,
+          handle,
+          title,
+          images: [firstImage],
+          options,
+          variants: [firstVariant],
+          availableForSale,
+          tags
+        },
+      }) => (
+        allProductData.push({
+          id: id,
+          handle: handle,
+          title: title,
+          firstImage: firstImage,
+          options: options,
+          firstVariant: firstVariant,
+          availableForSale: availableForSale,
+          tags: tags
+        })
+      ))
+
+
+  const [filteredData, setFilteredData] = useState(allProductData);
+  const [filteredProductCount, setFilteredProductCount] = useState(allProductData.length);
+
+  const filteredProductList = () => {
+    return (
+      <ProductList>
+        {filteredData.map((node) => (
+          <ProductDiv key={node.id}>
+            {!node.availableForSale &&
+              <ProductBanner>
+                Sold out
+              </ProductBanner>
+            }
+            <Link to={`/product/${node.handle}/`}>
+              {node.firstImage && node.firstImage.localFile && (
                 <Img
-                  fluid={firstImage.localFile.childImageSharp.fluid}
-                  alt={handle}
+                  fluid={node.firstImage.localFile.childImageSharp.fluid}
+                  alt={node.handle}
                 />
               )}
             </Link>
             <ProductInformation>
               <ProductTitle>
-                <Link style={{boxShadow: 'none'}} to={`/product/${handle}/`}>
-                  {title}
+                <Link style={{boxShadow: 'none'}} to={`/product/${node.handle}/`}>
+                  {node.title}
                 </Link>
               </ProductTitle>
               <PriceFlexbox>
-                {firstVariant.compareAtPrice &&
+                {!node.availableForSale &&
+                  <strike>
+                    <ProductPrice>{getPrice(node.firstVariant.price)}</ProductPrice>
+                  </strike>
+                }
+                {node.availableForSale && node.firstVariant.compareAtPrice &&
                   <>
                     <strike>
-                      <ProductPrice>{getPrice(firstVariant.compareAtPrice)}</ProductPrice>
+                      <ProductPrice>{getPrice(node.firstVariant.compareAtPrice)}</ProductPrice>
                     </strike>
-                    <SaleProductPrice>{getPrice(firstVariant.price)}</SaleProductPrice>
+                    <SaleProductPrice>{getPrice(node.firstVariant.price)}</SaleProductPrice>
                   </>
                 }
-                {!firstVariant.compareAtPrice &&
-                  <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
+                {node.availableForSale && !node.firstVariant.compareAtPrice &&
+                  <ProductPrice>{getPrice(node.firstVariant.price)}</ProductPrice>
                 }
               </PriceFlexbox>
-              {hasOptions(options) &&
-                <ProductOptions>{options[0].values.length} {options[0].name} options available</ProductOptions>
+              {hasOptions(node.options) &&
+                <ProductOptions>{node.options[0].values.length} {node.options[0].name} options available</ProductOptions>
               }
             </ProductInformation>
           </ProductDiv>
-        ),
-    );
-
-  const availableProductCount = () => {
-    return availableProducts.length;
-  }
-
-  const getAvailableProductList = () => {
-    return (
-      <ProductList>
-        {availableProducts}
+        ))}
       </ProductList>
     )
   }
@@ -298,19 +319,41 @@ const Shop = (props) => {
     );
 
   const [openFilters, setOpenFilters] = useState(false);
-  const [filteredProductCount, setFilteredProductCount] = useState(allShopifyProduct.edges.length);
-  const [filterAvailable, setFilterAvailable] = useState(false);
+  const [checkAvailable, setCheckAvailable] = useState(true);
+  const [anyFilterChecked, setAnyFilterChecked] = useState(false);
+  const [displayedProducts, setDisplayedProducts] = useState(shopifyCollections);
 
   const toggleClick = () => {
     setOpenFilters(!openFilters)
   }
 
-  const [displayedProducts, setDisplayedProducts] = useState(shopifyCollections);
+  const updateDisplayedProducts = () => {
+    let anyFilters = false;
+    let updatedFilteredData = allProductData;
 
-  const handleAvailable = () => {
-    setFilterAvailable(!filterAvailable);
-    setFilteredProductCount(!filterAvailable ? availableProductCount : allShopifyProduct.edges.length);
-    return setDisplayedProducts(!filterAvailable ? getAvailableProductList : shopifyCollections);
+    if (checkAvailable) {
+      updatedFilteredData = [...updatedFilteredData].filter(
+        ({
+          availableForSale,
+          tags
+        }) => (
+          availableForSale == true && !tags.includes("early")
+        ))
+      anyFilters = true;
+    }
+    setFilteredData(updatedFilteredData);
+    setFilteredProductCount(updatedFilteredData.length);
+    setAnyFilterChecked(anyFilters);
+  }
+
+  useEffect(() => {
+    setDisplayedProducts(anyFilterChecked ? filteredProductList() : shopifyCollections);
+  }, [filteredData]);
+
+  const handleAvailable = (event) => {
+    setCheckAvailable(!event.target.checked);
+
+    updateDisplayedProducts();
   }
 
   const siteTitle = get(this, 'props.data.site.siteMetadata.title');
