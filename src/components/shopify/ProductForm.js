@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import StoreContext from '../../context/StoreContext';
 
-const ProductForm = ({product}) => {
+const ProductForm = ({product, addon}) => {
   const {
     options,
     variants,
@@ -153,7 +153,7 @@ const ProductForm = ({product}) => {
             </React.Fragment>
           ))}
       </FlexContainer>
-      {available &&
+      {available && !addon &&
         <FlexContainer>
           <Input
             type="number"
@@ -165,6 +165,17 @@ const ProductForm = ({product}) => {
             value={quantity}
           />
           <br />
+          <Button
+            type="submit"
+            disabled={!available || adding}
+            onClick={handleAddToCart}
+          >
+            add to cart
+          </Button>
+        </FlexContainer>
+      }
+      {available && addon &&
+        <FlexContainer>
           <Button
             type="submit"
             disabled={!available || adding}

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import loadable from '@loadable/component';
 
 import ProductForm from './ProductForm';
+import ProductAddon from './ProductAddon';
 const ZoomCarousel = loadable(() => import('./ZoomCarousel'));
 
 const Product = React.memo(({product, soldOut}) => {
@@ -46,7 +47,12 @@ const Product = React.memo(({product, soldOut}) => {
           </>
         }
         {!soldOut &&
-          <ProductForm product={product} />
+          <>
+            <ProductForm product={product} />
+            {product.tags.includes("vase") &&
+              <ProductAddon />
+            }
+          </>
         }
       </ProductDetails>
     </ProductOverview>
@@ -68,10 +74,12 @@ const ProductOverview = styled.div`
 
 const ProductDetails = styled.div`
   margin-left: 2.5vh;
+  padding-right: 2.5vh;
   text-align: left;
   text-transform: lowercase;
 
   @media (max-width: 700px) {
+    padding-right: 0;
     margin: 20px 0;
   }
 `;

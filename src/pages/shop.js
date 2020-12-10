@@ -123,13 +123,18 @@ const Shop = (props) => {
                   images: [firstImage],
                   options,
                   variants: [firstVariant],
-                  availableForSale
-                  ,
+                  availableForSale,
+                  tags
                 }) => (
                   <ProductDiv key={id}>
                     {!availableForSale &&
-                      <ProductBanner>
+                      <SoldOutBanner>
                         Sold out
+                      </SoldOutBanner>
+                    }
+                    {availableForSale && tags.includes('vase') &&
+                      <ProductBanner>
+                        florals<br/>available
                       </ProductBanner>
                     }
                     <Link to={`/product/${handle}/`}>
@@ -208,7 +213,7 @@ const Shop = (props) => {
           tags
         }
       }) => (
-        !tags.includes("early")
+        !tags.includes("early") && !tags.includes("florals")
       ))
     .map(
       ({
@@ -235,6 +240,31 @@ const Shop = (props) => {
         })
       ))
 
+  var tagSet = new Set();
+  allProductData.map(node => (
+    node.tags.map(tag => {
+      if (tag != "vase") {
+        tagSet.add(tag)
+      }
+    })
+  ))
+
+  const getFilterCheckboxes = () => {
+    const filterCheckboxes = []
+    for (let tag of tagSet) {
+      filterCheckboxes.push(
+        <FilterLabel>
+          <span class="checkmark"></span>
+          <input
+            type="checkbox"
+            name="available"
+            onClick={(e) => handleFilter(tag, e)} />
+          {tag}
+        </FilterLabel>
+      )
+    }
+    return filterCheckboxes;
+  }
 
   const [filteredData, setFilteredData] = useState(allProductData);
   const [filteredProductCount, setFilteredProductCount] = useState(allProductData.length);
@@ -245,8 +275,13 @@ const Shop = (props) => {
         {filteredData.map((node) => (
           <ProductDiv key={node.id}>
             {!node.availableForSale &&
-              <ProductBanner>
+              <SoldOutBanner>
                 Sold out
+              </SoldOutBanner>
+            }
+            {node.availableForSale && node.tags.includes('vase') &&
+              <ProductBanner>
+                florals<br/>available
               </ProductBanner>
             }
             <Link to={`/product/${node.handle}/`}>
@@ -319,7 +354,7 @@ const Shop = (props) => {
     );
 
   const [openFilters, setOpenFilters] = useState(false);
-  const [checkAvailable, setCheckAvailable] = useState(true);
+  const [checkFilters, setCheckFilters] = useState(new Set());
   const [anyFilterChecked, setAnyFilterChecked] = useState(false);
   const [displayedProducts, setDisplayedProducts] = useState(shopifyCollections);
 
@@ -331,16 +366,29 @@ const Shop = (props) => {
     let anyFilters = false;
     let updatedFilteredData = allProductData;
 
-    if (checkAvailable) {
-      updatedFilteredData = [...updatedFilteredData].filter(
-        ({
-          availableForSale,
-          tags
-        }) => (
-          availableForSale == true && !tags.includes("early")
-        ))
-      anyFilters = true;
+    if (checkFilters.size > 0) {
+      for (let checkFilter of checkFilters) {
+        if (checkFilter == "available") {
+          updatedFilteredData = [...updatedFilteredData].filter(
+            ({
+              availableForSale,
+              tags
+            }) => (
+              availableForSale == true && !tags.includes("early")
+            ))
+        } else {
+          updatedFilteredData = updatedFilteredData.filter(
+            ({
+              tags
+            }) => (
+              tags.includes(checkFilter)
+            )
+          )
+        }
+        anyFilters = true;
+      }
     }
+
     setFilteredData(updatedFilteredData);
     setFilteredProductCount(updatedFilteredData.length);
     setAnyFilterChecked(anyFilters);
@@ -351,8 +399,26 @@ const Shop = (props) => {
   }, [filteredData]);
 
   const handleAvailable = (event) => {
-    setCheckAvailable(!event.target.checked);
+    const currentCheckFilters = checkFilters;
+    if (event.target.checked) {
+      currentCheckFilters.add("available");
+    } else {
+      currentCheckFilters.delete("available");
+    }
 
+    setCheckFilters(currentCheckFilters);
+    updateDisplayedProducts();
+  }
+
+  const handleFilter = (tag, event) => {
+    const currentCheckFilters = checkFilters;
+    if (event.target.checked) {
+      currentCheckFilters.add(tag);
+    } else {
+      currentCheckFilters.delete(tag);
+    }
+
+    setCheckFilters(currentCheckFilters);
     updateDisplayedProducts();
   }
 
@@ -395,6 +461,7 @@ const Shop = (props) => {
                       onClick={handleAvailable} />
                     Available
                   </FilterLabel>
+                  {getFilterCheckboxes()}
                 </FilterList>
               </Collapse>
             </div>
@@ -517,7 +584,7 @@ const ProductInformation = styled.div`
   }
 `;
 
-const ProductBanner = styled.div`
+const SoldOutBanner = styled.div`
   text-transform: lowercase;
   position: absolute;
   top: 40px;
@@ -529,6 +596,31 @@ const ProductBanner = styled.div`
 
   @media (max-width: 700px) {
     top: 15px;
+    right: -5px;
+  }
+`;
+
+const ProductBanner = styled.div`
+  text-transform: lowercase;
+  position: absolute;
+  top: 35px;
+  right: -10px;
+  background-color: #CC8E20;
+  color: white;
+  padding: 3px 7px;
+  z-index: 1;
+  width: 85px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 700px) {
+    width: 55px;
+    height: 60px;
+    font-size: small;
+    top: 10px;
     right: -5px;
   }
 `;
@@ -668,6 +760,8 @@ const FilterButton = styled.button`
 
 const FilterList = styled.div`
   padding: 10px 0;
+  display: flex;
+  flex-direction: column;
 `;
 
 const FilterLabel = styled.label`

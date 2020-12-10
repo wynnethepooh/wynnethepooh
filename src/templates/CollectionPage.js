@@ -39,14 +39,19 @@ class CollectionPage extends React.Component {
                   title,
                   images: [firstImage],
                   variants: [firstVariant],
-                  availableForSale
-                  ,
+                  availableForSale,
+                  tags,
                 }) => (
                   <ProductDiv key={id}>
                     {!availableForSale &&
-                  <ProductBanner>
-                    Sold out
-                  </ProductBanner>
+                      <SoldOutBanner>
+                        Sold out
+                      </SoldOutBanner>
+                    }
+                    {availableForSale && tags.includes('vase') &&
+                      <ProductBanner>
+                        florals<br/>available
+                      </ProductBanner>
                     }
                     <Link to={`/product/${handle}/`}>
                       {firstImage && firstImage.localFile && (
@@ -158,6 +163,7 @@ export const query = graphql`
           price
           compareAtPrice
         }
+        tags
         availableForSale
       }
     }
@@ -234,7 +240,7 @@ const ProductInformation = styled.div`
   }
 `;
 
-const ProductBanner = styled.div`
+const SoldOutBanner = styled.div`
   text-transform: lowercase;
   position: absolute;
   top: 40px;
@@ -246,6 +252,31 @@ const ProductBanner = styled.div`
 
   @media (max-width: 700px) {
     top: 15px;
+    right: -5px;
+  }
+`;
+
+const ProductBanner = styled.div`
+  text-transform: lowercase;
+  position: absolute;
+  top: 35px;
+  right: -10px;
+  background-color: #CC8E20;
+  color: white;
+  padding: 3px 7px;
+  z-index: 1;
+  width: 85px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 700px) {
+    width: 55px;
+    height: 60px;
+    font-size: small;
+    top: 10px;
     right: -5px;
   }
 `;
