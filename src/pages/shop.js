@@ -461,6 +461,7 @@ const Shop = (props) => {
                       onClick={handleAvailable} />
                     Available
                   </FilterLabel>
+                  <FilterCategory>clays</FilterCategory>
                   {getFilterCheckboxes()}
                 </FilterList>
               </Collapse>
@@ -776,6 +777,12 @@ const FilterLabel = styled.label`
     top: 2px;
     position: relative;
   }
+`;
+
+const FilterCategory = styled.h4`
+  font-weight: 500;
+  margin-bottom: 10px;
+`;
 
 //  input {
 //    position: absolute;
@@ -819,4 +826,4 @@ const FilterLabel = styled.label`
 //  input:checked ~ .checkmark {
 //    background-color: black;
 //  }
-`;
+//`;
