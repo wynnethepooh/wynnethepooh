@@ -254,7 +254,7 @@ const Shop = (props) => {
     for (let tag of tagSet) {
       filterCheckboxes.push(
         <FilterLabel>
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
           <input
             type="checkbox"
             name="available"
@@ -454,7 +454,7 @@ const Shop = (props) => {
               <Collapse isOpen={openFilters}>
                 <FilterList>
                   <FilterLabel>
-                    <span class="checkmark"></span>
+                    <span className="checkmark"></span>
                     <input
                       type="checkbox"
                       name="available"
