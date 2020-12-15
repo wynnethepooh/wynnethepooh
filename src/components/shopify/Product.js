@@ -46,7 +46,7 @@ const Product = React.memo(({product, soldOut}) => {
             </OutOfStock>
           </>
         }
-        {!soldOut &&
+        {product.availableForSale &&
           <>
             <ProductForm product={product} />
             {product.tags.includes("vase") &&

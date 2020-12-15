@@ -112,7 +112,7 @@ const ProductForm = ({product, addon}) => {
   return (
     <>
       <PriceFlexbox>
-        {variant.compareAtPrice &&
+        {variant.price > 0 && variant.compareAtPrice &&
           <>
             <strike>
               <Price>{compareAtPrice}</Price>
@@ -120,7 +120,7 @@ const ProductForm = ({product, addon}) => {
             <SalePrice>{price}</SalePrice>
           </>
         }
-        {!variant.compareAtPrice &&
+        {variant.price > 0 && !variant.compareAtPrice &&
           <Price>{price}</Price>
         }
       </PriceFlexbox>
@@ -271,6 +271,7 @@ const FlexContainer = styled.div`
   display: flex;
   margin-top: 20px;
   text-transform: lowercase;
+  flex-wrap: wrap;
 `;
 
 const Input = styled.input`

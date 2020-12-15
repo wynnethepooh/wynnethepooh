@@ -94,7 +94,7 @@ const ProductDetails = styled.div`
 
 const Title = styled.h3`
   margin-top: 0;
-
+  margin-bottom: 0;
 `;
 
 const Img = styled(Image)`

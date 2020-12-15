@@ -115,6 +115,12 @@ const Shop = (props) => {
       products && products.length > 0 ? (
         products
             .sort((a, b) => b.availableForSale - a.availableForSale)
+            .filter(
+              ({
+                tags
+              }) => (
+                !tags.includes("early") && !tags.includes("florals")
+              ))
             .map(
                 ({
                   id,
