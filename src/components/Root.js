@@ -45,20 +45,43 @@ const Root = (props) => {
 
   const shopifyCollections = [];
 
-  allShopifyCollection.edges.map(
-    ({
-      node: {
-        title,
-        handle,
-        products
-      }
-    }) => (
-      shopifyCollections.push({
-        title: title,
-        handle: handle,
-        products: products
-      })
-  ));
+  allShopifyCollection.edges
+    .filter(({ node: { handle } }) => (
+        handle.includes("new-arrivals")
+      ))
+    .map(
+      ({
+        node: {
+          title,
+          handle,
+          products
+        }
+      }) => (
+        shopifyCollections.push({
+          title: title,
+          handle: handle,
+          products: products
+        })
+    ));
+
+  allShopifyCollection.edges
+    .filter(({ node: { handle }}) => (
+        !handle.includes("new-arrivals")
+      ))
+    .map(
+      ({
+        node: {
+          title,
+          handle,
+          products
+        }
+      }) => (
+        shopifyCollections.push({
+          title: title,
+          handle: handle,
+          products: products
+        })
+    ));
 
   console.log(shopifyCollections);
 

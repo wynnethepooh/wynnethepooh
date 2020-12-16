@@ -90,7 +90,7 @@ class CollectionPage extends React.Component {
                 ),
             )
       ) : (
-        <p>No Products found!</p>
+        <NoProductsDiv>No Products found!</NoProductsDiv>
       );
 
     return (
@@ -174,7 +174,7 @@ const PageContainer = styled.div`
   margin-top: 150px;
   padding: 2.5vh 0 2.5vh 5vh;
 
-  @media (max-width: 700px) {
+  @media (max-width: 550px) {
     margin-top: 100px;
     padding: 2.5vh 3vh;
   }
@@ -334,4 +334,9 @@ const Img = styled(Image)`
   @media(max-width: 700px) {
     width: 40vw;
   }
+`;
+
+const NoProductsDiv = styled.div`
+  width: 100%;
+  text-align: center;
 `;

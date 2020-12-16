@@ -186,30 +186,59 @@ const Shop = (props) => {
         <p>No Products found!</p>
       );
 
-  const shopifyCollections = allShopifyCollection.edges ?
-      allShopifyCollection.edges.map(
-          ({
-            node: {
-              title,
-              description,
-              products,
-            },
-          }) => (
-            <>
-              {products && products.length > 0 && !title.includes("early access") &&
-                <CollectionDiv key={title}>
-                  <CollectionTitle>{title}</CollectionTitle>
-                  <CollectionDescription>{description}</CollectionDescription>
-                  <ProductList>
-                    {shopifyProductList(products)}
-                  </ProductList>
-                </CollectionDiv>
-              }
-            </>
-          ),
-      ) : (
-        <p>No products found!</p>
-      );
+  const shopifyCollections = []
+
+  allShopifyCollection.edges?.map(
+    ({
+      node: {
+        title,
+        handle,
+        description,
+        products,
+      },
+    }) => (
+      shopifyCollections.push(
+        <>
+          {products && products.length > 0 &&
+              handle.includes("new-arrivals") &&
+            <CollectionDiv key={title}>
+              <CollectionTitle>{title}</CollectionTitle>
+              <CollectionDescription>{description}</CollectionDescription>
+              <ProductList>
+                {shopifyProductList(products)}
+              </ProductList>
+            </CollectionDiv>
+          }
+        </>
+      )
+    ),
+  )
+
+  allShopifyCollection.edges?.map(
+    ({
+      node: {
+        title,
+        handle,
+        description,
+        products,
+      },
+    }) => (
+      shopifyCollections.push(
+        <>
+          {products && products.length > 0 &&
+              !title.includes("early access") &&
+              !handle.includes("new-arrivals") &&
+            <CollectionDiv key={title}>
+              <CollectionTitle>{title}</CollectionTitle>
+              <CollectionDescription>{description}</CollectionDescription>
+              <ProductList>
+                {shopifyProductList(products)}
+              </ProductList>
+            </CollectionDiv>
+          }
+        </>
+      )
+    ))
 
   const allProductData = [];
   allShopifyProduct.edges
@@ -332,15 +361,20 @@ const Shop = (props) => {
     )
   }
 
-  const shopifyCollectionLinks = allShopifyCollection.edges ?
-    allShopifyCollection.edges.map(
-        ({
-          node: {
-            title,
-            handle,
-            products,
-          },
-        }) => (
+  const shopifyCollectionLinks = [];
+  allShopifyCollection.edges
+    .filter(({ node: { handle }}) => (
+        handle.includes("new-arrivals")
+      ))
+    .map(
+      ({
+        node: {
+          title,
+          handle,
+          products,
+        },
+      }) => (
+        shopifyCollectionLinks.push(
           <>
             {products && products.length > 0 && !title.includes("early access") &&
               <Link
@@ -354,10 +388,39 @@ const Shop = (props) => {
               </Link>
             }
           </>
-        ),
-    ) : (
-      <p>No products found!</p>
-    );
+        )
+      ),
+    )
+
+  allShopifyCollection.edges
+    .filter(({ node: { handle }}) => (
+        !handle.includes("new-arrivals")
+      ))
+    .map(
+      ({
+        node: {
+          title,
+          handle,
+          products,
+        },
+      }) => (
+        shopifyCollectionLinks.push(
+          <>
+            {products && products.length > 0 && !title.includes("early access") &&
+              <Link
+                  to={`/collection/${handle}`}
+                  style={{
+                    whiteSpace: 'nowrap',
+                    padding: '7px 20px'
+                  }}
+                  key={title}>
+                {title}
+              </Link>
+            }
+          </>
+        )
+      )
+    )
 
   const [openFilters, setOpenFilters] = useState(false);
   const [checkFilters, setCheckFilters] = useState(new Set());
@@ -394,6 +457,8 @@ const Shop = (props) => {
         anyFilters = true;
       }
     }
+
+    updatedFilteredData.sort((a, b) => b.availableForSale - a.availableForSale)
 
     setFilteredData(updatedFilteredData);
     setFilteredProductCount(updatedFilteredData.length);
