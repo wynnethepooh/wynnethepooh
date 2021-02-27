@@ -32,6 +32,12 @@ class CollectionPage extends React.Component {
       products && products.length > 0 ? (
         products
             .sort((a, b) => b.availableForSale - a.availableForSale)
+            .filter(
+              ({
+                tags
+              }) => (
+                !tags.includes("early") && !tags.includes("florals")
+              ))
             .map(
                 ({
                   id,
@@ -48,15 +54,21 @@ class CollectionPage extends React.Component {
                         Sold out
                       </SoldOutBanner>
                     }
-                    {availableForSale && tags.includes('vase') &&
+                    {process.env.GATSBY_SELLING_FLORALS == true && availableForSale && tags.includes('vase') &&
                       <ProductBanner>
                         florals<br/>available
                       </ProductBanner>
                     }
                     <Link to={`/product/${handle}/`}>
                       {firstImage && firstImage.localFile && (
-                        <Img
+                        <GatsbyImg
                           fluid={firstImage.localFile.childImageSharp.fluid}
+                          alt={handle}
+                        />
+                      )}
+                      {firstImage && !firstImage.localFile && (
+                        <Img
+                          src={firstImage.originalSrc}
                           alt={handle}
                         />
                       )}
@@ -68,11 +80,6 @@ class CollectionPage extends React.Component {
                         </Link>
                       </ProductTitle>
                       <PriceFlexbox>
-                        {!availableForSale &&
-                          <strike>
-                            <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
-                          </strike>
-                        }
                         {availableForSale && firstVariant.compareAtPrice &&
                           <>
                             <strike>
@@ -327,7 +334,16 @@ const SaleProductPrice = styled.p`
   margin-left: 10px;
 `;
 
-const Img = styled(Image)`
+const GatsbyImg = styled(Image)`
+  position: relative;
+  width: 250px;
+
+  @media(max-width: 700px) {
+    width: 40vw;
+  }
+`;
+
+const Img = styled.img`
   position: relative;
   width: 250px;
 

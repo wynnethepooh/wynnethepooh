@@ -138,15 +138,21 @@ const Shop = (props) => {
                         Sold out
                       </SoldOutBanner>
                     }
-                    {availableForSale && tags.includes('vase') &&
+                    {process.env.GATSBY_SELLING_FLORALS == true && availableForSale && tags.includes('vase') &&
                       <ProductBanner>
                         florals<br/>available
                       </ProductBanner>
                     }
                     <Link to={`/product/${handle}/`}>
                       {firstImage && firstImage.localFile && (
-                        <Img
+                        <GatsbyImg
                           fluid={firstImage.localFile.childImageSharp.fluid}
+                          alt={handle}
+                        />
+                      )}
+                      {firstImage && !firstImage.localFile && (
+                        <Img
+                          src={firstImage.originalSrc}
                           alt={handle}
                         />
                       )}
@@ -158,11 +164,6 @@ const Shop = (props) => {
                         </Link>
                       </ProductTitle>
                       <PriceFlexbox>
-                        {!availableForSale &&
-                          <strike>
-                            <ProductPrice>{getPrice(firstVariant.price)}</ProductPrice>
-                          </strike>
-                        }
                         {availableForSale && firstVariant.compareAtPrice &&
                           <>
                             <strike>
@@ -314,15 +315,21 @@ const Shop = (props) => {
                 Sold out
               </SoldOutBanner>
             }
-            {node.availableForSale && node.tags.includes('vase') &&
+            {process.env.GATSBY_SELLING_FLORALS == true && node.availableForSale && node.tags.includes('vase') &&
               <ProductBanner>
                 florals<br/>available
               </ProductBanner>
             }
             <Link to={`/product/${node.handle}/`}>
               {node.firstImage && node.firstImage.localFile && (
-                <Img
+                <GatsbyImg
                   fluid={node.firstImage.localFile.childImageSharp.fluid}
+                  alt={node.handle}
+                />
+              )}
+              {node.firstImage && !node.firstImage.localFile && (
+                <Img
+                  src={node.firstImage.originalSrc}
                   alt={node.handle}
                 />
               )}
@@ -334,11 +341,6 @@ const Shop = (props) => {
                 </Link>
               </ProductTitle>
               <PriceFlexbox>
-                {!node.availableForSale &&
-                  <strike>
-                    <ProductPrice>{getPrice(node.firstVariant.price)}</ProductPrice>
-                  </strike>
-                }
                 {node.availableForSale && node.firstVariant.compareAtPrice &&
                   <>
                     <strike>
@@ -748,7 +750,20 @@ const ProductOptions = styled.p`
   margin: 10px 0;
 `;
 
-const Img = styled(Image)`
+const GatsbyImg = styled(Image)`
+  position: relative;
+  width: 250px;
+
+  @media(max-width: 700px) {
+    width: 43vw;
+  }
+
+  @media(max-width: 550px) {
+    width: 41vw;
+  }
+`;
+
+const Img = styled.img`
   position: relative;
   width: 250px;
 

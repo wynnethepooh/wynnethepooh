@@ -83,8 +83,6 @@ const Root = (props) => {
         })
     ));
 
-  console.log(shopifyCollections);
-
   const childrenWithProps = React.Children.map(children, (child) => {
     return React.cloneElement(child, {
       shopifyCollections: shopifyCollections,
@@ -94,9 +92,7 @@ const Root = (props) => {
   const [subscriptionHidden, hideSubscription] = useState(false);
 
   const handleCloseSubscription = () => {
-    console.log(subscriptionHidden);
     hideSubscription(true);
-    console.log(subscriptionHidden);
   }
 
   return (

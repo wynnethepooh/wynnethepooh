@@ -49,7 +49,7 @@ const Product = React.memo(({product, soldOut}) => {
         {product.availableForSale &&
           <>
             <ProductForm product={product} />
-            {product.tags.includes("vase") &&
+            {process.env.GATSBY_SELLING_FLORALS == true && product.tags.includes("vase") &&
               <ProductAddon />
             }
           </>
